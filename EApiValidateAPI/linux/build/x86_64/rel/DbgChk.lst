@@ -1,0 +1,637 @@
+GAS LISTING /tmp/cc9BdbYk.s 			page 1
+
+
+   1              		.file	"DbgChk.c"
+   2              		.section	.rodata.str1.1,"aMS",@progbits,1
+   3              	.LC0:
+   4 0000 4E4F545F 		.string	"NOT_INITIALIZED"
+   4      494E4954 
+   4      49414C49 
+   4      5A454400 
+   5              		.section	.text.unlikely,"ax",@progbits
+   6              	.LCOLDB1:
+   7              		.text
+   8              	.LHOTB1:
+   9              		.p2align 4,,15
+  10              		.globl	EApiGetErrorStringA
+  12              	EApiGetErrorStringA:
+  13              	.LFB99:
+  14              		.cfi_startproc
+  15 0000 83FEFF   		cmpl	$-1, %esi
+  16 0003 48C70700 		movq	$0, (%rdi)
+  16      000000
+  17 000a 742E     		je	.L6
+  18 000c B8000000 		movl	$ErrorLookupA+16, %eax
+  18      00
+  19              		.p2align 4,,10
+  20 0011 0F1F8000 		.p2align 3
+  20      000000
+  21              	.L5:
+  22 0018 3930     		cmpl	%esi, (%rax)
+  23 001a 7414     		je	.L9
+  24 001c 4883C010 		addq	$16, %rax
+  25 0020 483D0000 		cmpq	$ErrorLookupA+304, %rax
+  25      0000
+  26 0026 75F0     		jne	.L5
+  27 0028 B8FFF0FF 		movl	$-3841, %eax
+  27      FF
+  28 002d C3       		ret
+  29 002e 6690     		.p2align 4,,10
+  30              		.p2align 3
+  31              	.L9:
+  32 0030 488B4008 		movq	8(%rax), %rax
+  33              	.L2:
+  34 0034 488907   		movq	%rax, (%rdi)
+  35 0037 31C0     		xorl	%eax, %eax
+  36 0039 C3       		ret
+  37              	.L6:
+  38 003a B8000000 		movl	$.LC0, %eax
+  38      00
+  39 003f EBF3     		jmp	.L2
+  40              		.cfi_endproc
+  41              	.LFE99:
+  43              		.section	.text.unlikely
+  44              	.LCOLDE1:
+  45              		.text
+  46              	.LHOTE1:
+  47              		.section	.text.unlikely
+  48              	.LCOLDB2:
+  49              		.text
+  50              	.LHOTB2:
+GAS LISTING /tmp/cc9BdbYk.s 			page 2
+
+
+  51 0041 0F1F4400 		.p2align 4,,15
+  51      00662E0F 
+  51      1F840000 
+  51      000000
+  52              		.globl	GetLastOccurance
+  54              	GetLastOccurance:
+  55              	.LFB100:
+  56              		.cfi_startproc
+  57              		.p2align 4,,10
+  58              		.p2align 3
+  59              	.L13:
+  60 0050 0FB617   		movzbl	(%rdi), %edx
+  61 0053 4889F8   		movq	%rdi, %rax
+  62 0056 84D2     		testb	%dl, %dl
+  63 0058 7415     		je	.L22
+  64              	.L14:
+  65 005a 4883C701 		addq	$1, %rdi
+  66 005e 80FA2F   		cmpb	$47, %dl
+  67 0061 74ED     		je	.L13
+  68 0063 80FA5C   		cmpb	$92, %dl
+  69 0066 74E8     		je	.L13
+  70 0068 0FB617   		movzbl	(%rdi), %edx
+  71 006b 84D2     		testb	%dl, %dl
+  72 006d 75EB     		jne	.L14
+  73              	.L22:
+  74 006f F3C3     		rep ret
+  75              		.cfi_endproc
+  76              	.LFE100:
+  78              		.section	.text.unlikely
+  79              	.LCOLDE2:
+  80              		.text
+  81              	.LHOTE2:
+  82              		.section	.rodata.str1.1
+  83              	.LC3:
+  84 0010 252D3235 		.string	"%-25s | "
+  84      73207C20 
+  84      00
+  85              		.section	.text.unlikely
+  86              	.LCOLDB4:
+  87              		.text
+  88              	.LHOTB4:
+  89 0071 0F1F4400 		.p2align 4,,15
+  89      00662E0F 
+  89      1F840000 
+  89      000000
+  90              		.globl	siFormattedMessage_M2
+  92              	siFormattedMessage_M2:
+  93              	.LFB101:
+  94              		.cfi_startproc
+  95 0080 4154     		pushq	%r12
+  96              		.cfi_def_cfa_offset 16
+  97              		.cfi_offset 12, -16
+  98 0082 55       		pushq	%rbp
+  99              		.cfi_def_cfa_offset 24
+ 100              		.cfi_offset 6, -24
+ 101 0083 4C89C5   		movq	%r8, %rbp
+ 102 0086 53       		pushq	%rbx
+GAS LISTING /tmp/cc9BdbYk.s 			page 3
+
+
+ 103              		.cfi_def_cfa_offset 32
+ 104              		.cfi_offset 3, -32
+ 105 0087 4C89CB   		movq	%r9, %rbx
+ 106 008a 4881ECD0 		subq	$208, %rsp
+ 106      000000
+ 107              		.cfi_def_cfa_offset 240
+ 108 0091 84C0     		testb	%al, %al
+ 109 0093 7437     		je	.L24
+ 110 0095 0F294424 		movaps	%xmm0, 80(%rsp)
+ 110      50
+ 111 009a 0F294C24 		movaps	%xmm1, 96(%rsp)
+ 111      60
+ 112 009f 0F295424 		movaps	%xmm2, 112(%rsp)
+ 112      70
+ 113 00a4 0F299C24 		movaps	%xmm3, 128(%rsp)
+ 113      80000000 
+ 114 00ac 0F29A424 		movaps	%xmm4, 144(%rsp)
+ 114      90000000 
+ 115 00b4 0F29AC24 		movaps	%xmm5, 160(%rsp)
+ 115      A0000000 
+ 116 00bc 0F29B424 		movaps	%xmm6, 176(%rsp)
+ 116      B0000000 
+ 117 00c4 0F29BC24 		movaps	%xmm7, 192(%rsp)
+ 117      C0000000 
+ 118              	.L24:
+ 119 00cc 64488B04 		movq	%fs:40, %rax
+ 119      25280000 
+ 119      00
+ 120 00d5 48894424 		movq	%rax, 24(%rsp)
+ 120      18
+ 121 00da 31C0     		xorl	%eax, %eax
+ 122 00dc 488D8424 		leaq	240(%rsp), %rax
+ 122      F0000000 
+ 123 00e4 4989F0   		movq	%rsi, %r8
+ 124 00e7 48894424 		movq	%rax, 8(%rsp)
+ 124      08
+ 125 00ec 488D4424 		leaq	32(%rsp), %rax
+ 125      20
+ 126 00f1 C7042430 		movl	$48, (%rsp)
+ 126      000000
+ 127 00f8 C7442404 		movl	$48, 4(%rsp)
+ 127      30000000 
+ 128 0100 48894424 		movq	%rax, 16(%rsp)
+ 128      10
+ 129              		.p2align 4,,10
+ 130 0105 0F1F00   		.p2align 3
+ 131              	.L25:
+ 132 0108 0FB606   		movzbl	(%rsi), %eax
+ 133 010b 84C0     		testb	%al, %al
+ 134 010d 7416     		je	.L37
+ 135              	.L28:
+ 136 010f 4883C601 		addq	$1, %rsi
+ 137 0113 3C2F     		cmpb	$47, %al
+ 138 0115 7404     		je	.L27
+ 139 0117 3C5C     		cmpb	$92, %al
+ 140 0119 75ED     		jne	.L25
+ 141              	.L27:
+GAS LISTING /tmp/cc9BdbYk.s 			page 4
+
+
+ 142 011b 0FB606   		movzbl	(%rsi), %eax
+ 143 011e 4989F0   		movq	%rsi, %r8
+ 144 0121 84C0     		testb	%al, %al
+ 145 0123 75EA     		jne	.L28
+ 146              	.L37:
+ 147 0125 400FBEFF 		movsbl	%dil, %edi
+ 148 0129 4989D1   		movq	%rdx, %r9
+ 149 012c BE000000 		movl	$cszLogFormat, %esi
+ 149      00
+ 150 0131 89FA     		movl	%edi, %edx
+ 151 0133 BF010000 		movl	$1, %edi
+ 151      00
+ 152 0138 E8000000 		call	__printf_chk
+ 152      00
+ 153 013d 4889EA   		movq	%rbp, %rdx
+ 154 0140 4189C4   		movl	%eax, %r12d
+ 155 0143 BE000000 		movl	$.LC3, %esi
+ 155      00
+ 156 0148 BF010000 		movl	$1, %edi
+ 156      00
+ 157 014d 31C0     		xorl	%eax, %eax
+ 158 014f E8000000 		call	__printf_chk
+ 158      00
+ 159 0154 488B3D00 		movq	stdout(%rip), %rdi
+ 159      000000
+ 160 015b 4889DA   		movq	%rbx, %rdx
+ 161 015e 4889E1   		movq	%rsp, %rcx
+ 162 0161 BE010000 		movl	$1, %esi
+ 162      00
+ 163 0166 E8000000 		call	__vfprintf_chk
+ 163      00
+ 164 016b 4401E0   		addl	%r12d, %eax
+ 165 016e 488B5C24 		movq	24(%rsp), %rbx
+ 165      18
+ 166 0173 6448331C 		xorq	%fs:40, %rbx
+ 166      25280000 
+ 166      00
+ 167 017c 750C     		jne	.L38
+ 168 017e 4881C4D0 		addq	$208, %rsp
+ 168      000000
+ 169              		.cfi_remember_state
+ 170              		.cfi_def_cfa_offset 32
+ 171 0185 5B       		popq	%rbx
+ 172              		.cfi_def_cfa_offset 24
+ 173 0186 5D       		popq	%rbp
+ 174              		.cfi_def_cfa_offset 16
+ 175 0187 415C     		popq	%r12
+ 176              		.cfi_def_cfa_offset 8
+ 177 0189 C3       		ret
+ 178              	.L38:
+ 179              		.cfi_restore_state
+ 180 018a E8000000 		call	__stack_chk_fail
+ 180      00
+ 181              		.cfi_endproc
+ 182              	.LFE101:
+ 184              		.section	.text.unlikely
+ 185              	.LCOLDE4:
+GAS LISTING /tmp/cc9BdbYk.s 			page 5
+
+
+ 186              		.text
+ 187              	.LHOTE4:
+ 188              		.section	.rodata.str1.1
+ 189              	.LC5:
+ 190 0019 20202020 		.string	"               0x%08X | "
+ 190      20202020 
+ 190      20202020 
+ 190      20202030 
+ 190      78253038 
+ 191              		.section	.text.unlikely
+ 192              	.LCOLDB6:
+ 193              		.text
+ 194              	.LHOTB6:
+ 195 018f 90       		.p2align 4,,15
+ 196              		.globl	siFormattedMessage_SC
+ 198              	siFormattedMessage_SC:
+ 199              	.LFB102:
+ 200              		.cfi_startproc
+ 201 0190 4155     		pushq	%r13
+ 202              		.cfi_def_cfa_offset 16
+ 203              		.cfi_offset 13, -16
+ 204 0192 4154     		pushq	%r12
+ 205              		.cfi_def_cfa_offset 24
+ 206              		.cfi_offset 12, -24
+ 207 0194 55       		pushq	%rbp
+ 208              		.cfi_def_cfa_offset 32
+ 209              		.cfi_offset 6, -32
+ 210 0195 53       		pushq	%rbx
+ 211              		.cfi_def_cfa_offset 40
+ 212              		.cfi_offset 3, -40
+ 213 0196 4C89CD   		movq	%r9, %rbp
+ 214 0199 4489C3   		movl	%r8d, %ebx
+ 215 019c 4881ECD8 		subq	$216, %rsp
+ 215      000000
+ 216              		.cfi_def_cfa_offset 256
+ 217 01a3 84C0     		testb	%al, %al
+ 218 01a5 7437     		je	.L40
+ 219 01a7 0F294424 		movaps	%xmm0, 80(%rsp)
+ 219      50
+ 220 01ac 0F294C24 		movaps	%xmm1, 96(%rsp)
+ 220      60
+ 221 01b1 0F295424 		movaps	%xmm2, 112(%rsp)
+ 221      70
+ 222 01b6 0F299C24 		movaps	%xmm3, 128(%rsp)
+ 222      80000000 
+ 223 01be 0F29A424 		movaps	%xmm4, 144(%rsp)
+ 223      90000000 
+ 224 01c6 0F29AC24 		movaps	%xmm5, 160(%rsp)
+ 224      A0000000 
+ 225 01ce 0F29B424 		movaps	%xmm6, 176(%rsp)
+ 225      B0000000 
+ 226 01d6 0F29BC24 		movaps	%xmm7, 192(%rsp)
+ 226      C0000000 
+ 227              	.L40:
+ 228 01de 64488B04 		movq	%fs:40, %rax
+ 228      25280000 
+ 228      00
+GAS LISTING /tmp/cc9BdbYk.s 			page 6
+
+
+ 229 01e7 48894424 		movq	%rax, 24(%rsp)
+ 229      18
+ 230 01ec 31C0     		xorl	%eax, %eax
+ 231 01ee 488D8424 		leaq	256(%rsp), %rax
+ 231      00010000 
+ 232 01f6 83FBFF   		cmpl	$-1, %ebx
+ 233 01f9 48894424 		movq	%rax, 8(%rsp)
+ 233      08
+ 234 01fe 488D4424 		leaq	32(%rsp), %rax
+ 234      20
+ 235 0203 C7042430 		movl	$48, (%rsp)
+ 235      000000
+ 236 020a C7442404 		movl	$48, 4(%rsp)
+ 236      30000000 
+ 237 0212 48894424 		movq	%rax, 16(%rsp)
+ 237      10
+ 238 0217 0F84D100 		je	.L52
+ 238      0000
+ 239 021d B8000000 		movl	$ErrorLookupA+16, %eax
+ 239      00
+ 240              		.p2align 4,,10
+ 241 0222 660F1F44 		.p2align 3
+ 241      0000
+ 242              	.L44:
+ 243 0228 3B18     		cmpl	(%rax), %ebx
+ 244 022a 0F84A000 		je	.L63
+ 244      0000
+ 245 0230 4883C010 		addq	$16, %rax
+ 246 0234 483D0000 		cmpq	$ErrorLookupA+304, %rax
+ 246      0000
+ 247 023a 75EC     		jne	.L44
+ 248 023c 4531E4   		xorl	%r12d, %r12d
+ 249 023f 90       		.p2align 4,,10
+ 250              		.p2align 3
+ 251              	.L53:
+ 252 0240 0FB606   		movzbl	(%rsi), %eax
+ 253 0243 4989F0   		movq	%rsi, %r8
+ 254 0246 84C0     		testb	%al, %al
+ 255 0248 7413     		je	.L64
+ 256              	.L48:
+ 257 024a 4883C601 		addq	$1, %rsi
+ 258 024e 3C2F     		cmpb	$47, %al
+ 259 0250 74EE     		je	.L53
+ 260 0252 3C5C     		cmpb	$92, %al
+ 261 0254 74EA     		je	.L53
+ 262 0256 0FB606   		movzbl	(%rsi), %eax
+ 263 0259 84C0     		testb	%al, %al
+ 264 025b 75ED     		jne	.L48
+ 265              	.L64:
+ 266 025d 400FBEFF 		movsbl	%dil, %edi
+ 267 0261 4989D1   		movq	%rdx, %r9
+ 268 0264 BE000000 		movl	$cszLogFormat, %esi
+ 268      00
+ 269 0269 89FA     		movl	%edi, %edx
+ 270 026b BF010000 		movl	$1, %edi
+ 270      00
+ 271 0270 E8000000 		call	__printf_chk
+GAS LISTING /tmp/cc9BdbYk.s 			page 7
+
+
+ 271      00
+ 272 0275 4D85E4   		testq	%r12, %r12
+ 273 0278 4189C5   		movl	%eax, %r13d
+ 274 027b 745C     		je	.L65
+ 275 027d 4C89E2   		movq	%r12, %rdx
+ 276 0280 BE000000 		movl	$.LC3, %esi
+ 276      00
+ 277 0285 BF010000 		movl	$1, %edi
+ 277      00
+ 278 028a 31C0     		xorl	%eax, %eax
+ 279 028c E8000000 		call	__printf_chk
+ 279      00
+ 280              	.L50:
+ 281 0291 488B3D00 		movq	stdout(%rip), %rdi
+ 281      000000
+ 282 0298 4889E1   		movq	%rsp, %rcx
+ 283 029b 4889EA   		movq	%rbp, %rdx
+ 284 029e BE010000 		movl	$1, %esi
+ 284      00
+ 285 02a3 E8000000 		call	__vfprintf_chk
+ 285      00
+ 286 02a8 4401E8   		addl	%r13d, %eax
+ 287 02ab 488B4C24 		movq	24(%rsp), %rcx
+ 287      18
+ 288 02b0 6448330C 		xorq	%fs:40, %rcx
+ 288      25280000 
+ 288      00
+ 289 02b9 753E     		jne	.L66
+ 290 02bb 4881C4D8 		addq	$216, %rsp
+ 290      000000
+ 291              		.cfi_remember_state
+ 292              		.cfi_def_cfa_offset 40
+ 293 02c2 5B       		popq	%rbx
+ 294              		.cfi_def_cfa_offset 32
+ 295 02c3 5D       		popq	%rbp
+ 296              		.cfi_def_cfa_offset 24
+ 297 02c4 415C     		popq	%r12
+ 298              		.cfi_def_cfa_offset 16
+ 299 02c6 415D     		popq	%r13
+ 300              		.cfi_def_cfa_offset 8
+ 301 02c8 C3       		ret
+ 302 02c9 0F1F8000 		.p2align 4,,10
+ 302      000000
+ 303              		.p2align 3
+ 304              	.L63:
+ 305              		.cfi_restore_state
+ 306 02d0 4C8B6008 		movq	8(%rax), %r12
+ 307 02d4 E967FFFF 		jmp	.L53
+ 307      FF
+ 308              	.L65:
+ 309 02d9 89DA     		movl	%ebx, %edx
+ 310 02db BE000000 		movl	$.LC5, %esi
+ 310      00
+ 311 02e0 BF010000 		movl	$1, %edi
+ 311      00
+ 312 02e5 31C0     		xorl	%eax, %eax
+ 313 02e7 E8000000 		call	__printf_chk
+GAS LISTING /tmp/cc9BdbYk.s 			page 8
+
+
+ 313      00
+ 314 02ec EBA3     		jmp	.L50
+ 315              	.L52:
+ 316 02ee 41BC0000 		movl	$.LC0, %r12d
+ 316      0000
+ 317 02f4 E947FFFF 		jmp	.L53
+ 317      FF
+ 318              	.L66:
+ 319 02f9 E8000000 		call	__stack_chk_fail
+ 319      00
+ 320              		.cfi_endproc
+ 321              	.LFE102:
+ 323              		.section	.text.unlikely
+ 324              	.LCOLDE6:
+ 325              		.text
+ 326              	.LHOTE6:
+ 327              		.globl	cszLogFormat
+ 328              		.section	.rodata
+ 329              		.align 16
+ 332              	cszLogFormat:
+ 333 0000 25632530 		.string	"%c%04i %-15.15s %-30s | "
+ 333      34692025 
+ 333      2D31352E 
+ 333      31357320 
+ 333      252D3330 
+ 334              		.globl	ErrorLookupA
+ 335              		.section	.rodata.str1.1
+ 336              	.LC7:
+ 337 0032 494E4954 		.string	"INITIALIZED"
+ 337      49414C49 
+ 337      5A454400 
+ 338              	.LC8:
+ 339 003e 414C4C4F 		.string	"ALLOC_ERROR"
+ 339      435F4552 
+ 339      524F5200 
+ 340              	.LC9:
+ 341 004a 44524956 		.string	"DRIVER_TIMEOUT"
+ 341      45525F54 
+ 341      494D454F 
+ 341      555400
+ 342              	.LC10:
+ 343 0059 494E5641 		.string	"INVALID_PARAMETER"
+ 343      4C49445F 
+ 343      50415241 
+ 343      4D455445 
+ 343      5200
+ 344              	.LC11:
+ 345 006b 494E5641 		.string	"INVALID_BLOCK_ALIGNMENT"
+ 345      4C49445F 
+ 345      424C4F43 
+ 345      4B5F414C 
+ 345      49474E4D 
+ 346              	.LC12:
+ 347 0083 494E5641 		.string	"INVALID_BLOCK_LENGTH"
+ 347      4C49445F 
+ 347      424C4F43 
+ 347      4B5F4C45 
+GAS LISTING /tmp/cc9BdbYk.s 			page 9
+
+
+ 347      4E475448 
+ 348              	.LC13:
+ 349 0098 494E5641 		.string	"INVALID_DIRECTION"
+ 349      4C49445F 
+ 349      44495245 
+ 349      4354494F 
+ 349      4E00
+ 350              	.LC14:
+ 351 00aa 494E5641 		.string	"INVALID_BITMASK"
+ 351      4C49445F 
+ 351      4249544D 
+ 351      41534B00 
+ 352              	.LC15:
+ 353 00ba 52554E4E 		.string	"RUNNING"
+ 353      494E4700 
+ 354              	.LC16:
+ 355 00c2 554E5355 		.string	"UNSUPPORTED"
+ 355      50504F52 
+ 355      54454400 
+ 356              	.LC17:
+ 357 00ce 4E4F545F 		.string	"NOT_FOUND"
+ 357      464F554E 
+ 357      4400
+ 358              	.LC18:
+ 359 00d8 54494D45 		.string	"TIMEOUT"
+ 359      4F555400 
+ 360              	.LC19:
+ 361 00e0 42555359 		.string	"BUSY_COLLISION"
+ 361      5F434F4C 
+ 361      4C495349 
+ 361      4F4E00
+ 362              	.LC20:
+ 363 00ef 52454144 		.string	"READ_ERROR"
+ 363      5F455252 
+ 363      4F5200
+ 364              	.LC21:
+ 365 00fa 57524954 		.string	"WRITE_ERROR"
+ 365      455F4552 
+ 365      524F5200 
+ 366              	.LC22:
+ 367 0106 4D4F5245 		.string	"MORE_DATA"
+ 367      5F444154 
+ 367      4100
+ 368              	.LC23:
+ 369 0110 4552524F 		.string	"ERROR"
+ 369      5200
+ 370              	.LC24:
+ 371 0116 53554343 		.string	"SUCCESS"
+ 371      45535300 
+ 372              		.section	.rodata
+ 373 0019 00000000 		.align 32
+ 373      000000
+ 376              	ErrorLookupA:
+ 377 0020 FFFFFFFF 		.long	-1
+ 378 0024 00000000 		.zero	4
+ 379 0028 00000000 		.quad	.LC0
+ 379      00000000 
+GAS LISTING /tmp/cc9BdbYk.s 			page 10
+
+
+ 380 0030 FEFFFFFF 		.long	-2
+ 381 0034 00000000 		.zero	4
+ 382 0038 00000000 		.quad	.LC7
+ 382      00000000 
+ 383 0040 FDFFFFFF 		.long	-3
+ 384 0044 00000000 		.zero	4
+ 385 0048 00000000 		.quad	.LC8
+ 385      00000000 
+ 386 0050 FCFFFFFF 		.long	-4
+ 387 0054 00000000 		.zero	4
+ 388 0058 00000000 		.quad	.LC9
+ 388      00000000 
+ 389 0060 FFFEFFFF 		.long	-257
+ 390 0064 00000000 		.zero	4
+ 391 0068 00000000 		.quad	.LC10
+ 391      00000000 
+ 392 0070 FEFEFFFF 		.long	-258
+ 393 0074 00000000 		.zero	4
+ 394 0078 00000000 		.quad	.LC11
+ 394      00000000 
+ 395 0080 FDFEFFFF 		.long	-259
+ 396 0084 00000000 		.zero	4
+ 397 0088 00000000 		.quad	.LC12
+ 397      00000000 
+ 398 0090 FCFEFFFF 		.long	-260
+ 399 0094 00000000 		.zero	4
+ 400 0098 00000000 		.quad	.LC13
+ 400      00000000 
+ 401 00a0 FBFEFFFF 		.long	-261
+ 402 00a4 00000000 		.zero	4
+ 403 00a8 00000000 		.quad	.LC14
+ 403      00000000 
+ 404 00b0 FAFEFFFF 		.long	-262
+ 405 00b4 00000000 		.zero	4
+ 406 00b8 00000000 		.quad	.LC15
+ 406      00000000 
+ 407 00c0 FFFCFFFF 		.long	-769
+ 408 00c4 00000000 		.zero	4
+ 409 00c8 00000000 		.quad	.LC16
+ 409      00000000 
+ 410 00d0 FFFBFFFF 		.long	-1025
+ 411 00d4 00000000 		.zero	4
+ 412 00d8 00000000 		.quad	.LC17
+ 412      00000000 
+ 413 00e0 FEFBFFFF 		.long	-1026
+ 414 00e4 00000000 		.zero	4
+ 415 00e8 00000000 		.quad	.LC18
+ 415      00000000 
+ 416 00f0 FDFBFFFF 		.long	-1027
+ 417 00f4 00000000 		.zero	4
+ 418 00f8 00000000 		.quad	.LC19
+ 418      00000000 
+ 419 0100 FFFAFFFF 		.long	-1281
+ 420 0104 00000000 		.zero	4
+ 421 0108 00000000 		.quad	.LC20
+ 421      00000000 
+ 422 0110 FEFAFFFF 		.long	-1282
+GAS LISTING /tmp/cc9BdbYk.s 			page 11
+
+
+ 423 0114 00000000 		.zero	4
+ 424 0118 00000000 		.quad	.LC21
+ 424      00000000 
+ 425 0120 FFF9FFFF 		.long	-1537
+ 426 0124 00000000 		.zero	4
+ 427 0128 00000000 		.quad	.LC22
+ 427      00000000 
+ 428 0130 FFF0FFFF 		.long	-3841
+ 429 0134 00000000 		.zero	4
+ 430 0138 00000000 		.quad	.LC23
+ 430      00000000 
+ 431 0140 00000000 		.long	0
+ 432 0144 00000000 		.zero	4
+ 433 0148 00000000 		.quad	.LC24
+ 433      00000000 
+ 434              		.ident	"GCC: (Ubuntu 5.2.1-22ubuntu2) 5.2.1 20151010"
+ 435              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/cc9BdbYk.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 DbgChk.c
+     /tmp/cc9BdbYk.s:12     .text:0000000000000000 EApiGetErrorStringA
+     /tmp/cc9BdbYk.s:376    .rodata:0000000000000020 ErrorLookupA
+     /tmp/cc9BdbYk.s:54     .text:0000000000000050 GetLastOccurance
+     /tmp/cc9BdbYk.s:92     .text:0000000000000080 siFormattedMessage_M2
+     /tmp/cc9BdbYk.s:332    .rodata:0000000000000000 cszLogFormat
+     /tmp/cc9BdbYk.s:198    .text:0000000000000190 siFormattedMessage_SC
+
+UNDEFINED SYMBOLS
+__printf_chk
+stdout
+__vfprintf_chk
+__stack_chk_fail

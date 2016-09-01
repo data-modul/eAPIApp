@@ -1,0 +1,805 @@
+GAS LISTING /tmp/cceNVJES.s 			page 1
+
+
+   1              		.file	"DbgChk.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.globl	ErrorLookupA
+   5              		.section	.rodata
+   6              	.LC0:
+   7 0000 4E4F545F 		.string	"NOT_INITIALIZED"
+   7      494E4954 
+   7      49414C49 
+   7      5A454400 
+   8              	.LC1:
+   9 0010 494E4954 		.string	"INITIALIZED"
+   9      49414C49 
+   9      5A454400 
+  10              	.LC2:
+  11 001c 414C4C4F 		.string	"ALLOC_ERROR"
+  11      435F4552 
+  11      524F5200 
+  12              	.LC3:
+  13 0028 44524956 		.string	"DRIVER_TIMEOUT"
+  13      45525F54 
+  13      494D454F 
+  13      555400
+  14              	.LC4:
+  15 0037 494E5641 		.string	"INVALID_PARAMETER"
+  15      4C49445F 
+  15      50415241 
+  15      4D455445 
+  15      5200
+  16              	.LC5:
+  17 0049 494E5641 		.string	"INVALID_BLOCK_ALIGNMENT"
+  17      4C49445F 
+  17      424C4F43 
+  17      4B5F414C 
+  17      49474E4D 
+  18              	.LC6:
+  19 0061 494E5641 		.string	"INVALID_BLOCK_LENGTH"
+  19      4C49445F 
+  19      424C4F43 
+  19      4B5F4C45 
+  19      4E475448 
+  20              	.LC7:
+  21 0076 494E5641 		.string	"INVALID_DIRECTION"
+  21      4C49445F 
+  21      44495245 
+  21      4354494F 
+  21      4E00
+  22              	.LC8:
+  23 0088 494E5641 		.string	"INVALID_BITMASK"
+  23      4C49445F 
+  23      4249544D 
+  23      41534B00 
+  24              	.LC9:
+  25 0098 52554E4E 		.string	"RUNNING"
+  25      494E4700 
+  26              	.LC10:
+  27 00a0 554E5355 		.string	"UNSUPPORTED"
+GAS LISTING /tmp/cceNVJES.s 			page 2
+
+
+  27      50504F52 
+  27      54454400 
+  28              	.LC11:
+  29 00ac 4E4F545F 		.string	"NOT_FOUND"
+  29      464F554E 
+  29      4400
+  30              	.LC12:
+  31 00b6 54494D45 		.string	"TIMEOUT"
+  31      4F555400 
+  32              	.LC13:
+  33 00be 42555359 		.string	"BUSY_COLLISION"
+  33      5F434F4C 
+  33      4C495349 
+  33      4F4E00
+  34              	.LC14:
+  35 00cd 52454144 		.string	"READ_ERROR"
+  35      5F455252 
+  35      4F5200
+  36              	.LC15:
+  37 00d8 57524954 		.string	"WRITE_ERROR"
+  37      455F4552 
+  37      524F5200 
+  38              	.LC16:
+  39 00e4 4D4F5245 		.string	"MORE_DATA"
+  39      5F444154 
+  39      4100
+  40              	.LC17:
+  41 00ee 4552524F 		.string	"ERROR"
+  41      5200
+  42              	.LC18:
+  43 00f4 53554343 		.string	"SUCCESS"
+  43      45535300 
+  44 00fc 00000000 		.align 32
+  47              	ErrorLookupA:
+  48 0100 FFFFFFFF 		.long	-1
+  49 0104 00000000 		.zero	4
+  50 0108 00000000 		.quad	.LC0
+  50      00000000 
+  51 0110 FEFFFFFF 		.long	-2
+  52 0114 00000000 		.zero	4
+  53 0118 00000000 		.quad	.LC1
+  53      00000000 
+  54 0120 FDFFFFFF 		.long	-3
+  55 0124 00000000 		.zero	4
+  56 0128 00000000 		.quad	.LC2
+  56      00000000 
+  57 0130 FCFFFFFF 		.long	-4
+  58 0134 00000000 		.zero	4
+  59 0138 00000000 		.quad	.LC3
+  59      00000000 
+  60 0140 FFFEFFFF 		.long	-257
+  61 0144 00000000 		.zero	4
+  62 0148 00000000 		.quad	.LC4
+  62      00000000 
+  63 0150 FEFEFFFF 		.long	-258
+  64 0154 00000000 		.zero	4
+  65 0158 00000000 		.quad	.LC5
+GAS LISTING /tmp/cceNVJES.s 			page 3
+
+
+  65      00000000 
+  66 0160 FDFEFFFF 		.long	-259
+  67 0164 00000000 		.zero	4
+  68 0168 00000000 		.quad	.LC6
+  68      00000000 
+  69 0170 FCFEFFFF 		.long	-260
+  70 0174 00000000 		.zero	4
+  71 0178 00000000 		.quad	.LC7
+  71      00000000 
+  72 0180 FBFEFFFF 		.long	-261
+  73 0184 00000000 		.zero	4
+  74 0188 00000000 		.quad	.LC8
+  74      00000000 
+  75 0190 FAFEFFFF 		.long	-262
+  76 0194 00000000 		.zero	4
+  77 0198 00000000 		.quad	.LC9
+  77      00000000 
+  78 01a0 FFFCFFFF 		.long	-769
+  79 01a4 00000000 		.zero	4
+  80 01a8 00000000 		.quad	.LC10
+  80      00000000 
+  81 01b0 FFFBFFFF 		.long	-1025
+  82 01b4 00000000 		.zero	4
+  83 01b8 00000000 		.quad	.LC11
+  83      00000000 
+  84 01c0 FEFBFFFF 		.long	-1026
+  85 01c4 00000000 		.zero	4
+  86 01c8 00000000 		.quad	.LC12
+  86      00000000 
+  87 01d0 FDFBFFFF 		.long	-1027
+  88 01d4 00000000 		.zero	4
+  89 01d8 00000000 		.quad	.LC13
+  89      00000000 
+  90 01e0 FFFAFFFF 		.long	-1281
+  91 01e4 00000000 		.zero	4
+  92 01e8 00000000 		.quad	.LC14
+  92      00000000 
+  93 01f0 FEFAFFFF 		.long	-1282
+  94 01f4 00000000 		.zero	4
+  95 01f8 00000000 		.quad	.LC15
+  95      00000000 
+  96 0200 FFF9FFFF 		.long	-1537
+  97 0204 00000000 		.zero	4
+  98 0208 00000000 		.quad	.LC16
+  98      00000000 
+  99 0210 FFF0FFFF 		.long	-3841
+ 100 0214 00000000 		.zero	4
+ 101 0218 00000000 		.quad	.LC17
+ 101      00000000 
+ 102 0220 00000000 		.long	0
+ 103 0224 00000000 		.zero	4
+ 104 0228 00000000 		.quad	.LC18
+ 104      00000000 
+ 105              		.text
+ 106              		.globl	EApiGetErrorStringA
+ 108              	EApiGetErrorStringA:
+ 109              	.LFB2:
+GAS LISTING /tmp/cceNVJES.s 			page 4
+
+
+ 110              		.file 1 "/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c"
+   1:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** /*
+   2:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *<KHeader>
+   3:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *+=========================================================================
+   4:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  Project Name: EApiDK Embedded Application Development Kit
+   5:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *+=========================================================================
+   6:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  $HeadURL: http://svn.code.sf.net/p/eapidk/code/trunk/apps/common/DbgChk.c $
+   7:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *+=========================================================================
+   8:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I   Copyright: Copyright (c) 2002-2009, Kontron Embedded Modules GmbH
+   9:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I      Author: John Kearney,                  John.Kearney@kontron.com
+  10:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I
+  11:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I     License: All rights reserved. This program and the accompanying 
+  12:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              materials are licensed and made available under the 
+  13:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              terms and conditions of the BSD License which 
+  14:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              accompanies this distribution. The full text of the 
+  15:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              license may be found at 
+  16:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              http://opensource.org/licenses/bsd-license.php
+  17:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              
+  18:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "
+  19:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS OF 
+  20:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I              ANY KIND, EITHER EXPRESS OR IMPLIED.
+  21:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I
+  22:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I Description: Auto Created for DbgPrt.c
+  23:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I
+  24:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *+-------------------------------------------------------------------------
+  25:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I
+  26:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  File Name            : DbgChk.c
+  27:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  File Location        : apps\common
+  28:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  Last committed       : $Revision: 74 $
+  29:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  Last changed by      : $Author: dethrophes $
+  30:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  Last changed date    : $Date: 2010-06-23 21:26:50 +0200 (Wed, 23 Jun 2010) $
+  31:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I  ID                   : $Id: DbgChk.c 74 2010-06-23 19:26:50Z dethrophes $
+  32:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *I
+  33:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *+=========================================================================
+  34:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  *</KHeader>
+  35:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****  */
+  36:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+  37:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** #include <EApiApp.h>
+  38:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** typedef struct ErrorLookupTbl_S{
+  39:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   const EApiStatus_t StatusCode;
+  40:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   const char  *const  ErrorString;
+  41:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** }ErrorLookupTbl_t;
+  42:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** #define EAPI_INVALID_STRLEN ((size_t )-1)
+  43:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+  44:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** const ErrorLookupTbl_t ErrorLookupA[]={
+  45:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_NOT_INITIALIZED        , "NOT_INITIALIZED"          },
+  46:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_INITIALIZED            , "INITIALIZED"              },
+  47:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_ALLOC_ERROR            , "ALLOC_ERROR"              },
+  48:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_DRIVER_TIMEOUT         , "DRIVER_TIMEOUT"           },
+  49:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_INVALID_PARAMETER      , "INVALID_PARAMETER"        },
+  50:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_INVALID_BLOCK_ALIGNMENT, "INVALID_BLOCK_ALIGNMENT"  },
+  51:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_INVALID_BLOCK_LENGTH   , "INVALID_BLOCK_LENGTH"     },
+  52:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_INVALID_DIRECTION      , "INVALID_DIRECTION"        },
+  53:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_INVALID_BITMASK        , "INVALID_BITMASK"          },
+  54:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_RUNNING                , "RUNNING"                  },
+  55:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_UNSUPPORTED            , "UNSUPPORTED"              },
+  56:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_NOT_FOUND              , "NOT_FOUND"                },
+GAS LISTING /tmp/cceNVJES.s 			page 5
+
+
+  57:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_TIMEOUT                , "TIMEOUT"                  },
+  58:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_BUSY_COLLISION         , "BUSY_COLLISION"           },
+  59:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_READ_ERROR             , "READ_ERROR"               },
+  60:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_WRITE_ERROR            , "WRITE_ERROR"              },
+  61:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_MORE_DATA              , "MORE_DATA"                },
+  62:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_ERROR                  , "ERROR"                    },
+  63:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {EAPI_STATUS_SUCCESS                , "SUCCESS"                  },
+  64:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** };
+  65:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** EApiStatus_t
+  66:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** EApiGetErrorStringA(
+  67:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     __OUT const char  **const pszString     , 
+  68:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     __IN EApiStatus_t StatusCode
+  69:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     )
+  70:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** {
+ 111              		.loc 1 70 0
+ 112              		.cfi_startproc
+ 113 0000 55       		pushq	%rbp
+ 114              		.cfi_def_cfa_offset 16
+ 115              		.cfi_offset 6, -16
+ 116 0001 4889E5   		movq	%rsp, %rbp
+ 117              		.cfi_def_cfa_register 6
+ 118 0004 48897DE8 		movq	%rdi, -24(%rbp)
+ 119 0008 8975E4   		movl	%esi, -28(%rbp)
+  71:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   unsigned i;
+  72:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   const ErrorLookupTbl_t *pErrorLookup;
+  73:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+  74:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** /*   EAPI_LIB_ASSERT_PARAMATER_NULL(EApiGetErrorStringA, pszString); */
+  75:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+  76:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   *pszString=NULL;
+ 120              		.loc 1 76 0
+ 121 000b 488B45E8 		movq	-24(%rbp), %rax
+ 122 000f 48C70000 		movq	$0, (%rax)
+ 122      000000
+  77:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   for(i=ARRAY_SIZE(ErrorLookupA),
+ 123              		.loc 1 77 0
+ 124 0016 C745F413 		movl	$19, -12(%rbp)
+ 124      000000
+  78:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       pErrorLookup=ErrorLookupA; 
+ 125              		.loc 1 78 0
+ 126 001d 48C745F8 		movq	$ErrorLookupA, -8(%rbp)
+ 126      00000000 
+  77:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   for(i=ARRAY_SIZE(ErrorLookupA),
+ 127              		.loc 1 77 0
+ 128 0025 EB26     		jmp	.L2
+ 129              	.L5:
+  79:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       i--;pErrorLookup++
+  80:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     )
+  81:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+  82:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   {
+  83:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     if(pErrorLookup->StatusCode==StatusCode){
+ 130              		.loc 1 83 0
+ 131 0027 488B45F8 		movq	-8(%rbp), %rax
+ 132 002b 8B00     		movl	(%rax), %eax
+ 133 002d 3B45E4   		cmpl	-28(%rbp), %eax
+ 134 0030 7516     		jne	.L3
+  84:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       *pszString=pErrorLookup->ErrorString;
+ 135              		.loc 1 84 0
+GAS LISTING /tmp/cceNVJES.s 			page 6
+
+
+ 136 0032 488B45F8 		movq	-8(%rbp), %rax
+ 137 0036 488B5008 		movq	8(%rax), %rdx
+ 138 003a 488B45E8 		movq	-24(%rbp), %rax
+ 139 003e 488910   		movq	%rdx, (%rax)
+  85:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       return EAPI_STATUS_SUCCESS;
+ 140              		.loc 1 85 0
+ 141 0041 B8000000 		movl	$0, %eax
+ 141      00
+ 142 0046 EB17     		jmp	.L4
+ 143              	.L3:
+  79:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       i--;pErrorLookup++
+ 144              		.loc 1 79 0
+ 145 0048 488345F8 		addq	$16, -8(%rbp)
+ 145      10
+ 146              	.L2:
+  79:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       i--;pErrorLookup++
+ 147              		.loc 1 79 0 is_stmt 0 discriminator 1
+ 148 004d 8B45F4   		movl	-12(%rbp), %eax
+ 149 0050 8D50FF   		leal	-1(%rax), %edx
+ 150 0053 8955F4   		movl	%edx, -12(%rbp)
+  77:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       pErrorLookup=ErrorLookupA; 
+ 151              		.loc 1 77 0 is_stmt 1 discriminator 1
+ 152 0056 85C0     		testl	%eax, %eax
+ 153 0058 75CD     		jne	.L5
+  86:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     }
+  87:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   }
+  88:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   return EAPI_STATUS_ERROR;
+ 154              		.loc 1 88 0
+ 155 005a B8FFF0FF 		movl	$-3841, %eax
+ 155      FF
+ 156              	.L4:
+  89:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** }
+ 157              		.loc 1 89 0
+ 158 005f 5D       		popq	%rbp
+ 159              		.cfi_def_cfa 7, 8
+ 160 0060 C3       		ret
+ 161              		.cfi_endproc
+ 162              	.LFE2:
+ 164              		.globl	GetLastOccurance
+ 166              	GetLastOccurance:
+ 167              	.LFB3:
+  90:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+  91:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** const char *GetLastOccurance(
+  92:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *czFilename
+  93:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     )
+  94:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** {
+ 168              		.loc 1 94 0
+ 169              		.cfi_startproc
+ 170 0061 55       		pushq	%rbp
+ 171              		.cfi_def_cfa_offset 16
+ 172              		.cfi_offset 6, -16
+ 173 0062 4889E5   		movq	%rsp, %rbp
+ 174              		.cfi_def_cfa_register 6
+ 175 0065 48897DE8 		movq	%rdi, -24(%rbp)
+  95:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   const char*cszLPos=czFilename;
+ 176              		.loc 1 95 0
+ 177 0069 488B45E8 		movq	-24(%rbp), %rax
+GAS LISTING /tmp/cceNVJES.s 			page 7
+
+
+ 178 006d 488945F8 		movq	%rax, -8(%rbp)
+  96:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   while(*czFilename){
+ 179              		.loc 1 96 0
+ 180 0071 EB25     		jmp	.L7
+ 181              	.L10:
+  97:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     switch(*czFilename++){
+ 182              		.loc 1 97 0
+ 183 0073 488B45E8 		movq	-24(%rbp), %rax
+ 184 0077 488D5001 		leaq	1(%rax), %rdx
+ 185 007b 488955E8 		movq	%rdx, -24(%rbp)
+ 186 007f 0FB600   		movzbl	(%rax), %eax
+ 187 0082 0FBEC0   		movsbl	%al, %eax
+ 188 0085 83F82F   		cmpl	$47, %eax
+ 189 0088 7405     		je	.L9
+ 190 008a 83F85C   		cmpl	$92, %eax
+ 191 008d 7508     		jne	.L8
+ 192              	.L9:
+  98:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       case '\\':
+  99:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       case '/':
+ 100:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****         cszLPos=czFilename;
+ 193              		.loc 1 100 0
+ 194 008f 488B45E8 		movq	-24(%rbp), %rax
+ 195 0093 488945F8 		movq	%rax, -8(%rbp)
+ 196              	.L8:
+ 101:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       default:
+ 102:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****         break;
+ 197              		.loc 1 102 0
+ 198 0097 90       		nop
+ 199              	.L7:
+  96:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     switch(*czFilename++){
+ 200              		.loc 1 96 0
+ 201 0098 488B45E8 		movq	-24(%rbp), %rax
+ 202 009c 0FB600   		movzbl	(%rax), %eax
+ 203 009f 84C0     		testb	%al, %al
+ 204 00a1 75D0     		jne	.L10
+ 103:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     }
+ 104:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   }
+ 105:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   return cszLPos;
+ 205              		.loc 1 105 0
+ 206 00a3 488B45F8 		movq	-8(%rbp), %rax
+ 106:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** }
+ 207              		.loc 1 106 0
+ 208 00a7 5D       		popq	%rbp
+ 209              		.cfi_def_cfa 7, 8
+ 210 00a8 C3       		ret
+ 211              		.cfi_endproc
+ 212              	.LFE3:
+ 214              		.globl	cszLogFormat
+ 215              		.section	.rodata
+ 216              		.align 16
+ 219              	cszLogFormat:
+ 220 0230 25632530 		.string	"%c%04i %-15.15s %-30s | "
+ 220      34692025 
+ 220      2D31352E 
+ 220      31357320 
+ 220      252D3330 
+ 221              	.LC19:
+GAS LISTING /tmp/cceNVJES.s 			page 8
+
+
+ 222 0249 252D3235 		.string	"%-25s | "
+ 222      73207C20 
+ 222      00
+ 223              		.text
+ 224              		.globl	siFormattedMessage_M2
+ 226              	siFormattedMessage_M2:
+ 227              	.LFB4:
+ 107:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** const char cszLogFormat[]={"%c%04i %-15.15s %-30s | "};
+ 108:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+ 109:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** signed int
+ 110:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** __cdecl
+ 111:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** siFormattedMessage_M2(
+ 112:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     char          cType       ,
+ 113:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *  cszFileName ,   
+ 114:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *  cszFuncName ,   
+ 115:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     unsigned int  uiLineNum   ,
+ 116:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *  csz2ndValue ,   
+ 117:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *  cszFormat   ,   
+ 118:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     ...
+ 119:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     )
+ 120:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** {
+ 228              		.loc 1 120 0
+ 229              		.cfi_startproc
+ 230 00a9 55       		pushq	%rbp
+ 231              		.cfi_def_cfa_offset 16
+ 232              		.cfi_offset 6, -16
+ 233 00aa 4889E5   		movq	%rsp, %rbp
+ 234              		.cfi_def_cfa_register 6
+ 235 00ad 4881EC10 		subq	$272, %rsp
+ 235      010000
+ 236 00b4 4889B510 		movq	%rsi, -240(%rbp)
+ 236      FFFFFF
+ 237 00bb 48899508 		movq	%rdx, -248(%rbp)
+ 237      FFFFFF
+ 238 00c2 898D18FF 		movl	%ecx, -232(%rbp)
+ 238      FFFF
+ 239 00c8 4C898500 		movq	%r8, -256(%rbp)
+ 239      FFFFFF
+ 240 00cf 4C898DF8 		movq	%r9, -264(%rbp)
+ 240      FEFFFF
+ 241 00d6 84C0     		testb	%al, %al
+ 242 00d8 7420     		je	.L13
+ 243 00da 0F294580 		movaps	%xmm0, -128(%rbp)
+ 244 00de 0F294D90 		movaps	%xmm1, -112(%rbp)
+ 245 00e2 0F2955A0 		movaps	%xmm2, -96(%rbp)
+ 246 00e6 0F295DB0 		movaps	%xmm3, -80(%rbp)
+ 247 00ea 0F2965C0 		movaps	%xmm4, -64(%rbp)
+ 248 00ee 0F296DD0 		movaps	%xmm5, -48(%rbp)
+ 249 00f2 0F2975E0 		movaps	%xmm6, -32(%rbp)
+ 250 00f6 0F297DF0 		movaps	%xmm7, -16(%rbp)
+ 251              	.L13:
+ 252 00fa 4088BD1C 		movb	%dil, -228(%rbp)
+ 252      FFFFFF
+ 253              		.loc 1 120 0
+ 254 0101 64488B04 		movq	%fs:40, %rax
+ 254      25280000 
+ 254      00
+GAS LISTING /tmp/cceNVJES.s 			page 9
+
+
+ 255 010a 48898548 		movq	%rax, -184(%rbp)
+ 255      FFFFFF
+ 256 0111 31C0     		xorl	%eax, %eax
+ 121:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   signed int Ret;
+ 122:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   va_list _ArgList;
+ 123:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+ 124:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   va_start(_ArgList, cszFormat);
+ 257              		.loc 1 124 0
+ 258 0113 C78530FF 		movl	$48, -208(%rbp)
+ 258      FFFF3000 
+ 258      0000
+ 259 011d C78534FF 		movl	$48, -204(%rbp)
+ 259      FFFF3000 
+ 259      0000
+ 260 0127 488D4510 		leaq	16(%rbp), %rax
+ 261 012b 48898538 		movq	%rax, -200(%rbp)
+ 261      FFFFFF
+ 262 0132 488D8550 		leaq	-176(%rbp), %rax
+ 262      FFFFFF
+ 263 0139 48898540 		movq	%rax, -192(%rbp)
+ 263      FFFFFF
+ 125:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+ 126:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	Ret = printf(
+ 264              		.loc 1 126 0
+ 265 0140 488B8510 		movq	-240(%rbp), %rax
+ 265      FFFFFF
+ 266 0147 4889C7   		movq	%rax, %rdi
+ 267 014a E8000000 		call	GetLastOccurance
+ 267      00
+ 268 014f 4889C6   		movq	%rax, %rsi
+ 269 0152 0FBE851C 		movsbl	-228(%rbp), %eax
+ 269      FFFFFF
+ 270 0159 488B8D08 		movq	-248(%rbp), %rcx
+ 270      FFFFFF
+ 271 0160 8B9518FF 		movl	-232(%rbp), %edx
+ 271      FFFF
+ 272 0166 4989C8   		movq	%rcx, %r8
+ 273 0169 4889F1   		movq	%rsi, %rcx
+ 274 016c 89C6     		movl	%eax, %esi
+ 275 016e BF000000 		movl	$cszLogFormat, %edi
+ 275      00
+ 276 0173 B8000000 		movl	$0, %eax
+ 276      00
+ 277 0178 E8000000 		call	printf
+ 277      00
+ 278 017d 89852CFF 		movl	%eax, -212(%rbp)
+ 278      FFFF
+ 127:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       cszLogFormat, 
+ 128:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       cType       ,
+ 129:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       uiLineNum   ,
+ 130:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       GetLastOccurance(cszFileName),
+ 131:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       cszFuncName
+ 132:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     );
+ 133:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     printf("%-25s | ", csz2ndValue);
+ 279              		.loc 1 133 0
+ 280 0183 488B8500 		movq	-256(%rbp), %rax
+ 280      FFFFFF
+GAS LISTING /tmp/cceNVJES.s 			page 10
+
+
+ 281 018a 4889C6   		movq	%rax, %rsi
+ 282 018d BF000000 		movl	$.LC19, %edi
+ 282      00
+ 283 0192 B8000000 		movl	$0, %eax
+ 283      00
+ 284 0197 E8000000 		call	printf
+ 284      00
+ 134:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	Ret += vprintf(cszFormat, _ArgList);
+ 285              		.loc 1 134 0
+ 286 019c 488D9530 		leaq	-208(%rbp), %rdx
+ 286      FFFFFF
+ 287 01a3 488B85F8 		movq	-264(%rbp), %rax
+ 287      FEFFFF
+ 288 01aa 4889D6   		movq	%rdx, %rsi
+ 289 01ad 4889C7   		movq	%rax, %rdi
+ 290 01b0 E8000000 		call	vprintf
+ 290      00
+ 291 01b5 01852CFF 		addl	%eax, -212(%rbp)
+ 291      FFFF
+ 135:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	va_end(_ArgList);
+ 136:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	return Ret;
+ 292              		.loc 1 136 0
+ 293 01bb 8B852CFF 		movl	-212(%rbp), %eax
+ 293      FFFF
+ 137:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** }
+ 294              		.loc 1 137 0
+ 295 01c1 488B8D48 		movq	-184(%rbp), %rcx
+ 295      FFFFFF
+ 296 01c8 6448330C 		xorq	%fs:40, %rcx
+ 296      25280000 
+ 296      00
+ 297 01d1 7405     		je	.L15
+ 298 01d3 E8000000 		call	__stack_chk_fail
+ 298      00
+ 299              	.L15:
+ 300 01d8 C9       		leave
+ 301              		.cfi_def_cfa 7, 8
+ 302 01d9 C3       		ret
+ 303              		.cfi_endproc
+ 304              	.LFE4:
+ 306              		.section	.rodata
+ 307              	.LC20:
+ 308 0252 20202020 		.string	"               0x%08X | "
+ 308      20202020 
+ 308      20202020 
+ 308      20202030 
+ 308      78253038 
+ 309              		.text
+ 310              		.globl	siFormattedMessage_SC
+ 312              	siFormattedMessage_SC:
+ 313              	.LFB5:
+ 138:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 
+ 139:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** signed int
+ 140:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** __cdecl
+ 141:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** siFormattedMessage_SC(
+ 142:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     char          cType       ,
+ 143:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *  cszFileName ,   
+GAS LISTING /tmp/cceNVJES.s 			page 11
+
+
+ 144:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *  cszFuncName ,   
+ 145:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     unsigned int  uiLineNum   ,
+ 146:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     EApiStatus_t  StatusCode  ,   
+ 147:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     const char *  cszFormat   ,   
+ 148:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     ...
+ 149:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     )
+ 150:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** {
+ 314              		.loc 1 150 0
+ 315              		.cfi_startproc
+ 316 01da 55       		pushq	%rbp
+ 317              		.cfi_def_cfa_offset 16
+ 318              		.cfi_offset 6, -16
+ 319 01db 4889E5   		movq	%rsp, %rbp
+ 320              		.cfi_def_cfa_register 6
+ 321 01de 4881EC10 		subq	$272, %rsp
+ 321      010000
+ 322 01e5 4889B510 		movq	%rsi, -240(%rbp)
+ 322      FFFFFF
+ 323 01ec 48899508 		movq	%rdx, -248(%rbp)
+ 323      FFFFFF
+ 324 01f3 898D18FF 		movl	%ecx, -232(%rbp)
+ 324      FFFF
+ 325 01f9 44898504 		movl	%r8d, -252(%rbp)
+ 325      FFFFFF
+ 326 0200 4C898DF8 		movq	%r9, -264(%rbp)
+ 326      FEFFFF
+ 327 0207 84C0     		testb	%al, %al
+ 328 0209 7420     		je	.L17
+ 329 020b 0F294580 		movaps	%xmm0, -128(%rbp)
+ 330 020f 0F294D90 		movaps	%xmm1, -112(%rbp)
+ 331 0213 0F2955A0 		movaps	%xmm2, -96(%rbp)
+ 332 0217 0F295DB0 		movaps	%xmm3, -80(%rbp)
+ 333 021b 0F2965C0 		movaps	%xmm4, -64(%rbp)
+ 334 021f 0F296DD0 		movaps	%xmm5, -48(%rbp)
+ 335 0223 0F2975E0 		movaps	%xmm6, -32(%rbp)
+ 336 0227 0F297DF0 		movaps	%xmm7, -16(%rbp)
+ 337              	.L17:
+ 338 022b 4088BD1C 		movb	%dil, -228(%rbp)
+ 338      FFFFFF
+ 339              		.loc 1 150 0
+ 340 0232 64488B04 		movq	%fs:40, %rax
+ 340      25280000 
+ 340      00
+ 341 023b 48898548 		movq	%rax, -184(%rbp)
+ 341      FFFFFF
+ 342 0242 31C0     		xorl	%eax, %eax
+ 151:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   signed int Ret;
+ 152:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   va_list _ArgList;
+ 153:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   const char *szStatusDesc;
+ 154:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   va_start(_ArgList, cszFormat);
+ 343              		.loc 1 154 0
+ 344 0244 C78530FF 		movl	$48, -208(%rbp)
+ 344      FFFF3000 
+ 344      0000
+ 345 024e C78534FF 		movl	$48, -204(%rbp)
+ 345      FFFF3000 
+ 345      0000
+GAS LISTING /tmp/cceNVJES.s 			page 12
+
+
+ 346 0258 488D4510 		leaq	16(%rbp), %rax
+ 347 025c 48898538 		movq	%rax, -200(%rbp)
+ 347      FFFFFF
+ 348 0263 488D8550 		leaq	-176(%rbp), %rax
+ 348      FFFFFF
+ 349 026a 48898540 		movq	%rax, -192(%rbp)
+ 349      FFFFFF
+ 155:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   EApiGetErrorStringA(&szStatusDesc, StatusCode);
+ 350              		.loc 1 155 0
+ 351 0271 8B9504FF 		movl	-252(%rbp), %edx
+ 351      FFFF
+ 352 0277 488D8528 		leaq	-216(%rbp), %rax
+ 352      FFFFFF
+ 353 027e 89D6     		movl	%edx, %esi
+ 354 0280 4889C7   		movq	%rax, %rdi
+ 355 0283 E8000000 		call	EApiGetErrorStringA
+ 355      00
+ 156:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	Ret = printf(
+ 356              		.loc 1 156 0
+ 357 0288 488B8510 		movq	-240(%rbp), %rax
+ 357      FFFFFF
+ 358 028f 4889C7   		movq	%rax, %rdi
+ 359 0292 E8000000 		call	GetLastOccurance
+ 359      00
+ 360 0297 4889C6   		movq	%rax, %rsi
+ 361 029a 0FBE851C 		movsbl	-228(%rbp), %eax
+ 361      FFFFFF
+ 362 02a1 488B8D08 		movq	-248(%rbp), %rcx
+ 362      FFFFFF
+ 363 02a8 8B9518FF 		movl	-232(%rbp), %edx
+ 363      FFFF
+ 364 02ae 4989C8   		movq	%rcx, %r8
+ 365 02b1 4889F1   		movq	%rsi, %rcx
+ 366 02b4 89C6     		movl	%eax, %esi
+ 367 02b6 BF000000 		movl	$cszLogFormat, %edi
+ 367      00
+ 368 02bb B8000000 		movl	$0, %eax
+ 368      00
+ 369 02c0 E8000000 		call	printf
+ 369      00
+ 370 02c5 898524FF 		movl	%eax, -220(%rbp)
+ 370      FFFF
+ 157:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       cszLogFormat, 
+ 158:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       cType       ,
+ 159:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       uiLineNum   ,
+ 160:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       GetLastOccurance(cszFileName),
+ 161:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****       cszFuncName
+ 162:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     );
+ 163:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   if(szStatusDesc==NULL){
+ 371              		.loc 1 163 0
+ 372 02cb 488B8528 		movq	-216(%rbp), %rax
+ 372      FFFFFF
+ 373 02d2 4885C0   		testq	%rax, %rax
+ 374 02d5 7519     		jne	.L18
+ 164:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     printf("               0x%08"PRIX32" | ", StatusCode);
+ 375              		.loc 1 164 0
+ 376 02d7 8B8504FF 		movl	-252(%rbp), %eax
+GAS LISTING /tmp/cceNVJES.s 			page 13
+
+
+ 376      FFFF
+ 377 02dd 89C6     		movl	%eax, %esi
+ 378 02df BF000000 		movl	$.LC20, %edi
+ 378      00
+ 379 02e4 B8000000 		movl	$0, %eax
+ 379      00
+ 380 02e9 E8000000 		call	printf
+ 380      00
+ 381 02ee EB19     		jmp	.L19
+ 382              	.L18:
+ 165:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   }else{
+ 166:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****     printf("%-25s | ", szStatusDesc);
+ 383              		.loc 1 166 0
+ 384 02f0 488B8528 		movq	-216(%rbp), %rax
+ 384      FFFFFF
+ 385 02f7 4889C6   		movq	%rax, %rsi
+ 386 02fa BF000000 		movl	$.LC19, %edi
+ 386      00
+ 387 02ff B8000000 		movl	$0, %eax
+ 387      00
+ 388 0304 E8000000 		call	printf
+ 388      00
+ 389              	.L19:
+ 167:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c ****   }
+ 168:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	Ret += vprintf(cszFormat, _ArgList);
+ 390              		.loc 1 168 0
+ 391 0309 488D9530 		leaq	-208(%rbp), %rdx
+ 391      FFFFFF
+ 392 0310 488B85F8 		movq	-264(%rbp), %rax
+ 392      FEFFFF
+ 393 0317 4889D6   		movq	%rdx, %rsi
+ 394 031a 4889C7   		movq	%rax, %rdi
+ 395 031d E8000000 		call	vprintf
+ 395      00
+ 396 0322 018524FF 		addl	%eax, -220(%rbp)
+ 396      FFFF
+ 169:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	va_end(_ArgList);
+ 170:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** 	return Ret;
+ 397              		.loc 1 170 0
+ 398 0328 8B8524FF 		movl	-220(%rbp), %eax
+ 398      FFFF
+ 171:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/DbgChk.c **** }
+ 399              		.loc 1 171 0
+ 400 032e 488B8D48 		movq	-184(%rbp), %rcx
+ 400      FFFFFF
+ 401 0335 6448330C 		xorq	%fs:40, %rcx
+ 401      25280000 
+ 401      00
+ 402 033e 7405     		je	.L21
+ 403 0340 E8000000 		call	__stack_chk_fail
+ 403      00
+ 404              	.L21:
+ 405 0345 C9       		leave
+ 406              		.cfi_def_cfa 7, 8
+ 407 0346 C3       		ret
+ 408              		.cfi_endproc
+ 409              	.LFE5:
+GAS LISTING /tmp/cceNVJES.s 			page 14
+
+
+ 411              	.Letext0:
+ 412              		.file 2 "<built-in>"
+ 413              		.file 3 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h"
+ 414              		.file 4 "/usr/include/stdio.h"
+ 415              		.file 5 "/usr/include/stdint.h"
+ 416              		.file 6 "../../../include/EApi.h"
+GAS LISTING /tmp/cceNVJES.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 DbgChk.c
+     /tmp/cceNVJES.s:47     .rodata:0000000000000100 ErrorLookupA
+     /tmp/cceNVJES.s:108    .text:0000000000000000 EApiGetErrorStringA
+     /tmp/cceNVJES.s:166    .text:0000000000000061 GetLastOccurance
+     /tmp/cceNVJES.s:219    .rodata:0000000000000230 cszLogFormat
+     /tmp/cceNVJES.s:226    .text:00000000000000a9 siFormattedMessage_M2
+     /tmp/cceNVJES.s:312    .text:00000000000001da siFormattedMessage_SC
+
+UNDEFINED SYMBOLS
+printf
+vprintf
+__stack_chk_fail

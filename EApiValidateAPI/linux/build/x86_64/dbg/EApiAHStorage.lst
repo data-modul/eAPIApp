@@ -1,0 +1,553 @@
+GAS LISTING /tmp/ccyqJhnB.s 			page 1
+
+
+   1              		.file	"EApiAHStorage.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.section	.rodata
+   5              	.LC0:
+   6 0000 25730A00 		.string	"%s\n"
+   7              	.LC1:
+   8 0004 45417069 		.string	"EApiAHWriteStorage"
+   8      41485772 
+   8      69746553 
+   8      746F7261 
+   8      676500
+   9 0017 00       		.align 8
+  10              	.LC2:
+  11 0018 2F646576 		.string	"/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c"
+  11      656C6F70 
+  11      6D656E74 
+  11      2F654150 
+  11      492F6561 
+  12              	.LC3:
+  13 006e 28704275 		.string	"(pBuffer==NULL)"
+  13      66666572 
+  13      3D3D4E55 
+  13      4C4C2900 
+  14              	.LC4:
+  15 007e 28427974 		.string	"(ByteCnt==0)"
+  15      65436E74 
+  15      3D3D3029 
+  15      00
+  16              	.LC5:
+  17 008b 28284279 		.string	"((ByteOffset+ByteCnt)>MaxLen)"
+  17      74654F66 
+  17      66736574 
+  17      2B427974 
+  17      65436E74 
+  18 00a9 00000000 		.align 8
+  18      000000
+  19              	.LC6:
+  20 00b0 28284164 		.string	"((AdjOffset+AdjLength)>MaxLen)"
+  20      6A4F6666 
+  20      7365742B 
+  20      41646A4C 
+  20      656E6774 
+  21              	.LC7:
+  22 00cf 416C6C6F 		.string	"Allocating Page Buffer"
+  22      63617469 
+  22      6E672050 
+  22      61676520 
+  22      42756666 
+  23              		.text
+  24              		.globl	EApiAHWriteStorage
+  26              	EApiAHWriteStorage:
+  27              	.LFB2:
+  28              		.file 1 "/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c"
+   1:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** /*
+   2:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *<KHeader>
+   3:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *+=========================================================================
+GAS LISTING /tmp/ccyqJhnB.s 			page 2
+
+
+   4:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  Project Name: EApiDK Embedded Application Development Kit
+   5:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *+=========================================================================
+   6:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  $HeadURL: http://svn.code.sf.net/p/eapidk/code/trunk/apps/common/EApiAHStorage.c $
+   7:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *+=========================================================================
+   8:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I   Copyright: Copyright (c) 2002-2009, Kontron Embedded Modules GmbH
+   9:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I      Author: John Kearney,                  John.Kearney@kontron.com
+  10:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I
+  11:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I     License: All rights reserved. This program and the accompanying 
+  12:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              materials are licensed and made available under the 
+  13:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              terms and conditions of the BSD License which 
+  14:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              accompanies this distribution. The full text of the 
+  15:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              license may be found at 
+  16:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              http://opensource.org/licenses/bsd-license.php
+  17:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              
+  18:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "
+  19:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS OF 
+  20:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I              ANY KIND, EITHER EXPRESS OR IMPLIED.
+  21:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I
+  22:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I Description: Auto Created for EApiAHStorage.c
+  23:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I
+  24:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *+-------------------------------------------------------------------------
+  25:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I
+  26:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  File Name            : EApiAHStorage.c
+  27:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  File Location        : apps\common
+  28:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  Last committed       : $Revision: 74 $
+  29:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  Last changed by      : $Author: dethrophes $
+  30:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  Last changed date    : $Date: 2010-06-23 21:26:50 +0200 (Wed, 23 Jun 2010) $
+  31:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I  ID                   : $Id: EApiAHStorage.c 74 2010-06-23 19:26:50Z dethrophes $
+  32:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *I
+  33:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *+=========================================================================
+  34:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  *</KHeader>
+  35:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****  */
+  36:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****   #include <EApiApp.h>
+  37:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** 
+  38:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** 
+  39:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** EApiStatus_t 
+  40:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** EApiAHWriteStorage(
+  41:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     __IN  EApiId_t         Id          , 
+  42:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     __IN  const uint32_t   ByteOffset  , 
+  43:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     __IN  void *           pBuffer     , 
+  44:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     __IN  const uint32_t   ByteCnt 
+  45:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     )
+  46:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** {
+  29              		.loc 1 46 0
+  30              		.cfi_startproc
+  31 0000 55       		pushq	%rbp
+  32              		.cfi_def_cfa_offset 16
+  33              		.cfi_offset 6, -16
+  34 0001 4889E5   		movq	%rsp, %rbp
+  35              		.cfi_def_cfa_register 6
+  36 0004 4883EC50 		subq	$80, %rsp
+  37 0008 897DCC   		movl	%edi, -52(%rbp)
+  38 000b 8975C8   		movl	%esi, -56(%rbp)
+  39 000e 488955C0 		movq	%rdx, -64(%rbp)
+  40 0012 894DBC   		movl	%ecx, -68(%rbp)
+  41              		.loc 1 46 0
+  42 0015 64488B04 		movq	%fs:40, %rax
+GAS LISTING /tmp/ccyqJhnB.s 			page 3
+
+
+  42      25280000 
+  42      00
+  43 001e 488945F8 		movq	%rax, -8(%rbp)
+  44 0022 31C0     		xorl	%eax, %eax
+  47:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     EApiStatus_t StatusCode=EAPI_STATUS_SUCCESS;
+  45              		.loc 1 47 0
+  46 0024 C745E000 		movl	$0, -32(%rbp)
+  46      000000
+  48:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     uint32_t MaxLen, alignment;
+  49:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     uint32_t AdjOffset=ByteOffset, AdjLength=ByteCnt;
+  47              		.loc 1 49 0
+  48 002b 8B45C8   		movl	-56(%rbp), %eax
+  49 002e 8945E4   		movl	%eax, -28(%rbp)
+  50 0031 8B45BC   		movl	-68(%rbp), %eax
+  51 0034 8945E8   		movl	%eax, -24(%rbp)
+  50:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     int_least8_t * pLclBuffer=NULL;
+  52              		.loc 1 50 0
+  53 0037 48C745F0 		movq	$0, -16(%rbp)
+  53      00000000 
+  51:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     uint32_t BufferOffset=0;
+  54              		.loc 1 51 0
+  55 003f C745EC00 		movl	$0, -20(%rbp)
+  55      000000
+  52:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     
+  53:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     EAPI_APP_ASSERT_PARAMATER_NULL(
+  56              		.loc 1 53 0
+  57 0046 48837DC0 		cmpq	$0, -64(%rbp)
+  57      00
+  58 004b 7543     		jne	.L2
+  59              		.loc 1 53 0 is_stmt 0 discriminator 1
+  60 004d 4883EC08 		subq	$8, %rsp
+  61 0051 68000000 		pushq	$.LC3
+  61      00
+  62 0056 41B90000 		movl	$.LC0, %r9d
+  62      0000
+  63 005c 41B8FFFE 		movl	$-257, %r8d
+  63      FFFF
+  64 0062 B9390000 		movl	$57, %ecx
+  64      00
+  65 0067 BA000000 		movl	$.LC1, %edx
+  65      00
+  66 006c BE000000 		movl	$.LC2, %esi
+  66      00
+  67 0071 BF450000 		movl	$69, %edi
+  67      00
+  68 0076 B8000000 		movl	$0, %eax
+  68      00
+  69 007b E8000000 		call	siFormattedMessage_SC
+  69      00
+  70 0080 4883C410 		addq	$16, %rsp
+  71 0084 C745E0FF 		movl	$-257, -32(%rbp)
+  71      FEFFFF
+  72 008b E94C0200 		jmp	.L13
+  72      00
+  73              	.L2:
+  54:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EApiAHWriteStorage, 
+  55:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EAPI_STATUS_INVALID_PARAMETER, 
+GAS LISTING /tmp/ccyqJhnB.s 			page 4
+
+
+  56:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         pBuffer
+  57:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         );
+  58:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     EAPI_APP_ASSERT_PARAMATER_ZERO(
+  74              		.loc 1 58 0 is_stmt 1
+  75 0090 837DBC00 		cmpl	$0, -68(%rbp)
+  76 0094 7543     		jne	.L4
+  77              		.loc 1 58 0 is_stmt 0 discriminator 1
+  78 0096 4883EC08 		subq	$8, %rsp
+  79 009a 68000000 		pushq	$.LC4
+  79      00
+  80 009f 41B90000 		movl	$.LC0, %r9d
+  80      0000
+  81 00a5 41B8FFFE 		movl	$-257, %r8d
+  81      FFFF
+  82 00ab B93E0000 		movl	$62, %ecx
+  82      00
+  83 00b0 BA000000 		movl	$.LC1, %edx
+  83      00
+  84 00b5 BE000000 		movl	$.LC2, %esi
+  84      00
+  85 00ba BF450000 		movl	$69, %edi
+  85      00
+  86 00bf B8000000 		movl	$0, %eax
+  86      00
+  87 00c4 E8000000 		call	siFormattedMessage_SC
+  87      00
+  88 00c9 4883C410 		addq	$16, %rsp
+  89 00cd C745E0FF 		movl	$-257, -32(%rbp)
+  89      FEFFFF
+  90 00d4 E9030200 		jmp	.L13
+  90      00
+  91              	.L4:
+  59:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EApiAHWriteStorage, 
+  60:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EAPI_STATUS_INVALID_PARAMETER, 
+  61:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         ByteCnt
+  62:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         );
+  63:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     /* Get Storage Capabilities */
+  64:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     StatusCode=EApiStorageCap(Id, &MaxLen, &alignment);
+  92              		.loc 1 64 0 is_stmt 1
+  93 00d9 488D55DC 		leaq	-36(%rbp), %rdx
+  94 00dd 488D4DD8 		leaq	-40(%rbp), %rcx
+  95 00e1 8B45CC   		movl	-52(%rbp), %eax
+  96 00e4 4889CE   		movq	%rcx, %rsi
+  97 00e7 89C7     		movl	%eax, %edi
+  98 00e9 E8000000 		call	EApiStorageCap
+  98      00
+  99 00ee 8945E0   		movl	%eax, -32(%rbp)
+  65:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     if(!EAPI_TEST_SUCCESS(StatusCode))
+ 100              		.loc 1 65 0
+ 101 00f1 837DE000 		cmpl	$0, -32(%rbp)
+ 102 00f5 0F85DD01 		jne	.L17
+ 102      0000
+  66:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       goto ErrorExit;
+  67:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** 
+  68:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     /* Is the write possible? */
+  69:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     EAPI_APP_ASSERT_PARAMATER_CHECK_S(
+ 103              		.loc 1 69 0
+GAS LISTING /tmp/ccyqJhnB.s 			page 5
+
+
+ 104 00fb 8B55C8   		movl	-56(%rbp), %edx
+ 105 00fe 8B45BC   		movl	-68(%rbp), %eax
+ 106 0101 01C2     		addl	%eax, %edx
+ 107 0103 8B45D8   		movl	-40(%rbp), %eax
+ 108 0106 39C2     		cmpl	%eax, %edx
+ 109 0108 7643     		jbe	.L6
+ 110              		.loc 1 69 0 is_stmt 0 discriminator 1
+ 111 010a 4883EC08 		subq	$8, %rsp
+ 112 010e 68000000 		pushq	$.LC5
+ 112      00
+ 113 0113 41B90000 		movl	$.LC0, %r9d
+ 113      0000
+ 114 0119 41B8FFFE 		movl	$-257, %r8d
+ 114      FFFF
+ 115 011f B9490000 		movl	$73, %ecx
+ 115      00
+ 116 0124 BA000000 		movl	$.LC1, %edx
+ 116      00
+ 117 0129 BE000000 		movl	$.LC2, %esi
+ 117      00
+ 118 012e BF450000 		movl	$69, %edi
+ 118      00
+ 119 0133 B8000000 		movl	$0, %eax
+ 119      00
+ 120 0138 E8000000 		call	siFormattedMessage_SC
+ 120      00
+ 121 013d 4883C410 		addq	$16, %rsp
+ 122 0141 C745E0FF 		movl	$-257, -32(%rbp)
+ 122      FEFFFF
+ 123 0148 E98F0100 		jmp	.L13
+ 123      00
+ 124              	.L6:
+  70:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EApiAHWriteStorage, 
+  71:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EAPI_STATUS_INVALID_PARAMETER, 
+  72:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         ((ByteOffset+ByteCnt)>MaxLen) 
+  73:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         );
+  74:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** 
+  75:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     if(ByteOffset%alignment){
+ 125              		.loc 1 75 0 is_stmt 1
+ 126 014d 8B4DDC   		movl	-36(%rbp), %ecx
+ 127 0150 8B45C8   		movl	-56(%rbp), %eax
+ 128 0153 BA000000 		movl	$0, %edx
+ 128      00
+ 129 0158 F7F1     		divl	%ecx
+ 130 015a 89D0     		movl	%edx, %eax
+ 131 015c 85C0     		testl	%eax, %eax
+ 132 015e 7424     		je	.L7
+  76:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       BufferOffset=ByteOffset%alignment     ; /* Calculate Alignment Offset */
+ 133              		.loc 1 76 0
+ 134 0160 8B4DDC   		movl	-36(%rbp), %ecx
+ 135 0163 8B45C8   		movl	-56(%rbp), %eax
+ 136 0166 BA000000 		movl	$0, %edx
+ 136      00
+ 137 016b F7F1     		divl	%ecx
+ 138 016d 8955EC   		movl	%edx, -20(%rbp)
+  77:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       AdjOffset=ByteOffset - BufferOffset   ; /* Align Bottom of window */
+ 139              		.loc 1 77 0
+GAS LISTING /tmp/ccyqJhnB.s 			page 6
+
+
+ 140 0170 8B45C8   		movl	-56(%rbp), %eax
+ 141 0173 2B45EC   		subl	-20(%rbp), %eax
+ 142 0176 8945E4   		movl	%eax, -28(%rbp)
+  78:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       AdjLength=ByteCnt+BufferOffset        ; /* Increase block length to adjust for new base */
+ 143              		.loc 1 78 0
+ 144 0179 8B55BC   		movl	-68(%rbp), %edx
+ 145 017c 8B45EC   		movl	-20(%rbp), %eax
+ 146 017f 01D0     		addl	%edx, %eax
+ 147 0181 8945E8   		movl	%eax, -24(%rbp)
+ 148              	.L7:
+  79:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     }
+  80:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     if(AdjLength%alignment){
+ 149              		.loc 1 80 0
+ 150 0184 8B4DDC   		movl	-36(%rbp), %ecx
+ 151 0187 8B45E8   		movl	-24(%rbp), %eax
+ 152 018a BA000000 		movl	$0, %edx
+ 152      00
+ 153 018f F7F1     		divl	%ecx
+ 154 0191 89D0     		movl	%edx, %eax
+ 155 0193 85C0     		testl	%eax, %eax
+ 156 0195 741C     		je	.L8
+  81:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       /* Adjust Block length so its a multiple of alignment */
+  82:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       AdjLength=AdjLength-(AdjLength%alignment)+alignment;  
+ 157              		.loc 1 82 0
+ 158 0197 8B4DDC   		movl	-36(%rbp), %ecx
+ 159 019a 8B45E8   		movl	-24(%rbp), %eax
+ 160 019d BA000000 		movl	$0, %edx
+ 160      00
+ 161 01a2 F7F1     		divl	%ecx
+ 162 01a4 8B45E8   		movl	-24(%rbp), %eax
+ 163 01a7 29D0     		subl	%edx, %eax
+ 164 01a9 89C2     		movl	%eax, %edx
+ 165 01ab 8B45DC   		movl	-36(%rbp), %eax
+ 166 01ae 01D0     		addl	%edx, %eax
+ 167 01b0 8945E8   		movl	%eax, -24(%rbp)
+ 168              	.L8:
+  83:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     }
+  84:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     if(AdjLength!=ByteCnt){
+ 169              		.loc 1 84 0
+ 170 01b3 8B45E8   		movl	-24(%rbp), %eax
+ 171 01b6 3B45BC   		cmpl	-68(%rbp), %eax
+ 172 01b9 0F840001 		je	.L9
+ 172      0000
+  85:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       /* This Error can only occur if the Storage 
+  86:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****        * area isn't a multiple of its alignment 
+  87:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****        */
+  88:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       EAPI_APP_ASSERT_PARAMATER_CHECK_S(
+ 173              		.loc 1 88 0
+ 174 01bf 8B55E4   		movl	-28(%rbp), %edx
+ 175 01c2 8B45E8   		movl	-24(%rbp), %eax
+ 176 01c5 01C2     		addl	%eax, %edx
+ 177 01c7 8B45D8   		movl	-40(%rbp), %eax
+ 178 01ca 39C2     		cmpl	%eax, %edx
+ 179 01cc 7643     		jbe	.L10
+ 180              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 181 01ce 4883EC08 		subq	$8, %rsp
+ 182 01d2 68000000 		pushq	$.LC6
+GAS LISTING /tmp/ccyqJhnB.s 			page 7
+
+
+ 182      00
+ 183 01d7 41B90000 		movl	$.LC0, %r9d
+ 183      0000
+ 184 01dd 41B8FFF0 		movl	$-3841, %r8d
+ 184      FFFF
+ 185 01e3 B95C0000 		movl	$92, %ecx
+ 185      00
+ 186 01e8 BA000000 		movl	$.LC1, %edx
+ 186      00
+ 187 01ed BE000000 		movl	$.LC2, %esi
+ 187      00
+ 188 01f2 BF450000 		movl	$69, %edi
+ 188      00
+ 189 01f7 B8000000 		movl	$0, %eax
+ 189      00
+ 190 01fc E8000000 		call	siFormattedMessage_SC
+ 190      00
+ 191 0201 4883C410 		addq	$16, %rsp
+ 192 0205 C745E0FF 		movl	$-3841, -32(%rbp)
+ 192      F0FFFF
+ 193 020c E9CB0000 		jmp	.L13
+ 193      00
+ 194              	.L10:
+  89:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****           EApiAHWriteStorage, 
+  90:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****           EAPI_STATUS_ERROR, 
+  91:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****           ((AdjOffset+AdjLength)>MaxLen)
+  92:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****           );
+  93:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       pLclBuffer=malloc(AdjLength);
+ 195              		.loc 1 93 0 is_stmt 1
+ 196 0211 8B45E8   		movl	-24(%rbp), %eax
+ 197 0214 4889C7   		movq	%rax, %rdi
+ 198 0217 E8000000 		call	malloc
+ 198      00
+ 199 021c 488945F0 		movq	%rax, -16(%rbp)
+  94:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       EAPI_APP_RETURN_ERROR_IF(
+ 200              		.loc 1 94 0
+ 201 0220 48837DF0 		cmpq	$0, -16(%rbp)
+ 201      00
+ 202 0225 7540     		jne	.L11
+ 203              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 204 0227 4883EC08 		subq	$8, %rsp
+ 205 022b 68000000 		pushq	$.LC7
+ 205      00
+ 206 0230 41B90000 		movl	$.LC0, %r9d
+ 206      0000
+ 207 0236 41B8FDFF 		movl	$-3, %r8d
+ 207      FFFF
+ 208 023c B9630000 		movl	$99, %ecx
+ 208      00
+ 209 0241 BA000000 		movl	$.LC1, %edx
+ 209      00
+ 210 0246 BE000000 		movl	$.LC2, %esi
+ 210      00
+ 211 024b BF450000 		movl	$69, %edi
+ 211      00
+ 212 0250 B8000000 		movl	$0, %eax
+ 212      00
+GAS LISTING /tmp/ccyqJhnB.s 			page 8
+
+
+ 213 0255 E8000000 		call	siFormattedMessage_SC
+ 213      00
+ 214 025a 4883C410 		addq	$16, %rsp
+ 215 025e C745E0FD 		movl	$-3, -32(%rbp)
+ 215      FFFFFF
+ 216 0265 EB75     		jmp	.L13
+ 217              	.L11:
+  95:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EApiAHWriteStorage, 
+  96:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         pLclBuffer==NULL,
+  97:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         EAPI_STATUS_ALLOC_ERROR, 
+  98:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         "Allocating Page Buffer"
+  99:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         );
+ 100:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       StatusCode=EApiStorageAreaRead(Id, AdjOffset, pLclBuffer, AdjLength, AdjLength);
+ 218              		.loc 1 100 0 is_stmt 1
+ 219 0267 8B7DE8   		movl	-24(%rbp), %edi
+ 220 026a 8B4DE8   		movl	-24(%rbp), %ecx
+ 221 026d 488B55F0 		movq	-16(%rbp), %rdx
+ 222 0271 8B75E4   		movl	-28(%rbp), %esi
+ 223 0274 8B45CC   		movl	-52(%rbp), %eax
+ 224 0277 4189F8   		movl	%edi, %r8d
+ 225 027a 89C7     		movl	%eax, %edi
+ 226 027c E8000000 		call	EApiStorageAreaRead
+ 226      00
+ 227 0281 8945E0   		movl	%eax, -32(%rbp)
+ 101:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       if(!EAPI_TEST_SUCCESS(StatusCode))
+ 228              		.loc 1 101 0
+ 229 0284 837DE000 		cmpl	$0, -32(%rbp)
+ 230 0288 7551     		jne	.L18
+ 102:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****         goto ErrorExit;
+ 103:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       memcpy(&pLclBuffer[BufferOffset], pBuffer, ByteCnt);
+ 231              		.loc 1 103 0
+ 232 028a 8B55BC   		movl	-68(%rbp), %edx
+ 233 028d 8B4DEC   		movl	-20(%rbp), %ecx
+ 234 0290 488B45F0 		movq	-16(%rbp), %rax
+ 235 0294 4801C1   		addq	%rax, %rcx
+ 236 0297 488B45C0 		movq	-64(%rbp), %rax
+ 237 029b 4889C6   		movq	%rax, %rsi
+ 238 029e 4889CF   		movq	%rcx, %rdi
+ 239 02a1 E8000000 		call	memcpy
+ 239      00
+ 104:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       StatusCode=EApiStorageAreaWrite(Id, AdjOffset, pLclBuffer, AdjLength);
+ 240              		.loc 1 104 0
+ 241 02a6 8B4DE8   		movl	-24(%rbp), %ecx
+ 242 02a9 488B55F0 		movq	-16(%rbp), %rdx
+ 243 02ad 8B75E4   		movl	-28(%rbp), %esi
+ 244 02b0 8B45CC   		movl	-52(%rbp), %eax
+ 245 02b3 89C7     		movl	%eax, %edi
+ 246 02b5 E8000000 		call	EApiStorageAreaWrite
+ 246      00
+ 247 02ba 8945E0   		movl	%eax, -32(%rbp)
+ 248 02bd EB1D     		jmp	.L13
+ 249              	.L9:
+ 105:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     }else{
+ 106:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       StatusCode=EApiStorageAreaWrite(Id, ByteOffset, pBuffer, ByteCnt);
+ 250              		.loc 1 106 0
+ 251 02bf 8B4DBC   		movl	-68(%rbp), %ecx
+ 252 02c2 488B55C0 		movq	-64(%rbp), %rdx
+GAS LISTING /tmp/ccyqJhnB.s 			page 9
+
+
+ 253 02c6 8B75C8   		movl	-56(%rbp), %esi
+ 254 02c9 8B45CC   		movl	-52(%rbp), %eax
+ 255 02cc 89C7     		movl	%eax, %edi
+ 256 02ce E8000000 		call	EApiStorageAreaWrite
+ 256      00
+ 257 02d3 8945E0   		movl	%eax, -32(%rbp)
+ 258 02d6 EB04     		jmp	.L13
+ 259              	.L3:
+ 260              	.L17:
+  66:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** 
+ 261              		.loc 1 66 0
+ 262 02d8 90       		nop
+ 263 02d9 EB01     		jmp	.L13
+ 264              	.L18:
+ 102:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****       memcpy(&pLclBuffer[BufferOffset], pBuffer, ByteCnt);
+ 265              		.loc 1 102 0
+ 266 02db 90       		nop
+ 267              	.L13:
+ 107:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     }
+ 108:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** ErrorExit:
+ 109:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** EAPI_APP_ASSERT_EXIT
+ 110:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     if(pLclBuffer!=NULL)free(pLclBuffer);
+ 268              		.loc 1 110 0
+ 269 02dc 48837DF0 		cmpq	$0, -16(%rbp)
+ 269      00
+ 270 02e1 740C     		je	.L14
+ 271              		.loc 1 110 0 is_stmt 0 discriminator 1
+ 272 02e3 488B45F0 		movq	-16(%rbp), %rax
+ 273 02e7 4889C7   		movq	%rax, %rdi
+ 274 02ea E8000000 		call	free
+ 274      00
+ 275              	.L14:
+ 111:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** 
+ 112:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c ****     return StatusCode;
+ 276              		.loc 1 112 0 is_stmt 1
+ 277 02ef 8B45E0   		movl	-32(%rbp), %eax
+ 113:/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../../common/EApiAHStorage.c **** }
+ 278              		.loc 1 113 0
+ 279 02f2 488B7DF8 		movq	-8(%rbp), %rdi
+ 280 02f6 6448333C 		xorq	%fs:40, %rdi
+ 280      25280000 
+ 280      00
+ 281 02ff 7405     		je	.L16
+ 282 0301 E8000000 		call	__stack_chk_fail
+ 282      00
+ 283              	.L16:
+ 284 0306 C9       		leave
+ 285              		.cfi_def_cfa 7, 8
+ 286 0307 C3       		ret
+ 287              		.cfi_endproc
+ 288              	.LFE2:
+ 290              	.Letext0:
+ 291              		.file 2 "/usr/include/stdint.h"
+ 292              		.file 3 "../../../include/EApi.h"
+GAS LISTING /tmp/ccyqJhnB.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 EApiAHStorage.c
+     /tmp/ccyqJhnB.s:26     .text:0000000000000000 EApiAHWriteStorage
+
+UNDEFINED SYMBOLS
+siFormattedMessage_SC
+EApiStorageCap
+malloc
+EApiStorageAreaRead
+memcpy
+EApiStorageAreaWrite
+free
+__stack_chk_fail

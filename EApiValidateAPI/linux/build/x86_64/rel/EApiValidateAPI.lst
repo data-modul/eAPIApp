@@ -1,0 +1,3123 @@
+GAS LISTING /tmp/ccBFckO5.s 			page 1
+
+
+   1              		.file	"EApiValidateAPI.c"
+   2              		.section	.rodata.str1.1,"aMS",@progbits,1
+   3              	.LC0:
+   4 0000 252D3330 		.string	"%-30s : %s\n"
+   4      73203A20 
+   4      25730A00 
+   5              		.section	.rodata.str1.8,"aMS",@progbits,1
+   6              		.align 8
+   7              	.LC1:
+   8 0000 252D3330 		.string	"%-30s : EAPI_STATUS_UNSUPPORTED\n"
+   8      73203A20 
+   8      45415049 
+   8      5F535441 
+   8      5455535F 
+   9              		.section	.text.unlikely,"ax",@progbits
+  10              	.LCOLDB2:
+  11              		.text
+  12              	.LHOTB2:
+  13              		.p2align 4,,15
+  14              		.globl	EApiValidateStringApi
+  16              	EApiValidateStringApi:
+  17              	.LFB100:
+  18              		.cfi_startproc
+  19 0000 55       		pushq	%rbp
+  20              		.cfi_def_cfa_offset 16
+  21              		.cfi_offset 6, -16
+  22 0001 53       		pushq	%rbx
+  23              		.cfi_def_cfa_offset 24
+  24              		.cfi_offset 3, -24
+  25 0002 BF640000 		movl	$100, %edi
+  25      00
+  26 0007 BB000000 		movl	$EApiStrings+8, %ebx
+  26      00
+  27 000c 4883EC18 		subq	$24, %rsp
+  28              		.cfi_def_cfa_offset 48
+  29 0010 64488B04 		movq	%fs:40, %rax
+  29      25280000 
+  29      00
+  30 0019 48894424 		movq	%rax, 8(%rsp)
+  30      08
+  31 001e 31C0     		xorl	%eax, %eax
+  32 0020 C7442404 		movl	$100, 4(%rsp)
+  32      64000000 
+  33 0028 E8000000 		call	malloc
+  33      00
+  34 002d BF0A0000 		movl	$10, %edi
+  34      00
+  35 0032 4889C5   		movq	%rax, %rbp
+  36 0035 E8000000 		call	putchar
+  36      00
+  37 003a EB26     		jmp	.L4
+  38 003c 0F1F4000 		.p2align 4,,10
+  39              		.p2align 3
+  40              	.L11:
+  41 0040 488B13   		movq	(%rbx), %rdx
+  42 0043 4889E9   		movq	%rbp, %rcx
+  43 0046 BE000000 		movl	$.LC0, %esi
+GAS LISTING /tmp/ccBFckO5.s 			page 2
+
+
+  43      00
+  44 004b BF010000 		movl	$1, %edi
+  44      00
+  45 0050 4883C310 		addq	$16, %rbx
+  46 0054 E8000000 		call	__printf_chk
+  46      00
+  47 0059 4881FB00 		cmpq	$EApiStrings+136, %rbx
+  47      000000
+  48 0060 743D     		je	.L10
+  49              	.L4:
+  50 0062 8B7BF8   		movl	-8(%rbx), %edi
+  51 0065 488D5424 		leaq	4(%rsp), %rdx
+  51      04
+  52 006a 4889EE   		movq	%rbp, %rsi
+  53 006d C7442404 		movl	$100, 4(%rsp)
+  53      64000000 
+  54 0075 E8000000 		call	EApiBoardGetStringA
+  54      00
+  55 007a 85C0     		testl	%eax, %eax
+  56 007c 74C2     		je	.L11
+  57 007e 488B13   		movq	(%rbx), %rdx
+  58 0081 31C0     		xorl	%eax, %eax
+  59 0083 BE000000 		movl	$.LC1, %esi
+  59      00
+  60 0088 BF010000 		movl	$1, %edi
+  60      00
+  61 008d 4883C310 		addq	$16, %rbx
+  62 0091 E8000000 		call	__printf_chk
+  62      00
+  63 0096 4881FB00 		cmpq	$EApiStrings+136, %rbx
+  63      000000
+  64 009d 75C3     		jne	.L4
+  65              	.L10:
+  66 009f 488B4424 		movq	8(%rsp), %rax
+  66      08
+  67 00a4 64483304 		xorq	%fs:40, %rax
+  67      25280000 
+  67      00
+  68 00ad 750E     		jne	.L12
+  69 00af 4883C418 		addq	$24, %rsp
+  70              		.cfi_remember_state
+  71              		.cfi_def_cfa_offset 24
+  72 00b3 4889EF   		movq	%rbp, %rdi
+  73 00b6 5B       		popq	%rbx
+  74              		.cfi_def_cfa_offset 16
+  75 00b7 5D       		popq	%rbp
+  76              		.cfi_def_cfa_offset 8
+  77 00b8 E9000000 		jmp	free
+  77      00
+  78              	.L12:
+  79              		.cfi_restore_state
+  80 00bd E8000000 		call	__stack_chk_fail
+  80      00
+  81              		.cfi_endproc
+  82              	.LFE100:
+  84              		.section	.text.unlikely
+  85              	.LCOLDE2:
+GAS LISTING /tmp/ccBFckO5.s 			page 3
+
+
+  86              		.text
+  87              	.LHOTE2:
+  88              		.section	.text.unlikely
+  89              	.LCOLDB3:
+  90              		.text
+  91              	.LHOTB3:
+  92 00c2 0F1F4000 		.p2align 4,,15
+  92      662E0F1F 
+  92      84000000 
+  92      0000
+  93              		.globl	EApiValidateValuesApi
+  95              	EApiValidateValuesApi:
+  96              	.LFB101:
+  97              		.cfi_startproc
+  98 00d0 53       		pushq	%rbx
+  99              		.cfi_def_cfa_offset 16
+ 100              		.cfi_offset 3, -16
+ 101 00d1 BF0A0000 		movl	$10, %edi
+ 101      00
+ 102 00d6 BB000000 		movl	$EApiValues+8, %ebx
+ 102      00
+ 103 00db 4881EC20 		subq	$1056, %rsp
+ 103      040000
+ 104              		.cfi_def_cfa_offset 1072
+ 105 00e2 64488B04 		movq	%fs:40, %rax
+ 105      25280000 
+ 105      00
+ 106 00eb 48898424 		movq	%rax, 1048(%rsp)
+ 106      18040000 
+ 107 00f3 31C0     		xorl	%eax, %eax
+ 108 00f5 E8000000 		call	putchar
+ 108      00
+ 109 00fa EB3B     		jmp	.L16
+ 110 00fc 0F1F4000 		.p2align 4,,10
+ 111              		.p2align 3
+ 112              	.L22:
+ 113 0100 BA000400 		movl	$1024, %edx
+ 113      00
+ 114 0105 488D7424 		leaq	16(%rsp), %rsi
+ 114      10
+ 115 010a 8B7C240C 		movl	12(%rsp), %edi
+ 116 010e FF5308   		call	*8(%rbx)
+ 117              	.L20:
+ 118 0111 488B13   		movq	(%rbx), %rdx
+ 119 0114 488D4C24 		leaq	16(%rsp), %rcx
+ 119      10
+ 120 0119 31C0     		xorl	%eax, %eax
+ 121 011b BE000000 		movl	$.LC0, %esi
+ 121      00
+ 122 0120 BF010000 		movl	$1, %edi
+ 122      00
+ 123 0125 4883C318 		addq	$24, %rbx
+ 124 0129 E8000000 		call	__printf_chk
+ 124      00
+ 125 012e 4881FB00 		cmpq	$EApiValues+416, %rbx
+ 125      000000
+ 126 0135 7429     		je	.L21
+GAS LISTING /tmp/ccBFckO5.s 			page 4
+
+
+ 127              	.L16:
+ 128 0137 8B7BF8   		movl	-8(%rbx), %edi
+ 129 013a 488D7424 		leaq	12(%rsp), %rsi
+ 129      0C
+ 130 013f E8000000 		call	EApiBoardGetValue
+ 130      00
+ 131 0144 85C0     		testl	%eax, %eax
+ 132 0146 74B8     		je	.L22
+ 133 0148 488D7424 		leaq	16(%rsp), %rsi
+ 133      10
+ 134 014d BA000400 		movl	$1024, %edx
+ 134      00
+ 135 0152 89C7     		movl	%eax, %edi
+ 136 0154 E8000000 		call	EApiAHCreateErrorString
+ 136      00
+ 137 0159 EBB6     		jmp	.L20
+ 138 015b 0F1F4400 		.p2align 4,,10
+ 138      00
+ 139              		.p2align 3
+ 140              	.L21:
+ 141 0160 488B8424 		movq	1048(%rsp), %rax
+ 141      18040000 
+ 142 0168 64483304 		xorq	%fs:40, %rax
+ 142      25280000 
+ 142      00
+ 143 0171 7509     		jne	.L23
+ 144 0173 4881C420 		addq	$1056, %rsp
+ 144      040000
+ 145              		.cfi_remember_state
+ 146              		.cfi_def_cfa_offset 16
+ 147 017a 5B       		popq	%rbx
+ 148              		.cfi_def_cfa_offset 8
+ 149 017b C3       		ret
+ 150              	.L23:
+ 151              		.cfi_restore_state
+ 152 017c E8000000 		call	__stack_chk_fail
+ 152      00
+ 153              		.cfi_endproc
+ 154              	.LFE101:
+ 156              		.section	.text.unlikely
+ 157              	.LCOLDE3:
+ 158              		.text
+ 159              	.LHOTE3:
+ 160              		.section	.rodata.str1.1
+ 161              	.LC4:
+ 162 000c 25782020 		.string	"%x  "
+ 162      00
+ 163              	.LC5:
+ 164 0011 52657979 		.string	"Reyyyy in ke error e "
+ 164      79792069 
+ 164      6E206B65 
+ 164      20657272 
+ 164      6F722065 
+ 165              	.LC6:
+ 166 0027 52657979 		.string	"Reyyyy that is wunderbar"
+ 166      79792074 
+ 166      68617420 
+GAS LISTING /tmp/ccBFckO5.s 			page 5
+
+
+ 166      69732077 
+ 166      756E6465 
+ 167              	.LC7:
+ 168 0040 52657979 		.string	"Reyyyy that is an error"
+ 168      79792074 
+ 168      68617420 
+ 168      69732061 
+ 168      6E206572 
+ 169              		.section	.text.unlikely
+ 170              	.LCOLDB10:
+ 171              		.text
+ 172              	.LHOTB10:
+ 173 0181 0F1F4400 		.p2align 4,,15
+ 173      00662E0F 
+ 173      1F840000 
+ 173      000000
+ 174              		.globl	EApiValidateI2CApi
+ 176              	EApiValidateI2CApi:
+ 177              	.LFB103:
+ 178              		.cfi_startproc
+ 179 0190 55       		pushq	%rbp
+ 180              		.cfi_def_cfa_offset 16
+ 181              		.cfi_offset 6, -16
+ 182 0191 53       		pushq	%rbx
+ 183              		.cfi_def_cfa_offset 24
+ 184              		.cfi_offset 3, -24
+ 185 0192 41B94000 		movl	$64, %r9d
+ 185      0000
+ 186 0198 41B84000 		movl	$64, %r8d
+ 186      0000
+ 187 019e BA000000 		movl	$-2147483648, %edx
+ 187      80
+ 188 01a3 BE500000 		movl	$80, %esi
+ 188      00
+ 189 01a8 4881EC98 		subq	$152, %rsp
+ 189      000000
+ 190              		.cfi_def_cfa_offset 176
+ 191 01af BF0B0000 		movl	$11, %edi
+ 191      00
+ 192 01b4 488D4C24 		leaq	64(%rsp), %rcx
+ 192      40
+ 193 01b9 64488B04 		movq	%fs:40, %rax
+ 193      25280000 
+ 193      00
+ 194 01c2 48898424 		movq	%rax, 136(%rsp)
+ 194      88000000 
+ 195 01ca 31C0     		xorl	%eax, %eax
+ 196 01cc E8000000 		call	EApiI2CReadTransfer
+ 196      00
+ 197 01d1 85C0     		testl	%eax, %eax
+ 198 01d3 0F85F401 		jne	.L25
+ 198      0000
+ 199 01d9 31DB     		xorl	%ebx, %ebx
+ 200 01db EB28     		jmp	.L28
+ 201 01dd 0F1F00   		.p2align 4,,10
+ 202              		.p2align 3
+ 203              	.L26:
+GAS LISTING /tmp/ccBFckO5.s 			page 6
+
+
+ 204 01e0 F6C307   		testb	$7, %bl
+ 205 01e3 743B     		je	.L45
+ 206              	.L27:
+ 207 01e5 0FB6541C 		movzbl	64(%rsp,%rbx), %edx
+ 207      40
+ 208 01ea 31C0     		xorl	%eax, %eax
+ 209 01ec BE000000 		movl	$.LC4, %esi
+ 209      00
+ 210 01f1 BF010000 		movl	$1, %edi
+ 210      00
+ 211 01f6 4883C301 		addq	$1, %rbx
+ 212 01fa E8000000 		call	__printf_chk
+ 212      00
+ 213 01ff 4883FB40 		cmpq	$64, %rbx
+ 214 0203 742B     		je	.L46
+ 215              	.L28:
+ 216 0205 F6C30F   		testb	$15, %bl
+ 217 0208 75D6     		jne	.L26
+ 218 020a BF0A0000 		movl	$10, %edi
+ 218      00
+ 219 020f E8000000 		call	putchar
+ 219      00
+ 220 0214 EBCF     		jmp	.L27
+ 221 0216 662E0F1F 		.p2align 4,,10
+ 221      84000000 
+ 221      0000
+ 222              		.p2align 3
+ 223              	.L45:
+ 224 0220 BF200000 		movl	$32, %edi
+ 224      00
+ 225 0225 E8000000 		call	putchar
+ 225      00
+ 226 022a EBB9     		jmp	.L27
+ 227 022c 0F1F4000 		.p2align 4,,10
+ 228              		.p2align 3
+ 229              	.L46:
+ 230 0230 BF0A0000 		movl	$10, %edi
+ 230      00
+ 231 0235 E8000000 		call	putchar
+ 231      00
+ 232              	.L29:
+ 233 023a 31DB     		xorl	%ebx, %ebx
+ 234 023c EB28     		jmp	.L32
+ 235 023e 6690     		.p2align 4,,10
+ 236              		.p2align 3
+ 237              	.L48:
+ 238 0240 0FB65424 		movzbl	15(%rsp), %edx
+ 238      0F
+ 239 0245 BE000000 		movl	$.LC4, %esi
+ 239      00
+ 240 024a BF010000 		movl	$1, %edi
+ 240      00
+ 241 024f 83C301   		addl	$1, %ebx
+ 242 0252 E8000000 		call	__printf_chk
+ 242      00
+ 243 0257 BF0A0000 		movl	$10, %edi
+ 243      00
+GAS LISTING /tmp/ccBFckO5.s 			page 7
+
+
+ 244 025c E8000000 		call	putchar
+ 244      00
+ 245 0261 83FB08   		cmpl	$8, %ebx
+ 246 0264 7438     		je	.L47
+ 247              	.L32:
+ 248 0266 488D4C24 		leaq	15(%rsp), %rcx
+ 248      0F
+ 249 026b 41B90100 		movl	$1, %r9d
+ 249      0000
+ 250 0271 41B80100 		movl	$1, %r8d
+ 250      0000
+ 251 0277 89DA     		movl	%ebx, %edx
+ 252 0279 BE270000 		movl	$39, %esi
+ 252      00
+ 253 027e BF0B0000 		movl	$11, %edi
+ 253      00
+ 254 0283 E8000000 		call	EApiI2CReadTransfer
+ 254      00
+ 255 0288 85C0     		testl	%eax, %eax
+ 256 028a 74B4     		je	.L48
+ 257 028c BF000000 		movl	$.LC5, %edi
+ 257      00
+ 258 0291 83C301   		addl	$1, %ebx
+ 259 0294 E8000000 		call	puts
+ 259      00
+ 260 0299 83FB08   		cmpl	$8, %ebx
+ 261 029c 75C8     		jne	.L32
+ 262              	.L47:
+ 263 029e 488D5C24 		leaq	16(%rsp), %rbx
+ 263      10
+ 264 02a3 C6442410 		movb	$0, 16(%rsp)
+ 264      00
+ 265 02a8 C6442411 		movb	$1, 17(%rsp)
+ 265      01
+ 266 02ad C6442412 		movb	$2, 18(%rsp)
+ 266      02
+ 267 02b2 C6442413 		movb	$3, 19(%rsp)
+ 267      03
+ 268 02b7 C6442414 		movb	$4, 20(%rsp)
+ 268      04
+ 269 02bc C6442415 		movb	$5, 21(%rsp)
+ 269      05
+ 270 02c1 488D6B0A 		leaq	10(%rbx), %rbp
+ 271 02c5 C6442416 		movb	$6, 22(%rsp)
+ 271      06
+ 272 02ca C6442417 		movb	$7, 23(%rsp)
+ 272      07
+ 273 02cf C6442418 		movb	$8, 24(%rsp)
+ 273      08
+ 274 02d4 C6442419 		movb	$9, 25(%rsp)
+ 274      09
+ 275 02d9 EB22     		jmp	.L35
+ 276 02db 0F1F4400 		.p2align 4,,10
+ 276      00
+ 277              		.p2align 3
+ 278              	.L50:
+ 279 02e0 BF000000 		movl	$.LC6, %edi
+GAS LISTING /tmp/ccBFckO5.s 			page 8
+
+
+ 279      00
+ 280 02e5 E8000000 		call	puts
+ 280      00
+ 281              	.L34:
+ 282 02ea BF050000 		movl	$5, %edi
+ 282      00
+ 283 02ef 4883C301 		addq	$1, %rbx
+ 284 02f3 E8000000 		call	sleep
+ 284      00
+ 285 02f8 4839DD   		cmpq	%rbx, %rbp
+ 286 02fb 7433     		je	.L49
+ 287              	.L35:
+ 288 02fd 41B80100 		movl	$1, %r8d
+ 288      0000
+ 289 0303 4889D9   		movq	%rbx, %rcx
+ 290 0306 BA020000 		movl	$2, %edx
+ 290      00
+ 291 030b BE270000 		movl	$39, %esi
+ 291      00
+ 292 0310 BF0B0000 		movl	$11, %edi
+ 292      00
+ 293 0315 E8000000 		call	EApiI2CWriteTransfer
+ 293      00
+ 294 031a 85C0     		testl	%eax, %eax
+ 295 031c 74C2     		je	.L50
+ 296 031e BF000000 		movl	$.LC7, %edi
+ 296      00
+ 297 0323 E8000000 		call	puts
+ 297      00
+ 298 0328 EBC0     		jmp	.L34
+ 299 032a 660F1F44 		.p2align 4,,10
+ 299      0000
+ 300              		.p2align 3
+ 301              	.L49:
+ 302 0330 660F6F05 		movdqa	.LC8(%rip), %xmm0
+ 302      00000000 
+ 303 0338 488D6C24 		leaq	32(%rsp), %rbp
+ 303      20
+ 304 033d 31DB     		xorl	%ebx, %ebx
+ 305 033f 0F294424 		movaps	%xmm0, 32(%rsp)
+ 305      20
+ 306 0344 660F6F05 		movdqa	.LC9(%rip), %xmm0
+ 306      00000000 
+ 307 034c 0F294424 		movaps	%xmm0, 48(%rsp)
+ 307      30
+ 308 0351 EB25     		jmp	.L38
+ 309              		.p2align 4,,10
+ 310 0353 0F1F4400 		.p2align 3
+ 310      00
+ 311              	.L52:
+ 312 0358 BF000000 		movl	$.LC6, %edi
+ 312      00
+ 313 035d E8000000 		call	puts
+ 313      00
+ 314              	.L37:
+ 315 0362 BF010000 		movl	$1, %edi
+ 315      00
+GAS LISTING /tmp/ccBFckO5.s 			page 9
+
+
+ 316 0367 83C301   		addl	$1, %ebx
+ 317 036a 4883C501 		addq	$1, %rbp
+ 318 036e E8000000 		call	sleep
+ 318      00
+ 319 0373 83FB20   		cmpl	$32, %ebx
+ 320 0376 7438     		je	.L51
+ 321              	.L38:
+ 322 0378 89DA     		movl	%ebx, %edx
+ 323 037a 41B80100 		movl	$1, %r8d
+ 323      0000
+ 324 0380 4889E9   		movq	%rbp, %rcx
+ 325 0383 81CA0000 		orl	$-2147483648, %edx
+ 325      0080
+ 326 0389 BE500000 		movl	$80, %esi
+ 326      00
+ 327 038e BF0B0000 		movl	$11, %edi
+ 327      00
+ 328 0393 E8000000 		call	EApiI2CWriteTransfer
+ 328      00
+ 329 0398 85C0     		testl	%eax, %eax
+ 330 039a 74BC     		je	.L52
+ 331 039c BF000000 		movl	$.LC7, %edi
+ 331      00
+ 332 03a1 E8000000 		call	puts
+ 332      00
+ 333 03a6 EBBA     		jmp	.L37
+ 334 03a8 0F1F8400 		.p2align 4,,10
+ 334      00000000 
+ 335              		.p2align 3
+ 336              	.L51:
+ 337 03b0 488B8424 		movq	136(%rsp), %rax
+ 337      88000000 
+ 338 03b8 64483304 		xorq	%fs:40, %rax
+ 338      25280000 
+ 338      00
+ 339 03c1 7519     		jne	.L53
+ 340 03c3 4881C498 		addq	$152, %rsp
+ 340      000000
+ 341              		.cfi_remember_state
+ 342              		.cfi_def_cfa_offset 24
+ 343 03ca 5B       		popq	%rbx
+ 344              		.cfi_def_cfa_offset 16
+ 345 03cb 5D       		popq	%rbp
+ 346              		.cfi_def_cfa_offset 8
+ 347 03cc C3       		ret
+ 348              	.L25:
+ 349              		.cfi_restore_state
+ 350 03cd BF000000 		movl	$.LC5, %edi
+ 350      00
+ 351 03d2 E8000000 		call	puts
+ 351      00
+ 352 03d7 E95EFEFF 		jmp	.L29
+ 352      FF
+ 353              	.L53:
+ 354 03dc E8000000 		call	__stack_chk_fail
+ 354      00
+ 355              		.cfi_endproc
+GAS LISTING /tmp/ccBFckO5.s 			page 10
+
+
+ 356              	.LFE103:
+ 358              		.section	.text.unlikely
+ 359              	.LCOLDE10:
+ 360              		.text
+ 361              	.LHOTE10:
+ 362              		.section	.rodata.str1.1
+ 363              	.LC11:
+ 364 0058 25632530 		.string	"%c%04i %-30s | "
+ 364      34692025 
+ 364      2D333073 
+ 364      207C2000 
+ 365              	.LC12:
+ 366 0068 20202020 		.string	"               0x%08X | "
+ 366      20202020 
+ 366      20202020 
+ 366      20202030 
+ 366      78253038 
+ 367              	.LC13:
+ 368 0081 252D3235 		.string	"%-25s | "
+ 368      73207C20 
+ 368      00
+ 369              	.LC14:
+ 370 008a 20202025 		.string	"   %2d    %2d    [%s]\n"
+ 370      32642020 
+ 370      20202532 
+ 370      64202020 
+ 370      205B2573 
+ 371              		.section	.text.unlikely
+ 372              	.LCOLDB15:
+ 373              		.text
+ 374              	.LHOTB15:
+ 375 03e1 0F1F4400 		.p2align 4,,15
+ 375      00662E0F 
+ 375      1F840000 
+ 375      000000
+ 377              	siFFormattedMessage_SC.constprop.0:
+ 378              	.LFB107:
+ 379              		.cfi_startproc
+ 380 03f0 4154     		pushq	%r12
+ 381              		.cfi_def_cfa_offset 16
+ 382              		.cfi_offset 12, -16
+ 383 03f2 55       		pushq	%rbp
+ 384              		.cfi_def_cfa_offset 24
+ 385              		.cfi_offset 6, -24
+ 386 03f3 4989CC   		movq	%rcx, %r12
+ 387 03f6 53       		pushq	%rbx
+ 388              		.cfi_def_cfa_offset 32
+ 389              		.cfi_offset 3, -32
+ 390 03f7 4489CD   		movl	%r9d, %ebp
+ 391 03fa 4889FB   		movq	%rdi, %rbx
+ 392 03fd 4881ECF0 		subq	$240, %rsp
+ 392      000000
+ 393              		.cfi_def_cfa_offset 272
+ 394 0404 84C0     		testb	%al, %al
+ 395 0406 743D     		je	.L55
+ 396 0408 0F294424 		movaps	%xmm0, 112(%rsp)
+ 396      70
+GAS LISTING /tmp/ccBFckO5.s 			page 11
+
+
+ 397 040d 0F298C24 		movaps	%xmm1, 128(%rsp)
+ 397      80000000 
+ 398 0415 0F299424 		movaps	%xmm2, 144(%rsp)
+ 398      90000000 
+ 399 041d 0F299C24 		movaps	%xmm3, 160(%rsp)
+ 399      A0000000 
+ 400 0425 0F29A424 		movaps	%xmm4, 176(%rsp)
+ 400      B0000000 
+ 401 042d 0F29AC24 		movaps	%xmm5, 192(%rsp)
+ 401      C0000000 
+ 402 0435 0F29B424 		movaps	%xmm6, 208(%rsp)
+ 402      D0000000 
+ 403 043d 0F29BC24 		movaps	%xmm7, 224(%rsp)
+ 403      E0000000 
+ 404              	.L55:
+ 405 0445 64488B04 		movq	%fs:40, %rax
+ 405      25280000 
+ 405      00
+ 406 044e 48894424 		movq	%rax, 56(%rsp)
+ 406      38
+ 407 0453 31C0     		xorl	%eax, %eax
+ 408 0455 488D8424 		leaq	280(%rsp), %rax
+ 408      18010000 
+ 409 045d 488D7C24 		leaq	24(%rsp), %rdi
+ 409      18
+ 410 0462 89EE     		movl	%ebp, %esi
+ 411 0464 48894424 		movq	%rax, 40(%rsp)
+ 411      28
+ 412 0469 488D4424 		leaq	64(%rsp), %rax
+ 412      40
+ 413 046e 44894424 		movl	%r8d, 12(%rsp)
+ 413      0C
+ 414 0473 C7442420 		movl	$48, 32(%rsp)
+ 414      30000000 
+ 415 047b C7442424 		movl	$48, 36(%rsp)
+ 415      30000000 
+ 416 0483 48894424 		movq	%rax, 48(%rsp)
+ 416      30
+ 417 0488 E8000000 		call	EApiGetErrorStringA
+ 417      00
+ 418 048d 448B4424 		movl	12(%rsp), %r8d
+ 418      0C
+ 419 0492 4D89E1   		movq	%r12, %r9
+ 420 0495 B94C0000 		movl	$76, %ecx
+ 420      00
+ 421 049a 31C0     		xorl	%eax, %eax
+ 422 049c BA000000 		movl	$.LC11, %edx
+ 422      00
+ 423 04a1 BE010000 		movl	$1, %esi
+ 423      00
+ 424 04a6 4889DF   		movq	%rbx, %rdi
+ 425 04a9 E8000000 		call	__fprintf_chk
+ 425      00
+ 426 04ae 488B4C24 		movq	24(%rsp), %rcx
+ 426      18
+ 427 04b3 4189C4   		movl	%eax, %r12d
+ 428 04b6 4885C9   		testq	%rcx, %rcx
+GAS LISTING /tmp/ccBFckO5.s 			page 12
+
+
+ 429 04b9 744D     		je	.L60
+ 430 04bb BA000000 		movl	$.LC13, %edx
+ 430      00
+ 431 04c0 BE010000 		movl	$1, %esi
+ 431      00
+ 432 04c5 4889DF   		movq	%rbx, %rdi
+ 433 04c8 31C0     		xorl	%eax, %eax
+ 434 04ca E8000000 		call	__fprintf_chk
+ 434      00
+ 435              	.L57:
+ 436 04cf 488D4C24 		leaq	32(%rsp), %rcx
+ 436      20
+ 437 04d4 BA000000 		movl	$.LC14, %edx
+ 437      00
+ 438 04d9 BE010000 		movl	$1, %esi
+ 438      00
+ 439 04de 4889DF   		movq	%rbx, %rdi
+ 440 04e1 E8000000 		call	__vfprintf_chk
+ 440      00
+ 441 04e6 4401E0   		addl	%r12d, %eax
+ 442 04e9 488B5424 		movq	56(%rsp), %rdx
+ 442      38
+ 443 04ee 64483314 		xorq	%fs:40, %rdx
+ 443      25280000 
+ 443      00
+ 444 04f7 7527     		jne	.L61
+ 445 04f9 4881C4F0 		addq	$240, %rsp
+ 445      000000
+ 446              		.cfi_remember_state
+ 447              		.cfi_def_cfa_offset 32
+ 448 0500 5B       		popq	%rbx
+ 449              		.cfi_def_cfa_offset 24
+ 450 0501 5D       		popq	%rbp
+ 451              		.cfi_def_cfa_offset 16
+ 452 0502 415C     		popq	%r12
+ 453              		.cfi_def_cfa_offset 8
+ 454 0504 C3       		ret
+ 455              		.p2align 4,,10
+ 456 0505 0F1F00   		.p2align 3
+ 457              	.L60:
+ 458              		.cfi_restore_state
+ 459 0508 89E9     		movl	%ebp, %ecx
+ 460 050a BA000000 		movl	$.LC12, %edx
+ 460      00
+ 461 050f BE010000 		movl	$1, %esi
+ 461      00
+ 462 0514 4889DF   		movq	%rbx, %rdi
+ 463 0517 31C0     		xorl	%eax, %eax
+ 464 0519 E8000000 		call	__fprintf_chk
+ 464      00
+ 465 051e EBAF     		jmp	.L57
+ 466              	.L61:
+ 467 0520 E8000000 		call	__stack_chk_fail
+ 467      00
+ 468              		.cfi_endproc
+ 469              	.LFE107:
+ 471              		.section	.text.unlikely
+GAS LISTING /tmp/ccBFckO5.s 			page 13
+
+
+ 472              	.LCOLDE15:
+ 473              		.text
+ 474              	.LHOTE15:
+ 475              		.section	.rodata.str1.1
+ 476              	.LC16:
+ 477 00a1 252D3330 		.string	"%-30s : "
+ 477      73203A20 
+ 477      00
+ 478              	.LC17:
+ 479 00aa 25303258 		.string	"%02X"
+ 479      00
+ 480              	.LC18:
+ 481 00af 252D3330 		.string	"%-30s : %02X %s\n"
+ 481      73203A20 
+ 481      25303258 
+ 481      2025730A 
+ 481      00
+ 482              	.LC19:
+ 483 00c0 45417069 		.string	"EApiStorageAreaRead"
+ 483      53746F72 
+ 483      61676541 
+ 483      72656152 
+ 483      65616400 
+ 484              		.section	.rodata.str1.8
+ 485 0021 00000000 		.align 8
+ 485      000000
+ 486              	.LC20:
+ 487 0028 2F646576 		.string	"/development/eAPI/eapidk-code/apps/EApiValidateAPI/linux/../EApiValidateAPI.c"
+ 487      656C6F70 
+ 487      6D656E74 
+ 487      2F654150 
+ 487      492F6561 
+ 488              		.section	.rodata.str1.1
+ 489              	.LC21:
+ 490 00d4 45417069 		.string	"EApiStorageAreaWrite"
+ 490      53746F72 
+ 490      61676541 
+ 490      72656157 
+ 490      72697465 
+ 491              	.LC22:
+ 492 00e9 45417069 		.string	"EApiStorageCap"
+ 492      53746F72 
+ 492      61676543 
+ 492      617000
+ 493              		.section	.text.unlikely
+ 494              	.LCOLDB23:
+ 495              		.text
+ 496              	.LHOTB23:
+ 497 0525 90662E0F 		.p2align 4,,15
+ 497      1F840000 
+ 497      000000
+ 498              		.globl	EApiValidateStorageApi
+ 500              	EApiValidateStorageApi:
+ 501              	.LFB104:
+ 502              		.cfi_startproc
+ 503 0530 4157     		pushq	%r15
+ 504              		.cfi_def_cfa_offset 16
+GAS LISTING /tmp/ccBFckO5.s 			page 14
+
+
+ 505              		.cfi_offset 15, -16
+ 506 0532 4156     		pushq	%r14
+ 507              		.cfi_def_cfa_offset 24
+ 508              		.cfi_offset 14, -24
+ 509 0534 4155     		pushq	%r13
+ 510              		.cfi_def_cfa_offset 32
+ 511              		.cfi_offset 13, -32
+ 512 0536 4154     		pushq	%r12
+ 513              		.cfi_def_cfa_offset 40
+ 514              		.cfi_offset 12, -40
+ 515 0538 41BC0000 		movl	$EApiStorageDevices, %r12d
+ 515      0000
+ 516 053e 55       		pushq	%rbp
+ 517              		.cfi_def_cfa_offset 48
+ 518              		.cfi_offset 6, -48
+ 519 053f 53       		pushq	%rbx
+ 520              		.cfi_def_cfa_offset 56
+ 521              		.cfi_offset 3, -56
+ 522 0540 4881EC28 		subq	$1064, %rsp
+ 522      040000
+ 523              		.cfi_def_cfa_offset 1120
+ 524 0547 64488B04 		movq	%fs:40, %rax
+ 524      25280000 
+ 524      00
+ 525 0550 48898424 		movq	%rax, 1048(%rsp)
+ 525      18040000 
+ 526 0558 31C0     		xorl	%eax, %eax
+ 527 055a 488D5C24 		leaq	32(%rsp), %rbx
+ 527      20
+ 528 055f 48C70424 		movq	$I2CDevices, (%rsp)
+ 528      00000000 
+ 529              	.L68:
+ 530 0567 458B6C24 		movl	16(%r12), %r13d
+ 530      10
+ 531 056c 458B3C24 		movl	(%r12), %r15d
+ 532 0570 488D5424 		leaq	16(%rsp), %rdx
+ 532      10
+ 533 0575 31F6     		xorl	%esi, %esi
+ 534 0577 B9000400 		movl	$1024, %ecx
+ 534      00
+ 535 057c 4589E8   		movl	%r13d, %r8d
+ 536 057f 4489FF   		movl	%r15d, %edi
+ 537 0582 E8000000 		call	EApiStorageAreaRead
+ 537      00
+ 538 0587 85C0     		testl	%eax, %eax
+ 539 0589 0F85A902 		jne	.L63
+ 539      0000
+ 540 058f 498B4424 		movq	8(%r12), %rax
+ 540      08
+ 541 0594 BE000000 		movl	$.LC16, %esi
+ 541      00
+ 542 0599 BF010000 		movl	$1, %edi
+ 542      00
+ 543 059e 4C8D7424 		leaq	16(%rsp), %r14
+ 543      10
+ 544 05a3 48894424 		movq	%rax, 8(%rsp)
+ 544      08
+GAS LISTING /tmp/ccBFckO5.s 			page 15
+
+
+ 545 05a8 4889C2   		movq	%rax, %rdx
+ 546 05ab 31C0     		xorl	%eax, %eax
+ 547 05ad E8000000 		call	__printf_chk
+ 547      00
+ 548 05b2 488B2D00 		movq	stdout(%rip), %rbp
+ 548      000000
+ 549 05b9 0F1F8000 		.p2align 4,,10
+ 549      000000
+ 550              		.p2align 3
+ 551              	.L64:
+ 552 05c0 410FB60E 		movzbl	(%r14), %ecx
+ 553 05c4 31C0     		xorl	%eax, %eax
+ 554 05c6 BA000000 		movl	$.LC17, %edx
+ 554      00
+ 555 05cb BE010000 		movl	$1, %esi
+ 555      00
+ 556 05d0 4889EF   		movq	%rbp, %rdi
+ 557 05d3 4983C601 		addq	$1, %r14
+ 558 05d7 E8000000 		call	__fprintf_chk
+ 558      00
+ 559 05dc 4939DE   		cmpq	%rbx, %r14
+ 560 05df 75DF     		jne	.L64
+ 561 05e1 BF0A0000 		movl	$10, %edi
+ 561      00
+ 562 05e6 E8000000 		call	putchar
+ 562      00
+ 563 05eb B8CDCCCC 		movl	$-858993459, %eax
+ 563      CC
+ 564 05f0 BE0D0000 		movl	$13, %esi
+ 564      00
+ 565 05f5 4489FF   		movl	%r15d, %edi
+ 566 05f8 41F7E5   		mull	%r13d
+ 567 05fb 89D1     		movl	%edx, %ecx
+ 568 05fd 488D5424 		leaq	16(%rsp), %rdx
+ 568      10
+ 569 0602 C1E902   		shrl	$2, %ecx
+ 570 0605 E8000000 		call	EApiAHWriteStorage
+ 570      00
+ 571 060a 85C0     		testl	%eax, %eax
+ 572 060c 0F855E02 		jne	.L65
+ 572      0000
+ 573 0612 488B5424 		movq	8(%rsp), %rdx
+ 573      08
+ 574 0617 BE000000 		movl	$.LC16, %esi
+ 574      00
+ 575 061c BF010000 		movl	$1, %edi
+ 575      00
+ 576 0621 4C8D6C24 		leaq	16(%rsp), %r13
+ 576      10
+ 577 0626 E8000000 		call	__printf_chk
+ 577      00
+ 578 062b 488B2D00 		movq	stdout(%rip), %rbp
+ 578      000000
+ 579              		.p2align 4,,10
+ 580 0632 660F1F44 		.p2align 3
+ 580      0000
+ 581              	.L66:
+GAS LISTING /tmp/ccBFckO5.s 			page 16
+
+
+ 582 0638 410FB64D 		movzbl	0(%r13), %ecx
+ 582      00
+ 583 063d 31C0     		xorl	%eax, %eax
+ 584 063f BA000000 		movl	$.LC17, %edx
+ 584      00
+ 585 0644 BE010000 		movl	$1, %esi
+ 585      00
+ 586 0649 4889EF   		movq	%rbp, %rdi
+ 587 064c 4983C501 		addq	$1, %r13
+ 588 0650 E8000000 		call	__fprintf_chk
+ 588      00
+ 589 0655 4939DD   		cmpq	%rbx, %r13
+ 590 0658 75DE     		jne	.L66
+ 591 065a BF0A0000 		movl	$10, %edi
+ 591      00
+ 592 065f E8000000 		call	putchar
+ 592      00
+ 593              	.L67:
+ 594 0664 4983C418 		addq	$24, %r12
+ 595 0668 B8000000 		movl	$EApiStorageDevices+72, %eax
+ 595      00
+ 596 066d 48830424 		addq	$12, (%rsp)
+ 596      0C
+ 597 0672 4C39E0   		cmpq	%r12, %rax
+ 598 0675 0F85ECFE 		jne	.L68
+ 598      FFFF
+ 599 067b 4531E4   		xorl	%r12d, %r12d
+ 600 067e 6690     		.p2align 4,,10
+ 601              		.p2align 3
+ 602              	.L73:
+ 603 0680 BB000000 		movl	$StorageValidate+28, %ebx
+ 603      00
+ 604 0685 31ED     		xorl	%ebp, %ebp
+ 605 0687 660F1F84 		.p2align 4,,10
+ 605      00000000 
+ 605      00
+ 606              		.p2align 3
+ 607              	.L72:
+ 608 0690 448B7BF8 		movl	-8(%rbx), %r15d
+ 609 0694 4C8B73EC 		movq	-20(%rbx), %r14
+ 610 0698 4489E7   		movl	%r12d, %edi
+ 611 069b 448B6BE4 		movl	-28(%rbx), %r13d
+ 612 069f 8B4BF4   		movl	-12(%rbx), %ecx
+ 613 06a2 4C89F2   		movq	%r14, %rdx
+ 614 06a5 4589F8   		movl	%r15d, %r8d
+ 615 06a8 4489EE   		movl	%r13d, %esi
+ 616 06ab E8000000 		call	EApiStorageAreaRead
+ 616      00
+ 617 06b0 448B53FC 		movl	-4(%rbx), %r10d
+ 618 06b4 4189C1   		movl	%eax, %r9d
+ 619 06b7 BA010000 		movl	$1, %edx
+ 619      00
+ 620 06bc 4439D0   		cmpl	%r10d, %eax
+ 621 06bf 740C     		je	.L70
+ 622 06c1 3B03     		cmpl	(%rbx), %eax
+ 623 06c3 7408     		je	.L70
+ 624 06c5 31D2     		xorl	%edx, %edx
+GAS LISTING /tmp/ccBFckO5.s 			page 17
+
+
+ 625 06c7 394304   		cmpl	%eax, 4(%rbx)
+ 626 06ca 0F94C2   		sete	%dl
+ 627              	.L70:
+ 628 06cd 488B3D00 		movq	LogStream(%rip), %rdi
+ 628      000000
+ 629 06d4 44891424 		movl	%r10d, (%rsp)
+ 630 06d8 41B8DA02 		movl	$730, %r8d
+ 630      0000
+ 631 06de FF34D500 		pushq	FailPass(,%rdx,8)
+ 631      000000
+ 632              		.cfi_def_cfa_offset 1128
+ 633 06e5 55       		pushq	%rbp
+ 634              		.cfi_def_cfa_offset 1136
+ 635 06e6 B9000000 		movl	$.LC19, %ecx
+ 635      00
+ 636 06eb 4154     		pushq	%r12
+ 637              		.cfi_def_cfa_offset 1144
+ 638 06ed 68000000 		pushq	$.LC14
+ 638      00
+ 639              		.cfi_def_cfa_offset 1152
+ 640 06f2 BA000000 		movl	$.LC20, %edx
+ 640      00
+ 641 06f7 BE4C0000 		movl	$76, %esi
+ 641      00
+ 642 06fc 31C0     		xorl	%eax, %eax
+ 643 06fe E8EDFCFF 		call	siFFormattedMessage_SC.constprop.0
+ 643      FF
+ 644 0703 4883C420 		addq	$32, %rsp
+ 645              		.cfi_def_cfa_offset 1120
+ 646 0707 4C89F2   		movq	%r14, %rdx
+ 647 070a 4489F9   		movl	%r15d, %ecx
+ 648 070d 4489EE   		movl	%r13d, %esi
+ 649 0710 4489E7   		movl	%r12d, %edi
+ 650 0713 E8000000 		call	EApiStorageAreaWrite
+ 650      00
+ 651 0718 448B1424 		movl	(%rsp), %r10d
+ 652 071c 4189C1   		movl	%eax, %r9d
+ 653 071f BA010000 		movl	$1, %edx
+ 653      00
+ 654 0724 4139C2   		cmpl	%eax, %r10d
+ 655 0727 740C     		je	.L71
+ 656 0729 3B03     		cmpl	(%rbx), %eax
+ 657 072b 7408     		je	.L71
+ 658 072d 31D2     		xorl	%edx, %edx
+ 659 072f 394304   		cmpl	%eax, 4(%rbx)
+ 660 0732 0F94C2   		sete	%dl
+ 661              	.L71:
+ 662 0735 488B3D00 		movq	LogStream(%rip), %rdi
+ 662      000000
+ 663 073c FF34D500 		pushq	FailPass(,%rdx,8)
+ 663      000000
+ 664              		.cfi_def_cfa_offset 1128
+ 665 0743 31C0     		xorl	%eax, %eax
+ 666 0745 55       		pushq	%rbp
+ 667              		.cfi_def_cfa_offset 1136
+ 668 0746 4154     		pushq	%r12
+ 669              		.cfi_def_cfa_offset 1144
+GAS LISTING /tmp/ccBFckO5.s 			page 18
+
+
+ 670 0748 41B8E202 		movl	$738, %r8d
+ 670      0000
+ 671 074e 68000000 		pushq	$.LC14
+ 671      00
+ 672              		.cfi_def_cfa_offset 1152
+ 673 0753 B9000000 		movl	$.LC21, %ecx
+ 673      00
+ 674 0758 BA000000 		movl	$.LC20, %edx
+ 674      00
+ 675 075d BE4C0000 		movl	$76, %esi
+ 675      00
+ 676 0762 83C501   		addl	$1, %ebp
+ 677 0765 4883C328 		addq	$40, %rbx
+ 678 0769 E882FCFF 		call	siFFormattedMessage_SC.constprop.0
+ 678      FF
+ 679 076e 4883C420 		addq	$32, %rsp
+ 680              		.cfi_def_cfa_offset 1120
+ 681 0772 83FD06   		cmpl	$6, %ebp
+ 682 0775 0F8515FF 		jne	.L72
+ 682      FFFF
+ 683 077b 4183C401 		addl	$1, %r12d
+ 684 077f 4183FC0A 		cmpl	$10, %r12d
+ 685 0783 0F85F7FE 		jne	.L73
+ 685      FFFF
+ 686 0789 4531E4   		xorl	%r12d, %r12d
+ 687 078c 0F1F4000 		.p2align 4,,10
+ 688              		.p2align 3
+ 689              	.L77:
+ 690 0790 BB000000 		movl	$StorageCapValidate, %ebx
+ 690      00
+ 691 0795 31ED     		xorl	%ebp, %ebp
+ 692              	.L76:
+ 693 0797 488B5308 		movq	8(%rbx), %rdx
+ 694 079b 488B33   		movq	(%rbx), %rsi
+ 695 079e 4489E7   		movl	%r12d, %edi
+ 696 07a1 E8000000 		call	EApiStorageCap
+ 696      00
+ 697 07a6 3B4310   		cmpl	16(%rbx), %eax
+ 698 07a9 4189C1   		movl	%eax, %r9d
+ 699 07ac BA010000 		movl	$1, %edx
+ 699      00
+ 700 07b1 740D     		je	.L75
+ 701 07b3 3B4314   		cmpl	20(%rbx), %eax
+ 702 07b6 7408     		je	.L75
+ 703 07b8 31D2     		xorl	%edx, %edx
+ 704 07ba 394318   		cmpl	%eax, 24(%rbx)
+ 705 07bd 0F94C2   		sete	%dl
+ 706              	.L75:
+ 707 07c0 488B3D00 		movq	LogStream(%rip), %rdi
+ 707      000000
+ 708 07c7 FF34D500 		pushq	FailPass(,%rdx,8)
+ 708      000000
+ 709              		.cfi_def_cfa_offset 1128
+ 710 07ce 31C0     		xorl	%eax, %eax
+ 711 07d0 55       		pushq	%rbp
+ 712              		.cfi_def_cfa_offset 1136
+ 713 07d1 4154     		pushq	%r12
+GAS LISTING /tmp/ccBFckO5.s 			page 19
+
+
+ 714              		.cfi_def_cfa_offset 1144
+ 715 07d3 41B8EF02 		movl	$751, %r8d
+ 715      0000
+ 716 07d9 68000000 		pushq	$.LC14
+ 716      00
+ 717              		.cfi_def_cfa_offset 1152
+ 718 07de B9000000 		movl	$.LC22, %ecx
+ 718      00
+ 719 07e3 BA000000 		movl	$.LC20, %edx
+ 719      00
+ 720 07e8 BE4C0000 		movl	$76, %esi
+ 720      00
+ 721 07ed 83C501   		addl	$1, %ebp
+ 722 07f0 4883C320 		addq	$32, %rbx
+ 723 07f4 E8F7FBFF 		call	siFFormattedMessage_SC.constprop.0
+ 723      FF
+ 724 07f9 4883C420 		addq	$32, %rsp
+ 725              		.cfi_def_cfa_offset 1120
+ 726 07fd 83FD04   		cmpl	$4, %ebp
+ 727 0800 7595     		jne	.L76
+ 728 0802 4183C401 		addl	$1, %r12d
+ 729 0806 4183FC0A 		cmpl	$10, %r12d
+ 730 080a 7584     		jne	.L77
+ 731 080c 488B8424 		movq	1048(%rsp), %rax
+ 731      18040000 
+ 732 0814 64483304 		xorq	%fs:40, %rax
+ 732      25280000 
+ 732      00
+ 733 081d 0F858500 		jne	.L95
+ 733      0000
+ 734 0823 4881C428 		addq	$1064, %rsp
+ 734      040000
+ 735              		.cfi_remember_state
+ 736              		.cfi_def_cfa_offset 56
+ 737 082a 5B       		popq	%rbx
+ 738              		.cfi_def_cfa_offset 48
+ 739 082b 5D       		popq	%rbp
+ 740              		.cfi_def_cfa_offset 40
+ 741 082c 415C     		popq	%r12
+ 742              		.cfi_def_cfa_offset 32
+ 743 082e 415D     		popq	%r13
+ 744              		.cfi_def_cfa_offset 24
+ 745 0830 415E     		popq	%r14
+ 746              		.cfi_def_cfa_offset 16
+ 747 0832 415F     		popq	%r15
+ 748              		.cfi_def_cfa_offset 8
+ 749 0834 C3       		ret
+ 750              		.p2align 4,,10
+ 751 0835 0F1F00   		.p2align 3
+ 752              	.L63:
+ 753              		.cfi_restore_state
+ 754 0838 488D7424 		leaq	16(%rsp), %rsi
+ 754      10
+ 755 083d BA000400 		movl	$1024, %edx
+ 755      00
+ 756 0842 89C7     		movl	%eax, %edi
+ 757 0844 E8000000 		call	EApiAHCreateErrorString
+GAS LISTING /tmp/ccBFckO5.s 			page 20
+
+
+ 757      00
+ 758 0849 498B5424 		movq	8(%r12), %rdx
+ 758      08
+ 759 084e 488D4C24 		leaq	16(%rsp), %rcx
+ 759      10
+ 760 0853 BE000000 		movl	$.LC0, %esi
+ 760      00
+ 761 0858 BF010000 		movl	$1, %edi
+ 761      00
+ 762 085d 31C0     		xorl	%eax, %eax
+ 763 085f E8000000 		call	__printf_chk
+ 763      00
+ 764 0864 E9FBFDFF 		jmp	.L67
+ 764      FF
+ 765 0869 0F1F8000 		.p2align 4,,10
+ 765      000000
+ 766              		.p2align 3
+ 767              	.L65:
+ 768 0870 488D7424 		leaq	16(%rsp), %rsi
+ 768      10
+ 769 0875 BA000400 		movl	$1024, %edx
+ 769      00
+ 770 087a 89C7     		movl	%eax, %edi
+ 771 087c E8000000 		call	EApiAHCreateErrorString
+ 771      00
+ 772 0881 488B0424 		movq	(%rsp), %rax
+ 773 0885 488B5424 		movq	8(%rsp), %rdx
+ 773      08
+ 774 088a 4C8D4424 		leaq	16(%rsp), %r8
+ 774      10
+ 775 088f BE000000 		movl	$.LC18, %esi
+ 775      00
+ 776 0894 BF010000 		movl	$1, %edi
+ 776      00
+ 777 0899 0FB708   		movzwl	(%rax), %ecx
+ 778 089c 31C0     		xorl	%eax, %eax
+ 779 089e E8000000 		call	__printf_chk
+ 779      00
+ 780 08a3 E9BCFDFF 		jmp	.L67
+ 780      FF
+ 781              	.L95:
+ 782 08a8 E8000000 		call	__stack_chk_fail
+ 782      00
+ 783              		.cfi_endproc
+ 784              	.LFE104:
+ 786              		.section	.text.unlikely
+ 787              	.LCOLDE23:
+ 788              		.text
+ 789              	.LHOTE23:
+ 790              		.section	.rodata.str1.1
+ 791              	.LC24:
+ 792 00f8 45417069 		.string	"EApiGPIOGetDirectionCaps"
+ 792      4750494F 
+ 792      47657444 
+ 792      69726563 
+ 792      74696F6E 
+ 793              	.LC25:
+GAS LISTING /tmp/ccBFckO5.s 			page 21
+
+
+ 794 0111 252D3135 		.string	"%-15s %-25s : %s\n"
+ 794      7320252D 
+ 794      32357320 
+ 794      3A202573 
+ 794      0A00
+ 795              		.section	.rodata.str1.8
+ 796 0076 0000     		.align 8
+ 797              	.LC26:
+ 798 0078 252D3135 		.string	"%-15s %-25s : Inputs   =%08X Outputs=%08X\n"
+ 798      7320252D 
+ 798      32357320 
+ 798      3A20496E 
+ 798      70757473 
+ 799              		.section	.rodata.str1.1
+ 800              	.LC27:
+ 801 0123 45417069 		.string	"EApiGPIOGetDirection"
+ 801      4750494F 
+ 801      47657444 
+ 801      69726563 
+ 801      74696F6E 
+ 802              	.LC28:
+ 803 0138 252D3135 		.string	"%-15s %-25s : Direction=%08X\n"
+ 803      7320252D 
+ 803      32357320 
+ 803      3A204469 
+ 803      72656374 
+ 804              	.LC29:
+ 805 0156 45417069 		.string	"EApiGPIOGetLevel"
+ 805      4750494F 
+ 805      4765744C 
+ 805      6576656C 
+ 805      00
+ 806              	.LC30:
+ 807 0167 252D3135 		.string	"%-15s %-25s : Level    =%08X\n"
+ 807      7320252D 
+ 807      32357320 
+ 807      3A204C65 
+ 807      76656C20 
+ 808              	.LC31:
+ 809 0185 45417069 		.string	"EApiGPIOSetDirection"
+ 809      4750494F 
+ 809      53657444 
+ 809      69726563 
+ 809      74696F6E 
+ 810              	.LC32:
+ 811 019a 45417069 		.string	"EApiGPIOSetLevel"
+ 811      4750494F 
+ 811      5365744C 
+ 811      6576656C 
+ 811      00
+ 812              		.section	.text.unlikely
+ 813              	.LCOLDB33:
+ 814              		.text
+ 815              	.LHOTB33:
+ 816 08ad 0F1F00   		.p2align 4,,15
+ 817              		.globl	EApiValidateGPIOApi
+ 819              	EApiValidateGPIOApi:
+GAS LISTING /tmp/ccBFckO5.s 			page 22
+
+
+ 820              	.LFB105:
+ 821              		.cfi_startproc
+ 822 08b0 4154     		pushq	%r12
+ 823              		.cfi_def_cfa_offset 16
+ 824              		.cfi_offset 12, -16
+ 825 08b2 55       		pushq	%rbp
+ 826              		.cfi_def_cfa_offset 24
+ 827              		.cfi_offset 6, -24
+ 828 08b3 53       		pushq	%rbx
+ 829              		.cfi_def_cfa_offset 32
+ 830              		.cfi_offset 3, -32
+ 831 08b4 BB000000 		movl	$EApiGpioDevices+8, %ebx
+ 831      00
+ 832 08b9 4881EC20 		subq	$1056, %rsp
+ 832      040000
+ 833              		.cfi_def_cfa_offset 1088
+ 834 08c0 64488B04 		movq	%fs:40, %rax
+ 834      25280000 
+ 834      00
+ 835 08c9 48898424 		movq	%rax, 1048(%rsp)
+ 835      18040000 
+ 836 08d1 31C0     		xorl	%eax, %eax
+ 837 08d3 EB43     		jmp	.L105
+ 838              		.p2align 4,,10
+ 839 08d5 0F1F00   		.p2align 3
+ 840              	.L122:
+ 841 08d8 488D7424 		leaq	16(%rsp), %rsi
+ 841      10
+ 842 08dd BA000400 		movl	$1024, %edx
+ 842      00
+ 843 08e2 89C7     		movl	%eax, %edi
+ 844 08e4 E8000000 		call	EApiAHCreateErrorString
+ 844      00
+ 845 08e9 488B13   		movq	(%rbx), %rdx
+ 846 08ec 4C8D4424 		leaq	16(%rsp), %r8
+ 846      10
+ 847 08f1 B9000000 		movl	$.LC24, %ecx
+ 847      00
+ 848 08f6 BE000000 		movl	$.LC25, %esi
+ 848      00
+ 849 08fb BF010000 		movl	$1, %edi
+ 849      00
+ 850 0900 31C0     		xorl	%eax, %eax
+ 851 0902 E8000000 		call	__printf_chk
+ 851      00
+ 852              	.L98:
+ 853 0907 4883C310 		addq	$16, %rbx
+ 854 090b 4881FB00 		cmpq	$EApiGpioDevices+200, %rbx
+ 854      000000
+ 855 0912 0F84D100 		je	.L121
+ 855      0000
+ 856              	.L105:
+ 857 0918 8B6BF8   		movl	-8(%rbx), %ebp
+ 858 091b 488D5424 		leaq	12(%rsp), %rdx
+ 858      0C
+ 859 0920 488D7424 		leaq	8(%rsp), %rsi
+ 859      08
+GAS LISTING /tmp/ccBFckO5.s 			page 23
+
+
+ 860 0925 89EF     		movl	%ebp, %edi
+ 861 0927 E8000000 		call	EApiGPIOGetDirectionCaps
+ 861      00
+ 862 092c 85C0     		testl	%eax, %eax
+ 863 092e 75A8     		jne	.L122
+ 864 0930 4C8B23   		movq	(%rbx), %r12
+ 865 0933 448B4C24 		movl	12(%rsp), %r9d
+ 865      0C
+ 866 0938 B9000000 		movl	$.LC24, %ecx
+ 866      00
+ 867 093d 448B4424 		movl	8(%rsp), %r8d
+ 867      08
+ 868 0942 BE000000 		movl	$.LC26, %esi
+ 868      00
+ 869 0947 BF010000 		movl	$1, %edi
+ 869      00
+ 870 094c 31C0     		xorl	%eax, %eax
+ 871 094e 4C89E2   		movq	%r12, %rdx
+ 872 0951 E8000000 		call	__printf_chk
+ 872      00
+ 873 0956 8B742408 		movl	8(%rsp), %esi
+ 874 095a 0B74240C 		orl	12(%rsp), %esi
+ 875 095e 4889E2   		movq	%rsp, %rdx
+ 876 0961 89EF     		movl	%ebp, %edi
+ 877 0963 E8000000 		call	EApiGPIOGetDirection
+ 877      00
+ 878 0968 85C0     		testl	%eax, %eax
+ 879 096a 0F854001 		jne	.L120
+ 879      0000
+ 880 0970 448B0424 		movl	(%rsp), %r8d
+ 881 0974 B9000000 		movl	$.LC27, %ecx
+ 881      00
+ 882 0979 4C89E2   		movq	%r12, %rdx
+ 883 097c BE000000 		movl	$.LC28, %esi
+ 883      00
+ 884 0981 BF010000 		movl	$1, %edi
+ 884      00
+ 885 0986 31C0     		xorl	%eax, %eax
+ 886 0988 E8000000 		call	__printf_chk
+ 886      00
+ 887 098d 8B742408 		movl	8(%rsp), %esi
+ 888 0991 0B74240C 		orl	12(%rsp), %esi
+ 889 0995 488D5424 		leaq	4(%rsp), %rdx
+ 889      04
+ 890 099a 89EF     		movl	%ebp, %edi
+ 891 099c E8000000 		call	EApiGPIOGetLevel
+ 891      00
+ 892 09a1 85C0     		testl	%eax, %eax
+ 893 09a3 0F842701 		je	.L100
+ 893      0000
+ 894 09a9 488D7424 		leaq	16(%rsp), %rsi
+ 894      10
+ 895 09ae BA000400 		movl	$1024, %edx
+ 895      00
+ 896 09b3 89C7     		movl	%eax, %edi
+ 897 09b5 E8000000 		call	EApiAHCreateErrorString
+ 897      00
+GAS LISTING /tmp/ccBFckO5.s 			page 24
+
+
+ 898 09ba 4C8D4424 		leaq	16(%rsp), %r8
+ 898      10
+ 899 09bf B9000000 		movl	$.LC29, %ecx
+ 899      00
+ 900              	.L119:
+ 901 09c4 31C0     		xorl	%eax, %eax
+ 902 09c6 4C89E2   		movq	%r12, %rdx
+ 903 09c9 BE000000 		movl	$.LC25, %esi
+ 903      00
+ 904 09ce BF010000 		movl	$1, %edi
+ 904      00
+ 905 09d3 4883C310 		addq	$16, %rbx
+ 906 09d7 E8000000 		call	__printf_chk
+ 906      00
+ 907 09dc 4881FB00 		cmpq	$EApiGpioDevices+200, %rbx
+ 907      000000
+ 908 09e3 0F852FFF 		jne	.L105
+ 908      FFFF
+ 909              	.L121:
+ 910 09e9 4531E4   		xorl	%r12d, %r12d
+ 911 09ec 0F1F4000 		.p2align 4,,10
+ 912              		.p2align 3
+ 913              	.L109:
+ 914 09f0 BB000000 		movl	$EApiGpioterfaceValidate, %ebx
+ 914      00
+ 915 09f5 31ED     		xorl	%ebp, %ebp
+ 916              	.L108:
+ 917 09f7 488B5308 		movq	8(%rbx), %rdx
+ 918 09fb 488B33   		movq	(%rbx), %rsi
+ 919 09fe 4489E7   		movl	%r12d, %edi
+ 920 0a01 E8000000 		call	EApiGPIOGetDirectionCaps
+ 920      00
+ 921 0a06 3B4310   		cmpl	16(%rbx), %eax
+ 922 0a09 4189C1   		movl	%eax, %r9d
+ 923 0a0c BA010000 		movl	$1, %edx
+ 923      00
+ 924 0a11 740D     		je	.L107
+ 925 0a13 3B4314   		cmpl	20(%rbx), %eax
+ 926 0a16 7408     		je	.L107
+ 927 0a18 31D2     		xorl	%edx, %edx
+ 928 0a1a 394318   		cmpl	%eax, 24(%rbx)
+ 929 0a1d 0F94C2   		sete	%dl
+ 930              	.L107:
+ 931 0a20 488B3D00 		movq	LogStream(%rip), %rdi
+ 931      000000
+ 932 0a27 FF34D500 		pushq	FailPass(,%rdx,8)
+ 932      000000
+ 933              		.cfi_def_cfa_offset 1096
+ 934 0a2e 31C0     		xorl	%eax, %eax
+ 935 0a30 55       		pushq	%rbp
+ 936              		.cfi_def_cfa_offset 1104
+ 937 0a31 4154     		pushq	%r12
+ 938              		.cfi_def_cfa_offset 1112
+ 939 0a33 41B8AA03 		movl	$938, %r8d
+ 939      0000
+ 940 0a39 68000000 		pushq	$.LC14
+ 940      00
+GAS LISTING /tmp/ccBFckO5.s 			page 25
+
+
+ 941              		.cfi_def_cfa_offset 1120
+ 942 0a3e B9000000 		movl	$.LC24, %ecx
+ 942      00
+ 943 0a43 BA000000 		movl	$.LC20, %edx
+ 943      00
+ 944 0a48 BE4C0000 		movl	$76, %esi
+ 944      00
+ 945 0a4d 83C501   		addl	$1, %ebp
+ 946 0a50 4883C320 		addq	$32, %rbx
+ 947 0a54 E897F9FF 		call	siFFormattedMessage_SC.constprop.0
+ 947      FF
+ 948 0a59 4883C420 		addq	$32, %rsp
+ 949              		.cfi_def_cfa_offset 1088
+ 950 0a5d 83FD04   		cmpl	$4, %ebp
+ 951 0a60 7595     		jne	.L108
+ 952 0a62 4183C401 		addl	$1, %r12d
+ 953 0a66 4183FC0A 		cmpl	$10, %r12d
+ 954 0a6a 7584     		jne	.L109
+ 955 0a6c 488B8424 		movq	1048(%rsp), %rax
+ 955      18040000 
+ 956 0a74 64483304 		xorq	%fs:40, %rax
+ 956      25280000 
+ 956      00
+ 957 0a7d 0F852E01 		jne	.L123
+ 957      0000
+ 958 0a83 4881C420 		addq	$1056, %rsp
+ 958      040000
+ 959              		.cfi_remember_state
+ 960              		.cfi_def_cfa_offset 32
+ 961 0a8a 5B       		popq	%rbx
+ 962              		.cfi_def_cfa_offset 24
+ 963 0a8b 5D       		popq	%rbp
+ 964              		.cfi_def_cfa_offset 16
+ 965 0a8c 415C     		popq	%r12
+ 966              		.cfi_def_cfa_offset 8
+ 967 0a8e C3       		ret
+ 968 0a8f 90       		.p2align 4,,10
+ 969              		.p2align 3
+ 970              	.L101:
+ 971              		.cfi_restore_state
+ 972 0a90 8B742408 		movl	8(%rsp), %esi
+ 973 0a94 0B74240C 		orl	12(%rsp), %esi
+ 974 0a98 4889E2   		movq	%rsp, %rdx
+ 975 0a9b 89EF     		movl	%ebp, %edi
+ 976 0a9d E8000000 		call	EApiGPIOGetDirection
+ 976      00
+ 977 0aa2 85C0     		testl	%eax, %eax
+ 978 0aa4 747E     		je	.L124
+ 979 0aa6 662E0F1F 		.p2align 4,,10
+ 979      84000000 
+ 979      0000
+ 980              		.p2align 3
+ 981              	.L120:
+ 982 0ab0 488D7424 		leaq	16(%rsp), %rsi
+ 982      10
+ 983 0ab5 BA000400 		movl	$1024, %edx
+ 983      00
+GAS LISTING /tmp/ccBFckO5.s 			page 26
+
+
+ 984 0aba 89C7     		movl	%eax, %edi
+ 985 0abc E8000000 		call	EApiAHCreateErrorString
+ 985      00
+ 986 0ac1 4C8D4424 		leaq	16(%rsp), %r8
+ 986      10
+ 987 0ac6 B9000000 		movl	$.LC27, %ecx
+ 987      00
+ 988 0acb E9F4FEFF 		jmp	.L119
+ 988      FF
+ 989              		.p2align 4,,10
+ 990              		.p2align 3
+ 991              	.L100:
+ 992 0ad0 448B4424 		movl	4(%rsp), %r8d
+ 992      04
+ 993 0ad5 B9000000 		movl	$.LC29, %ecx
+ 993      00
+ 994 0ada 4C89E2   		movq	%r12, %rdx
+ 995 0add BE000000 		movl	$.LC30, %esi
+ 995      00
+ 996 0ae2 BF010000 		movl	$1, %edi
+ 996      00
+ 997 0ae7 31C0     		xorl	%eax, %eax
+ 998 0ae9 E8000000 		call	__printf_chk
+ 998      00
+ 999 0aee 8B742408 		movl	8(%rsp), %esi
+ 1000 0af2 89EF     		movl	%ebp, %edi
+ 1001 0af4 0FB7D6   		movzwl	%si, %edx
+ 1002 0af7 0B74240C 		orl	12(%rsp), %esi
+ 1003 0afb E8000000 		call	EApiGPIOSetDirection
+ 1003      00
+ 1004 0b00 85C0     		testl	%eax, %eax
+ 1005 0b02 748C     		je	.L101
+ 1006 0b04 488D7424 		leaq	16(%rsp), %rsi
+ 1006      10
+ 1007 0b09 BA000400 		movl	$1024, %edx
+ 1007      00
+ 1008 0b0e 89C7     		movl	%eax, %edi
+ 1009 0b10 E8000000 		call	EApiAHCreateErrorString
+ 1009      00
+ 1010 0b15 4C8D4424 		leaq	16(%rsp), %r8
+ 1010      10
+ 1011 0b1a B9000000 		movl	$.LC31, %ecx
+ 1011      00
+ 1012 0b1f E9A0FEFF 		jmp	.L119
+ 1012      FF
+ 1013              	.L124:
+ 1014 0b24 448B0424 		movl	(%rsp), %r8d
+ 1015 0b28 B9000000 		movl	$.LC27, %ecx
+ 1015      00
+ 1016 0b2d 4C89E2   		movq	%r12, %rdx
+ 1017 0b30 BE000000 		movl	$.LC28, %esi
+ 1017      00
+ 1018 0b35 BF010000 		movl	$1, %edi
+ 1018      00
+ 1019 0b3a 31C0     		xorl	%eax, %eax
+ 1020 0b3c E8000000 		call	__printf_chk
+ 1020      00
+GAS LISTING /tmp/ccBFckO5.s 			page 27
+
+
+ 1021 0b41 8B74240C 		movl	12(%rsp), %esi
+ 1022 0b45 89EF     		movl	%ebp, %edi
+ 1023 0b47 89F2     		movl	%esi, %edx
+ 1024 0b49 E8000000 		call	EApiGPIOSetLevel
+ 1024      00
+ 1025 0b4e 85C0     		testl	%eax, %eax
+ 1026 0b50 753F     		jne	.L125
+ 1027 0b52 8B742408 		movl	8(%rsp), %esi
+ 1028 0b56 0B74240C 		orl	12(%rsp), %esi
+ 1029 0b5a 488D5424 		leaq	4(%rsp), %rdx
+ 1029      04
+ 1030 0b5f 89EF     		movl	%ebp, %edi
+ 1031 0b61 E8000000 		call	EApiGPIOGetLevel
+ 1031      00
+ 1032 0b66 85C0     		testl	%eax, %eax
+ 1033 0b68 0F8542FF 		jne	.L120
+ 1033      FFFF
+ 1034 0b6e 448B4424 		movl	4(%rsp), %r8d
+ 1034      04
+ 1035 0b73 B9000000 		movl	$.LC32, %ecx
+ 1035      00
+ 1036 0b78 4C89E2   		movq	%r12, %rdx
+ 1037 0b7b BE000000 		movl	$.LC30, %esi
+ 1037      00
+ 1038 0b80 BF010000 		movl	$1, %edi
+ 1038      00
+ 1039 0b85 31C0     		xorl	%eax, %eax
+ 1040 0b87 E8000000 		call	__printf_chk
+ 1040      00
+ 1041 0b8c E976FDFF 		jmp	.L98
+ 1041      FF
+ 1042              	.L125:
+ 1043 0b91 488D7424 		leaq	16(%rsp), %rsi
+ 1043      10
+ 1044 0b96 BA000400 		movl	$1024, %edx
+ 1044      00
+ 1045 0b9b 89C7     		movl	%eax, %edi
+ 1046 0b9d E8000000 		call	EApiAHCreateErrorString
+ 1046      00
+ 1047 0ba2 4C8D4424 		leaq	16(%rsp), %r8
+ 1047      10
+ 1048 0ba7 B9000000 		movl	$.LC32, %ecx
+ 1048      00
+ 1049 0bac E913FEFF 		jmp	.L119
+ 1049      FF
+ 1050              	.L123:
+ 1051 0bb1 E8000000 		call	__stack_chk_fail
+ 1051      00
+ 1052              		.cfi_endproc
+ 1053              	.LFE105:
+ 1055              		.section	.text.unlikely
+ 1056              	.LCOLDE33:
+ 1057              		.text
+ 1058              	.LHOTE33:
+ 1059              		.section	.text.unlikely
+ 1060              	.LCOLDB34:
+ 1061              		.text
+GAS LISTING /tmp/ccBFckO5.s 			page 28
+
+
+ 1062              	.LHOTB34:
+ 1063 0bb6 662E0F1F 		.p2align 4,,15
+ 1063      84000000 
+ 1063      0000
+ 1064              		.globl	siFFormattedMessage_SC
+ 1066              	siFFormattedMessage_SC:
+ 1067              	.LFB99:
+ 1068              		.cfi_startproc
+ 1069 0bc0 4156     		pushq	%r14
+ 1070              		.cfi_def_cfa_offset 16
+ 1071              		.cfi_offset 14, -16
+ 1072 0bc2 4155     		pushq	%r13
+ 1073              		.cfi_def_cfa_offset 24
+ 1074              		.cfi_offset 13, -24
+ 1075 0bc4 4989CE   		movq	%rcx, %r14
+ 1076 0bc7 4154     		pushq	%r12
+ 1077              		.cfi_def_cfa_offset 32
+ 1078              		.cfi_offset 12, -32
+ 1079 0bc9 55       		pushq	%rbp
+ 1080              		.cfi_def_cfa_offset 40
+ 1081              		.cfi_offset 6, -40
+ 1082 0bca 4589CC   		movl	%r9d, %r12d
+ 1083 0bcd 53       		pushq	%rbx
+ 1084              		.cfi_def_cfa_offset 48
+ 1085              		.cfi_offset 3, -48
+ 1086 0bce 4889FD   		movq	%rdi, %rbp
+ 1087 0bd1 89F3     		movl	%esi, %ebx
+ 1088 0bd3 4881ECF0 		subq	$240, %rsp
+ 1088      000000
+ 1089              		.cfi_def_cfa_offset 288
+ 1090 0bda 84C0     		testb	%al, %al
+ 1091 0bdc 4C8BAC24 		movq	288(%rsp), %r13
+ 1091      20010000 
+ 1092 0be4 743D     		je	.L127
+ 1093 0be6 0F294424 		movaps	%xmm0, 112(%rsp)
+ 1093      70
+ 1094 0beb 0F298C24 		movaps	%xmm1, 128(%rsp)
+ 1094      80000000 
+ 1095 0bf3 0F299424 		movaps	%xmm2, 144(%rsp)
+ 1095      90000000 
+ 1096 0bfb 0F299C24 		movaps	%xmm3, 160(%rsp)
+ 1096      A0000000 
+ 1097 0c03 0F29A424 		movaps	%xmm4, 176(%rsp)
+ 1097      B0000000 
+ 1098 0c0b 0F29AC24 		movaps	%xmm5, 192(%rsp)
+ 1098      C0000000 
+ 1099 0c13 0F29B424 		movaps	%xmm6, 208(%rsp)
+ 1099      D0000000 
+ 1100 0c1b 0F29BC24 		movaps	%xmm7, 224(%rsp)
+ 1100      E0000000 
+ 1101              	.L127:
+ 1102 0c23 64488B04 		movq	%fs:40, %rax
+ 1102      25280000 
+ 1102      00
+ 1103 0c2c 48894424 		movq	%rax, 56(%rsp)
+ 1103      38
+ 1104 0c31 31C0     		xorl	%eax, %eax
+GAS LISTING /tmp/ccBFckO5.s 			page 29
+
+
+ 1105 0c33 488D8424 		leaq	296(%rsp), %rax
+ 1105      28010000 
+ 1106 0c3b 488D7C24 		leaq	24(%rsp), %rdi
+ 1106      18
+ 1107 0c40 4489E6   		movl	%r12d, %esi
+ 1108 0c43 48894424 		movq	%rax, 40(%rsp)
+ 1108      28
+ 1109 0c48 488D4424 		leaq	64(%rsp), %rax
+ 1109      40
+ 1110 0c4d 44894424 		movl	%r8d, 12(%rsp)
+ 1110      0C
+ 1111 0c52 C7442420 		movl	$48, 32(%rsp)
+ 1111      30000000 
+ 1112 0c5a C7442424 		movl	$48, 36(%rsp)
+ 1112      30000000 
+ 1113 0c62 48894424 		movq	%rax, 48(%rsp)
+ 1113      30
+ 1114 0c67 E8000000 		call	EApiGetErrorStringA
+ 1114      00
+ 1115 0c6c 448B4424 		movl	12(%rsp), %r8d
+ 1115      0C
+ 1116 0c71 0FBECB   		movsbl	%bl, %ecx
+ 1117 0c74 31C0     		xorl	%eax, %eax
+ 1118 0c76 4D89F1   		movq	%r14, %r9
+ 1119 0c79 BA000000 		movl	$.LC11, %edx
+ 1119      00
+ 1120 0c7e BE010000 		movl	$1, %esi
+ 1120      00
+ 1121 0c83 4889EF   		movq	%rbp, %rdi
+ 1122 0c86 E8000000 		call	__fprintf_chk
+ 1122      00
+ 1123 0c8b 488B4C24 		movq	24(%rsp), %rcx
+ 1123      18
+ 1124 0c90 89C3     		movl	%eax, %ebx
+ 1125 0c92 4885C9   		testq	%rcx, %rcx
+ 1126 0c95 7451     		je	.L132
+ 1127 0c97 BA000000 		movl	$.LC13, %edx
+ 1127      00
+ 1128 0c9c BE010000 		movl	$1, %esi
+ 1128      00
+ 1129 0ca1 4889EF   		movq	%rbp, %rdi
+ 1130 0ca4 31C0     		xorl	%eax, %eax
+ 1131 0ca6 E8000000 		call	__fprintf_chk
+ 1131      00
+ 1132              	.L129:
+ 1133 0cab 488D4C24 		leaq	32(%rsp), %rcx
+ 1133      20
+ 1134 0cb0 4C89EA   		movq	%r13, %rdx
+ 1135 0cb3 BE010000 		movl	$1, %esi
+ 1135      00
+ 1136 0cb8 4889EF   		movq	%rbp, %rdi
+ 1137 0cbb E8000000 		call	__vfprintf_chk
+ 1137      00
+ 1138 0cc0 01D8     		addl	%ebx, %eax
+ 1139 0cc2 488B5424 		movq	56(%rsp), %rdx
+ 1139      38
+ 1140 0cc7 64483314 		xorq	%fs:40, %rdx
+GAS LISTING /tmp/ccBFckO5.s 			page 30
+
+
+ 1140      25280000 
+ 1140      00
+ 1141 0cd0 752F     		jne	.L133
+ 1142 0cd2 4881C4F0 		addq	$240, %rsp
+ 1142      000000
+ 1143              		.cfi_remember_state
+ 1144              		.cfi_def_cfa_offset 48
+ 1145 0cd9 5B       		popq	%rbx
+ 1146              		.cfi_def_cfa_offset 40
+ 1147 0cda 5D       		popq	%rbp
+ 1148              		.cfi_def_cfa_offset 32
+ 1149 0cdb 415C     		popq	%r12
+ 1150              		.cfi_def_cfa_offset 24
+ 1151 0cdd 415D     		popq	%r13
+ 1152              		.cfi_def_cfa_offset 16
+ 1153 0cdf 415E     		popq	%r14
+ 1154              		.cfi_def_cfa_offset 8
+ 1155 0ce1 C3       		ret
+ 1156              		.p2align 4,,10
+ 1157 0ce2 660F1F44 		.p2align 3
+ 1157      0000
+ 1158              	.L132:
+ 1159              		.cfi_restore_state
+ 1160 0ce8 4489E1   		movl	%r12d, %ecx
+ 1161 0ceb BA000000 		movl	$.LC12, %edx
+ 1161      00
+ 1162 0cf0 BE010000 		movl	$1, %esi
+ 1162      00
+ 1163 0cf5 4889EF   		movq	%rbp, %rdi
+ 1164 0cf8 31C0     		xorl	%eax, %eax
+ 1165 0cfa E8000000 		call	__fprintf_chk
+ 1165      00
+ 1166 0cff EBAA     		jmp	.L129
+ 1167              	.L133:
+ 1168 0d01 E8000000 		call	__stack_chk_fail
+ 1168      00
+ 1169              		.cfi_endproc
+ 1170              	.LFE99:
+ 1172              		.section	.text.unlikely
+ 1173              	.LCOLDE34:
+ 1174              		.text
+ 1175              	.LHOTE34:
+ 1176              		.section	.text.unlikely
+ 1177              	.LCOLDB35:
+ 1178              		.text
+ 1179              	.LHOTB35:
+ 1180 0d06 662E0F1F 		.p2align 4,,15
+ 1180      84000000 
+ 1180      0000
+ 1181              		.globl	printHex
+ 1183              	printHex:
+ 1184              	.LFB102:
+ 1185              		.cfi_startproc
+ 1186 0d10 4885D2   		testq	%rdx, %rdx
+ 1187 0d13 7439     		je	.L142
+ 1188 0d15 4154     		pushq	%r12
+ 1189              		.cfi_def_cfa_offset 16
+GAS LISTING /tmp/ccBFckO5.s 			page 31
+
+
+ 1190              		.cfi_offset 12, -16
+ 1191 0d17 4989FC   		movq	%rdi, %r12
+ 1192 0d1a 55       		pushq	%rbp
+ 1193              		.cfi_def_cfa_offset 24
+ 1194              		.cfi_offset 6, -24
+ 1195 0d1b 4889F5   		movq	%rsi, %rbp
+ 1196 0d1e 53       		pushq	%rbx
+ 1197              		.cfi_def_cfa_offset 32
+ 1198              		.cfi_offset 3, -32
+ 1199 0d1f 4889D3   		movq	%rdx, %rbx
+ 1200              		.p2align 4,,10
+ 1201 0d22 660F1F44 		.p2align 3
+ 1201      0000
+ 1202              	.L138:
+ 1203 0d28 0FB64D00 		movzbl	0(%rbp), %ecx
+ 1204 0d2c 31C0     		xorl	%eax, %eax
+ 1205 0d2e BA000000 		movl	$.LC17, %edx
+ 1205      00
+ 1206 0d33 BE010000 		movl	$1, %esi
+ 1206      00
+ 1207 0d38 4C89E7   		movq	%r12, %rdi
+ 1208 0d3b 4883C501 		addq	$1, %rbp
+ 1209 0d3f E8000000 		call	__fprintf_chk
+ 1209      00
+ 1210 0d44 4883EB01 		subq	$1, %rbx
+ 1211 0d48 75DE     		jne	.L138
+ 1212 0d4a 5B       		popq	%rbx
+ 1213              		.cfi_restore 3
+ 1214              		.cfi_def_cfa_offset 24
+ 1215 0d4b 5D       		popq	%rbp
+ 1216              		.cfi_restore 6
+ 1217              		.cfi_def_cfa_offset 16
+ 1218 0d4c 415C     		popq	%r12
+ 1219              		.cfi_restore 12
+ 1220              		.cfi_def_cfa_offset 8
+ 1221              	.L142:
+ 1222 0d4e F3C3     		rep ret
+ 1223              		.cfi_endproc
+ 1224              	.LFE102:
+ 1226              		.section	.text.unlikely
+ 1227              	.LCOLDE35:
+ 1228              		.text
+ 1229              	.LHOTE35:
+ 1230              		.section	.rodata.str1.1
+ 1231              	.LC36:
+ 1232 01ab 7700     		.string	"w"
+ 1233              	.LC37:
+ 1234 01ad 45417069 		.string	"EApiValidateAPI.log"
+ 1234      56616C69 
+ 1234      64617465 
+ 1234      4150492E 
+ 1234      6C6F6700 
+ 1235              	.LC38:
+ 1236 01c1 53746174 		.string	"Status Code"
+ 1236      75732043 
+ 1236      6F646500 
+ 1237              	.LC39:
+GAS LISTING /tmp/ccBFckO5.s 			page 32
+
+
+ 1238 01cd 46756E63 		.string	"Function Name"
+ 1238      74696F6E 
+ 1238      204E616D 
+ 1238      6500
+ 1239              		.section	.rodata.str1.8
+ 1240 00a3 00000000 		.align 8
+ 1240      00
+ 1241              	.LC40:
+ 1242 00a8 4C253034 		.string	"L%04u %-30s | %-25s | %5s %5s    [%s]\n"
+ 1242      7520252D 
+ 1242      33307320 
+ 1242      7C20252D 
+ 1242      32357320 
+ 1243              		.section	.rodata.str1.1
+ 1244              	.LC41:
+ 1245 01db 53746174 		.string	"Status"
+ 1245      757300
+ 1246              	.LC42:
+ 1247 01e2 54657374 		.string	"Test#"
+ 1247      2300
+ 1248              	.LC43:
+ 1249 01e8 496400   		.string	"Id"
+ 1250              		.section	.rodata.str1.8
+ 1251 00cf 00       		.align 8
+ 1252              	.LC44:
+ 1253 00d0 45417069 		.string	"EApi(Embedded Application Interface)\nEApi Verification Tool                            V
+ 1253      28456D62 
+ 1253      65646465 
+ 1253      64204170 
+ 1253      706C6963 
+ 1254              		.section	.text.unlikely
+ 1255              	.LCOLDB45:
+ 1256              		.section	.text.startup,"ax",@progbits
+ 1257              	.LHOTB45:
+ 1258              		.p2align 4,,15
+ 1259              		.globl	main
+ 1261              	main:
+ 1262              	.LFB106:
+ 1263              		.cfi_startproc
+ 1264 0000 4883EC08 		subq	$8, %rsp
+ 1265              		.cfi_def_cfa_offset 16
+ 1266 0004 BE000000 		movl	$.LC36, %esi
+ 1266      00
+ 1267 0009 BF000000 		movl	$.LC37, %edi
+ 1267      00
+ 1268 000e E8000000 		call	fopen
+ 1268      00
+ 1269 0013 4885C0   		testq	%rax, %rax
+ 1270 0016 48890500 		movq	%rax, LogStream(%rip)
+ 1270      000000
+ 1271 001d 0F849F00 		je	.L148
+ 1271      0000
+ 1272              	.L144:
+ 1273 0023 E8000000 		call	EApiLibInitialize
+ 1273      00
+ 1274 0028 85C0     		testl	%eax, %eax
+ 1275 002a 740A     		je	.L145
+GAS LISTING /tmp/ccBFckO5.s 			page 33
+
+
+ 1276 002c BF020000 		movl	$2, %edi
+ 1276      00
+ 1277 0031 E8000000 		call	exit
+ 1277      00
+ 1278              	.L145:
+ 1279 0036 488B3D00 		movq	LogStream(%rip), %rdi
+ 1279      000000
+ 1280 003d 50       		pushq	%rax
+ 1281              		.cfi_def_cfa_offset 24
+ 1282 003e 41B90000 		movl	$.LC38, %r9d
+ 1282      0000
+ 1283 0044 68000000 		pushq	$.LC41
+ 1283      00
+ 1284              		.cfi_def_cfa_offset 32
+ 1285 0049 68000000 		pushq	$.LC42
+ 1285      00
+ 1286              		.cfi_def_cfa_offset 40
+ 1287 004e 41B80000 		movl	$.LC39, %r8d
+ 1287      0000
+ 1288 0054 68000000 		pushq	$.LC43
+ 1288      00
+ 1289              		.cfi_def_cfa_offset 48
+ 1290 0059 B9D40300 		movl	$980, %ecx
+ 1290      00
+ 1291 005e BA000000 		movl	$.LC40, %edx
+ 1291      00
+ 1292 0063 BE010000 		movl	$1, %esi
+ 1292      00
+ 1293 0068 31C0     		xorl	%eax, %eax
+ 1294 006a E8000000 		call	__fprintf_chk
+ 1294      00
+ 1295 006f 488B3D00 		movq	stderr(%rip), %rdi
+ 1295      000000
+ 1296 0076 4883C420 		addq	$32, %rsp
+ 1297              		.cfi_def_cfa_offset 16
+ 1298 007a 31C9     		xorl	%ecx, %ecx
+ 1299 007c 41B9FE02 		movl	$766, %r9d
+ 1299      0000
+ 1300 0082 41B80500 		movl	$5, %r8d
+ 1300      0000
+ 1301 0088 BA000000 		movl	$.LC44, %edx
+ 1301      00
+ 1302 008d BE010000 		movl	$1, %esi
+ 1302      00
+ 1303 0092 31C0     		xorl	%eax, %eax
+ 1304 0094 E8000000 		call	__fprintf_chk
+ 1304      00
+ 1305 0099 E8000000 		call	EApiValidateValuesApi
+ 1305      00
+ 1306 009e E8000000 		call	EApiValidateStringApi
+ 1306      00
+ 1307 00a3 E8000000 		call	EApiValidateI2CApi
+ 1307      00
+ 1308 00a8 E8000000 		call	EApiLibInitialize
+ 1308      00
+ 1309 00ad 85C0     		testl	%eax, %eax
+ 1310 00af 740A     		je	.L146
+GAS LISTING /tmp/ccBFckO5.s 			page 34
+
+
+ 1311 00b1 BF030000 		movl	$3, %edi
+ 1311      00
+ 1312 00b6 E8000000 		call	exit
+ 1312      00
+ 1313              	.L146:
+ 1314 00bb 31FF     		xorl	%edi, %edi
+ 1315 00bd E8000000 		call	exit
+ 1315      00
+ 1316              	.L148:
+ 1317 00c2 488B0500 		movq	stdout(%rip), %rax
+ 1317      000000
+ 1318 00c9 48890500 		movq	%rax, LogStream(%rip)
+ 1318      000000
+ 1319 00d0 E94EFFFF 		jmp	.L144
+ 1319      FF
+ 1320              		.cfi_endproc
+ 1321              	.LFE106:
+ 1323              		.section	.text.unlikely
+ 1324              	.LCOLDE45:
+ 1325              		.section	.text.startup
+ 1326              	.LHOTE45:
+ 1327              		.globl	TestFunctions
+ 1328              		.section	.rodata.str1.1
+ 1329              	.LC46:
+ 1330 01eb 56616C75 		.string	"Values Function"
+ 1330      65732046 
+ 1330      756E6374 
+ 1330      696F6E00 
+ 1331              	.LC47:
+ 1332 01fb 53747269 		.string	"Strings Function"
+ 1332      6E677320 
+ 1332      46756E63 
+ 1332      74696F6E 
+ 1332      00
+ 1333              	.LC48:
+ 1334 020c 49324320 		.string	"I2C Function"
+ 1334      46756E63 
+ 1334      74696F6E 
+ 1334      00
+ 1335              	.LC49:
+ 1336 0219 53746F72 		.string	"Storage Function"
+ 1336      61676520 
+ 1336      46756E63 
+ 1336      74696F6E 
+ 1336      00
+ 1337              	.LC50:
+ 1338 022a 4770696F 		.string	"Gpio Function"
+ 1338      2046756E 
+ 1338      6374696F 
+ 1338      6E00
+ 1339              		.section	.rodata
+ 1340              		.align 32
+ 1343              	TestFunctions:
+ 1344 0000 00000000 		.quad	EApiValidateValuesApi
+ 1344      00000000 
+ 1345 0008 00000000 		.quad	.LC46
+ 1345      00000000 
+GAS LISTING /tmp/ccBFckO5.s 			page 35
+
+
+ 1346 0010 00000000 		.quad	EApiValidateStringApi
+ 1346      00000000 
+ 1347 0018 00000000 		.quad	.LC47
+ 1347      00000000 
+ 1348 0020 00000000 		.quad	EApiValidateI2CApi
+ 1348      00000000 
+ 1349 0028 00000000 		.quad	.LC48
+ 1349      00000000 
+ 1350 0030 00000000 		.quad	EApiValidateStorageApi
+ 1350      00000000 
+ 1351 0038 00000000 		.quad	.LC49
+ 1351      00000000 
+ 1352 0040 00000000 		.quad	EApiValidateGPIOApi
+ 1352      00000000 
+ 1353 0048 00000000 		.quad	.LC50
+ 1353      00000000 
+ 1354              		.globl	EApiGpioDevices
+ 1355              		.section	.rodata.str1.1
+ 1356              	.LC51:
+ 1357 0238 4750494F 		.string	"GPIO Bank0"
+ 1357      2042616E 
+ 1357      6B3000
+ 1358              	.LC52:
+ 1359 0243 4750494F 		.string	"GPIO GPIO0"
+ 1359      20475049 
+ 1359      4F3000
+ 1360              	.LC53:
+ 1361 024e 4750494F 		.string	"GPIO GPIO1"
+ 1361      20475049 
+ 1361      4F3100
+ 1362              	.LC54:
+ 1363 0259 4750494F 		.string	"GPIO GPIO2"
+ 1363      20475049 
+ 1363      4F3200
+ 1364              	.LC55:
+ 1365 0264 4750494F 		.string	"GPIO GPIO3"
+ 1365      20475049 
+ 1365      4F3300
+ 1366              	.LC56:
+ 1367 026f 4750494F 		.string	"GPIO GPIO4"
+ 1367      20475049 
+ 1367      4F3400
+ 1368              	.LC57:
+ 1369 027a 4750494F 		.string	"GPIO GPIO5"
+ 1369      20475049 
+ 1369      4F3500
+ 1370              	.LC58:
+ 1371 0285 4750494F 		.string	"GPIO GPIO6"
+ 1371      20475049 
+ 1371      4F3600
+ 1372              	.LC59:
+ 1373 0290 4750494F 		.string	"GPIO GPIO7"
+ 1373      20475049 
+ 1373      4F3700
+ 1374              	.LC60:
+ 1375 029b 4750494F 		.string	"GPIO GPIO8"
+ 1375      20475049 
+GAS LISTING /tmp/ccBFckO5.s 			page 36
+
+
+ 1375      4F3800
+ 1376              	.LC61:
+ 1377 02a6 4750494F 		.string	"GPIO GPIO9"
+ 1377      20475049 
+ 1377      4F3900
+ 1378              	.LC62:
+ 1379 02b1 556E7375 		.string	"Unsupported"
+ 1379      70706F72 
+ 1379      74656400 
+ 1380              		.section	.rodata
+ 1381 0050 00000000 		.align 32
+ 1381      00000000 
+ 1381      00000000 
+ 1381      00000000 
+ 1384              	EApiGpioDevices:
+ 1385 0060 00000100 		.long	65536
+ 1386 0064 00000000 		.zero	4
+ 1387 0068 00000000 		.quad	.LC51
+ 1387      00000000 
+ 1388 0070 00000000 		.long	0
+ 1389 0074 00000000 		.zero	4
+ 1390 0078 00000000 		.quad	.LC52
+ 1390      00000000 
+ 1391 0080 01000000 		.long	1
+ 1392 0084 00000000 		.zero	4
+ 1393 0088 00000000 		.quad	.LC53
+ 1393      00000000 
+ 1394 0090 02000000 		.long	2
+ 1395 0094 00000000 		.zero	4
+ 1396 0098 00000000 		.quad	.LC54
+ 1396      00000000 
+ 1397 00a0 03000000 		.long	3
+ 1398 00a4 00000000 		.zero	4
+ 1399 00a8 00000000 		.quad	.LC55
+ 1399      00000000 
+ 1400 00b0 04000000 		.long	4
+ 1401 00b4 00000000 		.zero	4
+ 1402 00b8 00000000 		.quad	.LC56
+ 1402      00000000 
+ 1403 00c0 05000000 		.long	5
+ 1404 00c4 00000000 		.zero	4
+ 1405 00c8 00000000 		.quad	.LC57
+ 1405      00000000 
+ 1406 00d0 06000000 		.long	6
+ 1407 00d4 00000000 		.zero	4
+ 1408 00d8 00000000 		.quad	.LC58
+ 1408      00000000 
+ 1409 00e0 07000000 		.long	7
+ 1410 00e4 00000000 		.zero	4
+ 1411 00e8 00000000 		.quad	.LC59
+ 1411      00000000 
+ 1412 00f0 08000000 		.long	8
+ 1413 00f4 00000000 		.zero	4
+ 1414 00f8 00000000 		.quad	.LC60
+ 1414      00000000 
+ 1415 0100 09000000 		.long	9
+ 1416 0104 00000000 		.zero	4
+GAS LISTING /tmp/ccBFckO5.s 			page 37
+
+
+ 1417 0108 00000000 		.quad	.LC61
+ 1417      00000000 
+ 1418 0110 000F0000 		.long	3840
+ 1419 0114 00000000 		.zero	4
+ 1420 0118 00000000 		.quad	.LC62
+ 1420      00000000 
+ 1421              		.globl	EApiGpioterfaceValidate
+ 1422              		.align 32
+ 1425              	EApiGpioterfaceValidate:
+ 1426 0120 00000000 		.quad	GpioInputs
+ 1426      00000000 
+ 1427 0128 00000000 		.quad	GpioOutputs
+ 1427      00000000 
+ 1428 0130 00000000 		.long	0
+ 1429 0134 FFFCFFFF 		.long	-769
+ 1430 0138 FFFCFFFF 		.long	-769
+ 1431 013c 00000000 		.zero	4
+ 1432 0140 00000000 		.quad	GpioInputs
+ 1432      00000000 
+ 1433 0148 00000000 		.quad	0
+ 1433      00000000 
+ 1434 0150 00000000 		.long	0
+ 1435 0154 FFFCFFFF 		.long	-769
+ 1436 0158 FFFCFFFF 		.long	-769
+ 1437 015c 00000000 		.zero	4
+ 1438 0160 00000000 		.quad	0
+ 1438      00000000 
+ 1439 0168 00000000 		.quad	GpioOutputs
+ 1439      00000000 
+ 1440 0170 00000000 		.long	0
+ 1441 0174 FFFCFFFF 		.long	-769
+ 1442 0178 FFFCFFFF 		.long	-769
+ 1443 017c 00000000 		.zero	4
+ 1444 0180 00000000 		.quad	0
+ 1444      00000000 
+ 1445 0188 00000000 		.quad	0
+ 1445      00000000 
+ 1446 0190 FFFEFFFF 		.long	-257
+ 1447 0194 FFFEFFFF 		.long	-257
+ 1448 0198 FFFEFFFF 		.long	-257
+ 1449 019c 00000000 		.zero	4
+ 1450              		.comm	GpioOutputs,4,4
+ 1451              		.comm	GpioInputs,4,4
+ 1452              		.globl	StorageCapValidate
+ 1453              		.align 32
+ 1456              	StorageCapValidate:
+ 1457 01a0 00000000 		.quad	StorageSize
+ 1457      00000000 
+ 1458 01a8 00000000 		.quad	BlockLength
+ 1458      00000000 
+ 1459 01b0 00000000 		.long	0
+ 1460 01b4 FFFCFFFF 		.long	-769
+ 1461 01b8 FFFCFFFF 		.long	-769
+ 1462 01bc 00000000 		.zero	4
+ 1463 01c0 00000000 		.quad	StorageSize
+ 1463      00000000 
+ 1464 01c8 00000000 		.quad	0
+GAS LISTING /tmp/ccBFckO5.s 			page 38
+
+
+ 1464      00000000 
+ 1465 01d0 00000000 		.long	0
+ 1466 01d4 FFFCFFFF 		.long	-769
+ 1467 01d8 FFFCFFFF 		.long	-769
+ 1468 01dc 00000000 		.zero	4
+ 1469 01e0 00000000 		.quad	0
+ 1469      00000000 
+ 1470 01e8 00000000 		.quad	BlockLength
+ 1470      00000000 
+ 1471 01f0 00000000 		.long	0
+ 1472 01f4 FFFCFFFF 		.long	-769
+ 1473 01f8 FFFCFFFF 		.long	-769
+ 1474 01fc 00000000 		.zero	4
+ 1475 0200 00000000 		.quad	0
+ 1475      00000000 
+ 1476 0208 00000000 		.quad	0
+ 1476      00000000 
+ 1477 0210 FFFEFFFF 		.long	-257
+ 1478 0214 FFFEFFFF 		.long	-257
+ 1479 0218 FFFEFFFF 		.long	-257
+ 1480 021c 00000000 		.zero	4
+ 1481              		.comm	BlockLength,4,4
+ 1482              		.comm	StorageSize,4,4
+ 1483              		.globl	StorageValidate
+ 1484              		.align 32
+ 1487              	StorageValidate:
+ 1488 0220 00000000 		.long	0
+ 1489 0224 00000000 		.zero	4
+ 1490 0228 00000000 		.quad	Buffer
+ 1490      00000000 
+ 1491 0230 00040000 		.long	1024
+ 1492 0234 0A000000 		.long	10
+ 1493 0238 00000000 		.long	0
+ 1494 023c FFFCFFFF 		.long	-769
+ 1495 0240 FFFCFFFF 		.long	-769
+ 1496 0244 00000000 		.zero	4
+ 1497 0248 00000000 		.long	0
+ 1498 024c 00000000 		.zero	4
+ 1499 0250 00000000 		.quad	0
+ 1499      00000000 
+ 1500 0258 00040000 		.long	1024
+ 1501 025c 64000000 		.long	100
+ 1502 0260 FFFEFFFF 		.long	-257
+ 1503 0264 FFFEFFFF 		.long	-257
+ 1504 0268 FFFEFFFF 		.long	-257
+ 1505 026c 00000000 		.zero	4
+ 1506 0270 21000000 		.long	33
+ 1507 0274 00000000 		.zero	4
+ 1508 0278 00000000 		.quad	Buffer
+ 1508      00000000 
+ 1509 0280 00000000 		.long	0
+ 1510 0284 14000000 		.long	20
+ 1511 0288 FFFEFFFF 		.long	-257
+ 1512 028c FDFEFFFF 		.long	-259
+ 1513 0290 FFFCFFFF 		.long	-769
+ 1514 0294 00000000 		.zero	4
+ 1515 0298 21000000 		.long	33
+GAS LISTING /tmp/ccBFckO5.s 			page 39
+
+
+ 1516 029c 00000000 		.zero	4
+ 1517 02a0 00000000 		.quad	Buffer
+ 1517      00000000 
+ 1518 02a8 10000000 		.long	16
+ 1519 02ac 14000000 		.long	20
+ 1520 02b0 FDFEFFFF 		.long	-259
+ 1521 02b4 00000000 		.long	0
+ 1522 02b8 FFFCFFFF 		.long	-769
+ 1523 02bc 00000000 		.zero	4
+ 1524 02c0 21000000 		.long	33
+ 1525 02c4 00000000 		.zero	4
+ 1526 02c8 00000000 		.quad	Buffer
+ 1526      00000000 
+ 1527 02d0 00040000 		.long	1024
+ 1528 02d4 00000000 		.long	0
+ 1529 02d8 FFFEFFFF 		.long	-257
+ 1530 02dc FFFEFFFF 		.long	-257
+ 1531 02e0 FFFCFFFF 		.long	-769
+ 1532 02e4 00000000 		.zero	4
+ 1533 02e8 01000000 		.long	1
+ 1534 02ec 00000000 		.zero	4
+ 1535 02f0 00000000 		.quad	Buffer
+ 1535      00000000 
+ 1536 02f8 00040000 		.long	1024
+ 1537 02fc 0A000000 		.long	10
+ 1538 0300 00000000 		.long	0
+ 1539 0304 FFFCFFFF 		.long	-769
+ 1540 0308 FFFCFFFF 		.long	-769
+ 1541 030c 00000000 		.zero	4
+ 1542              		.globl	EApiStorageDevices
+ 1543              		.section	.rodata.str1.1
+ 1544              	.LC63:
+ 1545 02bd 5374616E 		.string	"Standard Storage"
+ 1545      64617264 
+ 1545      2053746F 
+ 1545      72616765 
+ 1545      00
+ 1546              	.LC64:
+ 1547 02ce 44756D6D 		.string	"Dummy PICMG Storage"
+ 1547      79205049 
+ 1547      434D4720 
+ 1547      53746F72 
+ 1547      61676500 
+ 1548              		.section	.rodata
+ 1549 0310 00000000 		.align 32
+ 1549      00000000 
+ 1549      00000000 
+ 1549      00000000 
+ 1552              	EApiStorageDevices:
+ 1553 0320 00000000 		.long	0
+ 1554 0324 00000000 		.zero	4
+ 1555 0328 00000000 		.quad	.LC63
+ 1555      00000000 
+ 1556 0330 20000000 		.long	32
+ 1557 0334 00000000 		.zero	4
+ 1558 0338 001074FA 		.long	-93057024
+ 1559 033c 00000000 		.zero	4
+GAS LISTING /tmp/ccBFckO5.s 			page 40
+
+
+ 1560 0340 00000000 		.quad	.LC64
+ 1560      00000000 
+ 1561 0348 80000000 		.long	128
+ 1562 034c 00000000 		.zero	4
+ 1563 0350 000F0000 		.long	3840
+ 1564 0354 00000000 		.zero	4
+ 1565 0358 00000000 		.quad	.LC62
+ 1565      00000000 
+ 1566 0360 20000000 		.long	32
+ 1567 0364 00000000 		.zero	4
+ 1568              		.globl	EApiI2CBuses
+ 1569              		.section	.rodata.str1.1
+ 1570              	.LC65:
+ 1571 02e2 45787465 		.string	"External I2C"
+ 1571      726E616C 
+ 1571      20493243 
+ 1571      00
+ 1572              	.LC66:
+ 1573 02ef 4C564453 		.string	"LVDS 1 I2C/DDC"
+ 1573      20312049 
+ 1573      32432F44 
+ 1573      444300
+ 1574              	.LC67:
+ 1575 02fe 4C564453 		.string	"LVDS 2 I2C/DDC"
+ 1575      20322049 
+ 1575      32432F44 
+ 1575      444300
+ 1576              		.section	.rodata
+ 1577 0368 00000000 		.align 32
+ 1577      00000000 
+ 1577      00000000 
+ 1577      00000000 
+ 1577      00000000 
+ 1580              	EApiI2CBuses:
+ 1581 0380 00000000 		.long	0
+ 1582 0384 00000000 		.zero	4
+ 1583 0388 00000000 		.quad	.LC65
+ 1583      00000000 
+ 1584 0390 01000000 		.long	1
+ 1585 0394 00000000 		.zero	4
+ 1586 0398 00000000 		.quad	.LC66
+ 1586      00000000 
+ 1587 03a0 02000000 		.long	2
+ 1588 03a4 00000000 		.zero	4
+ 1589 03a8 00000000 		.quad	.LC67
+ 1589      00000000 
+ 1590 03b0 000F0000 		.long	3840
+ 1591 03b4 00000000 		.zero	4
+ 1592 03b8 00000000 		.quad	.LC62
+ 1592      00000000 
+ 1593              		.globl	I2CDevices
+ 1594              		.align 32
+ 1597              	I2CDevices:
+ 1602 03c8 00010000 		.long	256
+ 1607 03d4 00010000 		.long	256
+ 1612 03e0 00010000 		.long	256
+ 1617 03ec 00010000 		.long	256
+GAS LISTING /tmp/ccBFckO5.s 			page 41
+
+
+ 1622 03f8 00010000 		.long	256
+ 1623              		.globl	EApiI2CInterfaceValidate
+ 1624 03fc 00000000 		.align 32
+ 1627              	EApiI2CInterfaceValidate:
+ 1628 0400 00000000 		.quad	I2CMaxClk
+ 1628      00000000 
+ 1629 0408 00000000 		.long	0
+ 1630 040c FFFCFFFF 		.long	-769
+ 1631 0410 FFFCFFFF 		.long	-769
+ 1632 0414 00000000 		.zero	4
+ 1633 0418 00000000 		.quad	0
+ 1633      00000000 
+ 1634 0420 FFFEFFFF 		.long	-257
+ 1635 0424 FFFEFFFF 		.long	-257
+ 1636 0428 FFFEFFFF 		.long	-257
+ 1637 042c 00000000 		.zero	4
+ 1638              		.globl	I2CMaxClk
+ 1639              		.bss
+ 1640              		.align 4
+ 1643              	I2CMaxClk:
+ 1644 0000 00000000 		.zero	4
+ 1645              		.globl	EApiI2CHLWriteValidate
+ 1646              		.section	.rodata
+ 1647 0430 00000000 		.align 32
+ 1647      00000000 
+ 1647      00000000 
+ 1647      00000000 
+ 1650              	EApiI2CHLWriteValidate:
+ 1651 0440 F8000000 		.long	248
+ 1652 0444 00000000 		.long	0
+ 1653 0448 00000000 		.quad	Buffer
+ 1653      00000000 
+ 1654 0450 00000000 		.long	0
+ 1655 0454 0A000000 		.long	10
+ 1656 0458 FFFBFFFF 		.long	-1025
+ 1657 045c FFFCFFFF 		.long	-769
+ 1658 0460 FFFBFFFF 		.long	-1025
+ 1659 0464 00000000 		.zero	4
+ 1660 0468 F8000000 		.long	248
+ 1661 046c 00000000 		.long	0
+ 1662 0470 00000000 		.quad	0
+ 1662      00000000 
+ 1663 0478 00000000 		.long	0
+ 1664 047c 0A000000 		.long	10
+ 1665 0480 FFFEFFFF 		.long	-257
+ 1666 0484 FFFEFFFF 		.long	-257
+ 1667 0488 FFFEFFFF 		.long	-257
+ 1668 048c 00000000 		.zero	4
+ 1669 0490 F8000000 		.long	248
+ 1670 0494 00000000 		.long	0
+ 1671 0498 00000000 		.quad	Buffer
+ 1671      00000000 
+ 1672 04a0 00000000 		.long	0
+ 1673 04a4 00000000 		.long	0
+ 1674 04a8 FFFEFFFF 		.long	-257
+ 1675 04ac FFFEFFFF 		.long	-257
+ 1676 04b0 FFFEFFFF 		.long	-257
+GAS LISTING /tmp/ccBFckO5.s 			page 42
+
+
+ 1677 04b4 00000000 		.zero	4
+ 1678              		.globl	EApiI2CHLReadValidate
+ 1679 04b8 00000000 		.align 32
+ 1679      00000000 
+ 1682              	EApiI2CHLReadValidate:
+ 1683 04c0 F8000000 		.long	248
+ 1684 04c4 00000000 		.long	0
+ 1685 04c8 00000000 		.quad	Buffer
+ 1685      00000000 
+ 1686 04d0 00040000 		.long	1024
+ 1687 04d4 0A000000 		.long	10
+ 1688 04d8 FFFBFFFF 		.long	-1025
+ 1689 04dc FFFCFFFF 		.long	-769
+ 1690 04e0 FFFBFFFF 		.long	-1025
+ 1691 04e4 00000000 		.zero	4
+ 1692 04e8 F8000000 		.long	248
+ 1693 04ec 00000000 		.long	0
+ 1694 04f0 00000000 		.quad	0
+ 1694      00000000 
+ 1695 04f8 00040000 		.long	1024
+ 1696 04fc 0A000000 		.long	10
+ 1697 0500 FFFEFFFF 		.long	-257
+ 1698 0504 FFFEFFFF 		.long	-257
+ 1699 0508 FFFEFFFF 		.long	-257
+ 1700 050c 00000000 		.zero	4
+ 1701 0510 F8000000 		.long	248
+ 1702 0514 00000000 		.long	0
+ 1703 0518 00000000 		.quad	Buffer
+ 1703      00000000 
+ 1704 0520 00000000 		.long	0
+ 1705 0524 14000000 		.long	20
+ 1706 0528 FFFEFFFF 		.long	-257
+ 1707 052c FFFEFFFF 		.long	-257
+ 1708 0530 FFFEFFFF 		.long	-257
+ 1709 0534 00000000 		.zero	4
+ 1710 0538 F8000000 		.long	248
+ 1711 053c 00000000 		.long	0
+ 1712 0540 00000000 		.quad	Buffer
+ 1712      00000000 
+ 1713 0548 00040000 		.long	1024
+ 1714 054c 00000000 		.long	0
+ 1715 0550 FFFEFFFF 		.long	-257
+ 1716 0554 FFFEFFFF 		.long	-257
+ 1717 0558 FFFEFFFF 		.long	-257
+ 1718 055c 00000000 		.zero	4
+ 1719 0560 F8000000 		.long	248
+ 1720 0564 00000000 		.long	0
+ 1721 0568 00000000 		.quad	Buffer
+ 1721      00000000 
+ 1722 0570 10000000 		.long	16
+ 1723 0574 14000000 		.long	20
+ 1724 0578 FFFCFFFF 		.long	-769
+ 1725 057c FFF9FFFF 		.long	-1537
+ 1726 0580 FFFBFFFF 		.long	-1025
+ 1727 0584 00000000 		.zero	4
+ 1728 0588 F8000000 		.long	248
+ 1729 058c 00000000 		.long	0
+GAS LISTING /tmp/ccBFckO5.s 			page 43
+
+
+ 1730 0590 00000000 		.quad	Buffer
+ 1730      00000000 
+ 1731 0598 00040000 		.long	1024
+ 1732 059c 0A000000 		.long	10
+ 1733 05a0 FFFBFFFF 		.long	-1025
+ 1734 05a4 FFFCFFFF 		.long	-769
+ 1735 05a8 FFFBFFFF 		.long	-1025
+ 1736 05ac 00000000 		.zero	4
+ 1737              		.globl	EApiI2CLLValidate
+ 1738 05b0 00000000 		.align 32
+ 1738      00000000 
+ 1738      00000000 
+ 1738      00000000 
+ 1741              	EApiI2CLLValidate:
+ 1742 05c0 F8       		.byte	-8
+ 1743 05c1 00000000 		.zero	7
+ 1743      000000
+ 1744 05c8 00000000 		.quad	0
+ 1744      00000000 
+ 1745 05d0 00000000 		.long	0
+ 1746 05d4 00000000 		.zero	4
+ 1747 05d8 00000000 		.quad	0
+ 1747      00000000 
+ 1748 05e0 00000000 		.long	0
+ 1749 05e4 00000000 		.long	0
+ 1750 05e8 FFFEFFFF 		.long	-257
+ 1751 05ec FFFEFFFF 		.long	-257
+ 1752 05f0 FFFEFFFF 		.long	-257
+ 1753 05f4 00000000 		.zero	4
+ 1754 05f8 F8       		.byte	-8
+ 1755 05f9 00000000 		.zero	7
+ 1755      000000
+ 1756 0600 00000000 		.quad	0
+ 1756      00000000 
+ 1757 0608 0A000000 		.long	10
+ 1758 060c 00000000 		.zero	4
+ 1759 0610 00000000 		.quad	0
+ 1759      00000000 
+ 1760 0618 00000000 		.long	0
+ 1761 061c 00000000 		.long	0
+ 1762 0620 FFFEFFFF 		.long	-257
+ 1763 0624 FFFEFFFF 		.long	-257
+ 1764 0628 FFFEFFFF 		.long	-257
+ 1765 062c 00000000 		.zero	4
+ 1766 0630 F8       		.byte	-8
+ 1767 0631 00000000 		.zero	7
+ 1767      000000
+ 1768 0638 00000000 		.quad	0
+ 1768      00000000 
+ 1769 0640 00000000 		.long	0
+ 1770 0644 00000000 		.zero	4
+ 1771 0648 00000000 		.quad	0
+ 1771      00000000 
+ 1772 0650 0A000000 		.long	10
+ 1773 0654 00000000 		.long	0
+ 1774 0658 FFFEFFFF 		.long	-257
+ 1775 065c FFFEFFFF 		.long	-257
+GAS LISTING /tmp/ccBFckO5.s 			page 44
+
+
+ 1776 0660 FFFEFFFF 		.long	-257
+ 1777 0664 00000000 		.zero	4
+ 1778 0668 F8       		.byte	-8
+ 1779 0669 00000000 		.zero	7
+ 1779      000000
+ 1780 0670 00000000 		.quad	0
+ 1780      00000000 
+ 1781 0678 00000000 		.long	0
+ 1782 067c 00000000 		.zero	4
+ 1783 0680 00000000 		.quad	0
+ 1783      00000000 
+ 1784 0688 00000000 		.long	0
+ 1785 068c 0A000000 		.long	10
+ 1786 0690 FFFEFFFF 		.long	-257
+ 1787 0694 FFFEFFFF 		.long	-257
+ 1788 0698 FFFEFFFF 		.long	-257
+ 1789 069c 00000000 		.zero	4
+ 1790 06a0 F8       		.byte	-8
+ 1791 06a1 00000000 		.zero	7
+ 1791      000000
+ 1792 06a8 00000000 		.quad	0
+ 1792      00000000 
+ 1793 06b0 00000000 		.long	0
+ 1794 06b4 00000000 		.zero	4
+ 1795 06b8 00000000 		.quad	0
+ 1795      00000000 
+ 1796 06c0 00000000 		.long	0
+ 1797 06c4 0A000000 		.long	10
+ 1798 06c8 FFFEFFFF 		.long	-257
+ 1799 06cc FFFEFFFF 		.long	-257
+ 1800 06d0 FFFEFFFF 		.long	-257
+ 1801 06d4 00000000 		.zero	4
+ 1802 06d8 F8       		.byte	-8
+ 1803 06d9 00000000 		.zero	7
+ 1803      000000
+ 1804 06e0 00000000 		.quad	0
+ 1804      00000000 
+ 1805 06e8 00000000 		.long	0
+ 1806 06ec 00000000 		.zero	4
+ 1807 06f0 00000000 		.quad	0
+ 1807      00000000 
+ 1808 06f8 0A000000 		.long	10
+ 1809 06fc 14000000 		.long	20
+ 1810 0700 FFFEFFFF 		.long	-257
+ 1811 0704 FFF9FFFF 		.long	-1537
+ 1812 0708 FFF9FFFF 		.long	-1537
+ 1813 070c 00000000 		.zero	4
+ 1814 0710 F8       		.byte	-8
+ 1815 0711 00000000 		.zero	7
+ 1815      000000
+ 1816 0718 00000000 		.quad	0
+ 1816      00000000 
+ 1817 0720 00000000 		.long	0
+ 1818 0724 00000000 		.zero	4
+ 1819 0728 00000000 		.quad	Buffer
+ 1819      00000000 
+ 1820 0730 0A000000 		.long	10
+GAS LISTING /tmp/ccBFckO5.s 			page 45
+
+
+ 1821 0734 14000000 		.long	20
+ 1822 0738 FFFBFFFF 		.long	-1025
+ 1823 073c FFF9FFFF 		.long	-1537
+ 1824 0740 FFFCFFFF 		.long	-769
+ 1825 0744 00000000 		.zero	4
+ 1826 0748 F8       		.byte	-8
+ 1827 0749 00000000 		.zero	7
+ 1827      000000
+ 1828 0750 00000000 		.quad	Buffer
+ 1828      00000000 
+ 1829 0758 00000000 		.long	0
+ 1830 075c 00000000 		.zero	4
+ 1831 0760 00000000 		.quad	0
+ 1831      00000000 
+ 1832 0768 00000000 		.long	0
+ 1833 076c 00000000 		.long	0
+ 1834 0770 FFFEFFFF 		.long	-257
+ 1835 0774 FFFEFFFF 		.long	-257
+ 1836 0778 FFFEFFFF 		.long	-257
+ 1837 077c 00000000 		.zero	4
+ 1838 0780 F8       		.byte	-8
+ 1839 0781 00000000 		.zero	7
+ 1839      000000
+ 1840 0788 00000000 		.quad	Buffer
+ 1840      00000000 
+ 1841 0790 0A000000 		.long	10
+ 1842 0794 00000000 		.zero	4
+ 1843 0798 00000000 		.quad	0
+ 1843      00000000 
+ 1844 07a0 00000000 		.long	0
+ 1845 07a4 00000000 		.long	0
+ 1846 07a8 FFFBFFFF 		.long	-1025
+ 1847 07ac FFFCFFFF 		.long	-769
+ 1848 07b0 FFFCFFFF 		.long	-769
+ 1849 07b4 00000000 		.zero	4
+ 1850 07b8 F8       		.byte	-8
+ 1851 07b9 00000000 		.zero	7
+ 1851      000000
+ 1852 07c0 00000000 		.quad	0
+ 1852      00000000 
+ 1853 07c8 00000000 		.long	0
+ 1854 07cc 00000000 		.zero	4
+ 1855 07d0 00000000 		.quad	Buffer
+ 1855      00000000 
+ 1856 07d8 00040000 		.long	1024
+ 1857 07dc 0A000000 		.long	10
+ 1858 07e0 FFFBFFFF 		.long	-1025
+ 1859 07e4 FFFCFFFF 		.long	-769
+ 1860 07e8 FFFCFFFF 		.long	-769
+ 1861 07ec 00000000 		.zero	4
+ 1862              		.globl	EApiValues
+ 1863              		.section	.rodata.str1.1
+ 1864              	.LC68:
+ 1865 030d 45417069 		.string	"EApi Spec Version"
+ 1865      20537065 
+ 1865      63205665 
+ 1865      7273696F 
+GAS LISTING /tmp/ccBFckO5.s 			page 46
+
+
+ 1865      6E00
+ 1866              	.LC69:
+ 1867 031f 426F6F74 		.string	"Boot Counter"
+ 1867      20436F75 
+ 1867      6E746572 
+ 1867      00
+ 1868              	.LC70:
+ 1869 032c 52756E6E 		.string	"Running Time Meter"
+ 1869      696E6720 
+ 1869      54696D65 
+ 1869      204D6574 
+ 1869      657200
+ 1870              	.LC71:
+ 1871 033f 4D616E75 		.string	"Manufacturer PNP ID"
+ 1871      66616374 
+ 1871      75726572 
+ 1871      20504E50 
+ 1871      20494400 
+ 1872              	.LC72:
+ 1873 0353 506C6174 		.string	"Platform Revision"
+ 1873      666F726D 
+ 1873      20526576 
+ 1873      6973696F 
+ 1873      6E00
+ 1874              	.LC73:
+ 1875 0365 43505520 		.string	"CPU Temperature"
+ 1875      54656D70 
+ 1875      65726174 
+ 1875      75726500 
+ 1876              	.LC74:
+ 1877 0375 43686970 		.string	"Chipset Temperature"
+ 1877      73657420 
+ 1877      54656D70 
+ 1877      65726174 
+ 1877      75726500 
+ 1878              	.LC75:
+ 1879 0389 53797374 		.string	"System Temperature"
+ 1879      656D2054 
+ 1879      656D7065 
+ 1879      72617475 
+ 1879      726500
+ 1880              	.LC76:
+ 1881 039c 43707520 		.string	"Cpu Fan"
+ 1881      46616E00 
+ 1882              	.LC77:
+ 1883 03a4 53797374 		.string	"System Fan"
+ 1883      656D2046 
+ 1883      616E00
+ 1884              	.LC78:
+ 1885 03af 56434F52 		.string	"VCORE"
+ 1885      4500
+ 1886              	.LC79:
+ 1887 03b5 322E3556 		.string	"2.5V"
+ 1887      00
+ 1888              	.LC80:
+ 1889 03ba 332E3356 		.string	"3.3V"
+ 1889      00
+GAS LISTING /tmp/ccBFckO5.s 			page 47
+
+
+ 1890              	.LC81:
+ 1891 03bf 56424154 		.string	"VBAT"
+ 1891      00
+ 1892              	.LC82:
+ 1893 03c4 355600   		.string	"5V"
+ 1894              	.LC83:
+ 1895 03c7 35565342 		.string	"5VSB"
+ 1895      00
+ 1896              	.LC84:
+ 1897 03cc 31325600 		.string	"12V"
+ 1898              		.section	.rodata
+ 1899 07f0 00000000 		.align 32
+ 1899      00000000 
+ 1899      00000000 
+ 1899      00000000 
+ 1902              	EApiValues:
+ 1903 0800 00000000 		.long	0
+ 1904 0804 00000000 		.zero	4
+ 1905 0808 00000000 		.quad	.LC68
+ 1905      00000000 
+ 1906 0810 00000000 		.quad	EApiAHCreateSVersionString
+ 1906      00000000 
+ 1907 0818 01000000 		.long	1
+ 1908 081c 00000000 		.zero	4
+ 1909 0820 00000000 		.quad	.LC69
+ 1909      00000000 
+ 1910 0828 00000000 		.quad	EApiAHCreateDecimalString
+ 1910      00000000 
+ 1911 0830 02000000 		.long	2
+ 1912 0834 00000000 		.zero	4
+ 1913 0838 00000000 		.quad	.LC70
+ 1913      00000000 
+ 1914 0840 00000000 		.quad	EApiAHCreateTimeString
+ 1914      00000000 
+ 1915 0848 03000000 		.long	3
+ 1916 084c 00000000 		.zero	4
+ 1917 0850 00000000 		.quad	.LC71
+ 1917      00000000 
+ 1918 0858 00000000 		.quad	EApiAHCreatePNPIDString
+ 1918      00000000 
+ 1919 0860 04000000 		.long	4
+ 1920 0864 00000000 		.zero	4
+ 1921 0868 00000000 		.quad	.LC72
+ 1921      00000000 
+ 1922 0870 00000000 		.quad	EApiAHCreateSVersionString
+ 1922      00000000 
+ 1923 0878 00000200 		.long	131072
+ 1924 087c 00000000 		.zero	4
+ 1925 0880 00000000 		.quad	.LC73
+ 1925      00000000 
+ 1926 0888 00000000 		.quad	EApiAHCreateTempString
+ 1926      00000000 
+ 1927 0890 01000200 		.long	131073
+ 1928 0894 00000000 		.zero	4
+ 1929 0898 00000000 		.quad	.LC74
+ 1929      00000000 
+ 1930 08a0 00000000 		.quad	EApiAHCreateTempString
+GAS LISTING /tmp/ccBFckO5.s 			page 48
+
+
+ 1930      00000000 
+ 1931 08a8 02000200 		.long	131074
+ 1932 08ac 00000000 		.zero	4
+ 1933 08b0 00000000 		.quad	.LC75
+ 1933      00000000 
+ 1934 08b8 00000000 		.quad	EApiAHCreateTempString
+ 1934      00000000 
+ 1935 08c0 00200200 		.long	139264
+ 1936 08c4 00000000 		.zero	4
+ 1937 08c8 00000000 		.quad	.LC76
+ 1937      00000000 
+ 1938 08d0 00000000 		.quad	EApiAHCreateRotationsString
+ 1938      00000000 
+ 1939 08d8 01200200 		.long	139265
+ 1940 08dc 00000000 		.zero	4
+ 1941 08e0 00000000 		.quad	.LC77
+ 1941      00000000 
+ 1942 08e8 00000000 		.quad	EApiAHCreateRotationsString
+ 1942      00000000 
+ 1943 08f0 04100200 		.long	135172
+ 1944 08f4 00000000 		.zero	4
+ 1945 08f8 00000000 		.quad	.LC78
+ 1945      00000000 
+ 1946 0900 00000000 		.quad	EApiAHCreateVoltageString
+ 1946      00000000 
+ 1947 0908 08100200 		.long	135176
+ 1948 090c 00000000 		.zero	4
+ 1949 0910 00000000 		.quad	.LC79
+ 1949      00000000 
+ 1950 0918 00000000 		.quad	EApiAHCreateVoltageString
+ 1950      00000000 
+ 1951 0920 0C100200 		.long	135180
+ 1952 0924 00000000 		.zero	4
+ 1953 0928 00000000 		.quad	.LC80
+ 1953      00000000 
+ 1954 0930 00000000 		.quad	EApiAHCreateVoltageString
+ 1954      00000000 
+ 1955 0938 10100200 		.long	135184
+ 1956 093c 00000000 		.zero	4
+ 1957 0940 00000000 		.quad	.LC81
+ 1957      00000000 
+ 1958 0948 00000000 		.quad	EApiAHCreateVoltageString
+ 1958      00000000 
+ 1959 0950 14100200 		.long	135188
+ 1960 0954 00000000 		.zero	4
+ 1961 0958 00000000 		.quad	.LC82
+ 1961      00000000 
+ 1962 0960 00000000 		.quad	EApiAHCreateVoltageString
+ 1962      00000000 
+ 1963 0968 18100200 		.long	135192
+ 1964 096c 00000000 		.zero	4
+ 1965 0970 00000000 		.quad	.LC83
+ 1965      00000000 
+ 1966 0978 00000000 		.quad	EApiAHCreateVoltageString
+ 1966      00000000 
+ 1967 0980 1C100200 		.long	135196
+ 1968 0984 00000000 		.zero	4
+GAS LISTING /tmp/ccBFckO5.s 			page 49
+
+
+ 1969 0988 00000000 		.quad	.LC84
+ 1969      00000000 
+ 1970 0990 00000000 		.quad	EApiAHCreateVoltageString
+ 1970      00000000 
+ 1971              		.globl	EApiStrings
+ 1972              		.section	.rodata.str1.1
+ 1973              	.LC85:
+ 1974 03d0 4D616E75 		.string	"Manufacturer"
+ 1974      66616374 
+ 1974      75726572 
+ 1974      00
+ 1975              	.LC86:
+ 1976 03dd 426F6172 		.string	"Board Name"
+ 1976      64204E61 
+ 1976      6D6500
+ 1977              	.LC87:
+ 1978 03e8 426F6172 		.string	"Board Serial Number"
+ 1978      64205365 
+ 1978      7269616C 
+ 1978      204E756D 
+ 1978      62657200 
+ 1979              	.LC88:
+ 1980 03fc 42696F73 		.string	"Bios Revision"
+ 1980      20526576 
+ 1980      6973696F 
+ 1980      6E00
+ 1981              	.LC89:
+ 1982 040a 506C6174 		.string	"Platform Type"
+ 1982      666F726D 
+ 1982      20547970 
+ 1982      6500
+ 1983              	.LC90:
+ 1984 0418 48572052 		.string	"HW Revision"
+ 1984      65766973 
+ 1984      696F6E00 
+ 1985              	.LC91:
+ 1986 0424 426F6172 		.string	"Board Revision"
+ 1986      64205265 
+ 1986      76697369 
+ 1986      6F6E00
+ 1987              	.LC92:
+ 1988 0433 4D616E75 		.string	"Manufacturing Date"
+ 1988      66616374 
+ 1988      7572696E 
+ 1988      67204461 
+ 1988      746500
+ 1989              		.section	.rodata
+ 1990 0998 00000000 		.align 32
+ 1990      00000000 
+ 1993              	EApiStrings:
+ 1994 09a0 00000000 		.long	0
+ 1995 09a4 00000000 		.zero	4
+ 1996 09a8 00000000 		.quad	.LC85
+ 1996      00000000 
+ 1997 09b0 01000000 		.long	1
+ 1998 09b4 00000000 		.zero	4
+ 1999 09b8 00000000 		.quad	.LC86
+GAS LISTING /tmp/ccBFckO5.s 			page 50
+
+
+ 1999      00000000 
+ 2000 09c0 03000000 		.long	3
+ 2001 09c4 00000000 		.zero	4
+ 2002 09c8 00000000 		.quad	.LC87
+ 2002      00000000 
+ 2003 09d0 04000000 		.long	4
+ 2004 09d4 00000000 		.zero	4
+ 2005 09d8 00000000 		.quad	.LC88
+ 2005      00000000 
+ 2006 09e0 06000000 		.long	6
+ 2007 09e4 00000000 		.zero	4
+ 2008 09e8 00000000 		.quad	.LC89
+ 2008      00000000 
+ 2009 09f0 05000000 		.long	5
+ 2010 09f4 00000000 		.zero	4
+ 2011 09f8 00000000 		.quad	.LC90
+ 2011      00000000 
+ 2012 0a00 02000000 		.long	2
+ 2013 0a04 00000000 		.zero	4
+ 2014 0a08 00000000 		.quad	.LC91
+ 2014      00000000 
+ 2015 0a10 0010F1FA 		.long	-84865024
+ 2016 0a14 00000000 		.zero	4
+ 2017 0a18 00000000 		.quad	.LC92
+ 2017      00000000 
+ 2018              		.globl	FailPass
+ 2019              		.section	.rodata.str1.1
+ 2020              	.LC93:
+ 2021 0446 4641494C 		.string	"FAIL"
+ 2021      00
+ 2022              	.LC94:
+ 2023 044b 50415353 		.string	"PASS"
+ 2023      00
+ 2024              		.data
+ 2025              		.align 16
+ 2028              	FailPass:
+ 2029 0000 00000000 		.quad	.LC93
+ 2029      00000000 
+ 2030 0008 00000000 		.quad	.LC94
+ 2030      00000000 
+ 2031              		.globl	BufPtrLen
+ 2032              		.align 4
+ 2035              	BufPtrLen:
+ 2036 0010 00040000 		.long	1024
+ 2037              		.globl	Buffer
+ 2038              		.bss
+ 2039 0004 00000000 		.align 32
+ 2039      00000000 
+ 2039      00000000 
+ 2039      00000000 
+ 2039      00000000 
+ 2042              	Buffer:
+ 2043 0020 00000000 		.zero	1024
+ 2043      00000000 
+ 2043      00000000 
+ 2043      00000000 
+ 2043      00000000 
+GAS LISTING /tmp/ccBFckO5.s 			page 51
+
+
+ 2044              		.comm	LogStream,8,8
+ 2045              		.section	.rodata.cst16,"aM",@progbits,16
+ 2046              		.align 16
+ 2047              	.LC8:
+ 2048 0000 00       		.byte	0
+ 2049 0001 33       		.byte	51
+ 2050 0002 50       		.byte	80
+ 2051 0003 10       		.byte	16
+ 2052 0004 09       		.byte	9
+ 2053 0005 74       		.byte	116
+ 2054 0006 63       		.byte	99
+ 2055 0007 6F       		.byte	111
+ 2056 0008 4D       		.byte	77
+ 2057 0009 30       		.byte	48
+ 2058 000a 11       		.byte	17
+ 2059 000b AF       		.byte	-81
+ 2060 000c 00       		.byte	0
+ 2061 000d 00       		.byte	0
+ 2062 000e 00       		.byte	0
+ 2063 000f 01       		.byte	1
+ 2064              		.align 16
+ 2065              	.LC9:
+ 2066 0010 06       		.byte	6
+ 2067 0011 21       		.byte	33
+ 2068 0012 D0       		.byte	-48
+ 2069 0013 00       		.byte	0
+ 2070 0014 20       		.byte	32
+ 2071 0015 02       		.byte	2
+ 2072 0016 0F       		.byte	15
+ 2073 0017 E0       		.byte	-32
+ 2074 0018 00       		.byte	0
+ 2075 0019 01       		.byte	1
+ 2076 001a 02       		.byte	2
+ 2077 001b 03       		.byte	3
+ 2078 001c 04       		.byte	4
+ 2079 001d 00       		.byte	0
+ 2080 001e 08       		.byte	8
+ 2081 001f 00       		.byte	0
+ 2082              		.ident	"GCC: (Ubuntu 5.2.1-22ubuntu2) 5.2.1 20151010"
+ 2083              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccBFckO5.s 			page 52
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 EApiValidateAPI.c
+     /tmp/ccBFckO5.s:16     .text:0000000000000000 EApiValidateStringApi
+     /tmp/ccBFckO5.s:1993   .rodata:00000000000009a0 EApiStrings
+     /tmp/ccBFckO5.s:95     .text:00000000000000d0 EApiValidateValuesApi
+     /tmp/ccBFckO5.s:1902   .rodata:0000000000000800 EApiValues
+     /tmp/ccBFckO5.s:176    .text:0000000000000190 EApiValidateI2CApi
+     /tmp/ccBFckO5.s:377    .text:00000000000003f0 siFFormattedMessage_SC.constprop.0
+     /tmp/ccBFckO5.s:500    .text:0000000000000530 EApiValidateStorageApi
+     /tmp/ccBFckO5.s:1552   .rodata:0000000000000320 EApiStorageDevices
+     /tmp/ccBFckO5.s:1597   .rodata:00000000000003c0 I2CDevices
+     /tmp/ccBFckO5.s:1487   .rodata:0000000000000220 StorageValidate
+                            *COM*:0000000000000008 LogStream
+     /tmp/ccBFckO5.s:2028   .data:0000000000000000 FailPass
+     /tmp/ccBFckO5.s:1456   .rodata:00000000000001a0 StorageCapValidate
+     /tmp/ccBFckO5.s:819    .text:00000000000008b0 EApiValidateGPIOApi
+     /tmp/ccBFckO5.s:1384   .rodata:0000000000000060 EApiGpioDevices
+     /tmp/ccBFckO5.s:1425   .rodata:0000000000000120 EApiGpioterfaceValidate
+     /tmp/ccBFckO5.s:1066   .text:0000000000000bc0 siFFormattedMessage_SC
+     /tmp/ccBFckO5.s:1183   .text:0000000000000d10 printHex
+     /tmp/ccBFckO5.s:1261   .text.startup:0000000000000000 main
+     /tmp/ccBFckO5.s:1343   .rodata:0000000000000000 TestFunctions
+                            *COM*:0000000000000004 GpioInputs
+                            *COM*:0000000000000004 GpioOutputs
+                            *COM*:0000000000000004 StorageSize
+                            *COM*:0000000000000004 BlockLength
+     /tmp/ccBFckO5.s:2042   .bss:0000000000000020 Buffer
+     /tmp/ccBFckO5.s:1580   .rodata:0000000000000380 EApiI2CBuses
+     /tmp/ccBFckO5.s:1627   .rodata:0000000000000400 EApiI2CInterfaceValidate
+     /tmp/ccBFckO5.s:1643   .bss:0000000000000000 I2CMaxClk
+     /tmp/ccBFckO5.s:1650   .rodata:0000000000000440 EApiI2CHLWriteValidate
+     /tmp/ccBFckO5.s:1682   .rodata:00000000000004c0 EApiI2CHLReadValidate
+     /tmp/ccBFckO5.s:1741   .rodata:00000000000005c0 EApiI2CLLValidate
+     /tmp/ccBFckO5.s:2035   .data:0000000000000010 BufPtrLen
+     /tmp/ccBFckO5.s:2047   .rodata.cst16:0000000000000000 .LC8
+     /tmp/ccBFckO5.s:2065   .rodata.cst16:0000000000000010 .LC9
+
+UNDEFINED SYMBOLS
+malloc
+putchar
+__printf_chk
+EApiBoardGetStringA
+free
+__stack_chk_fail
+EApiBoardGetValue
+EApiAHCreateErrorString
+EApiI2CReadTransfer
+puts
+sleep
+EApiI2CWriteTransfer
+EApiGetErrorStringA
+__fprintf_chk
+__vfprintf_chk
+EApiStorageAreaRead
+stdout
+EApiAHWriteStorage
+EApiStorageAreaWrite
+GAS LISTING /tmp/ccBFckO5.s 			page 53
+
+
+EApiStorageCap
+EApiGPIOGetDirectionCaps
+EApiGPIOGetDirection
+EApiGPIOGetLevel
+EApiGPIOSetDirection
+EApiGPIOSetLevel
+fopen
+EApiLibInitialize
+exit
+stderr
+EApiAHCreateSVersionString
+EApiAHCreateDecimalString
+EApiAHCreateTimeString
+EApiAHCreatePNPIDString
+EApiAHCreateTempString
+EApiAHCreateRotationsString
+EApiAHCreateVoltageString
