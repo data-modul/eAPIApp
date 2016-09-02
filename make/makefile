@@ -2,9 +2,9 @@
 #+=========================================================================
 #I  Project Name: EApiDK Embedded Application Development Kit
 #+=========================================================================
-#I  $HeadURL: http://svn.code.sf.net/p/eapidk/code/trunk/apps/EeePProg/linux/makefile $
+#I  $HeadURL: http://svn.code.sf.net/p/eapidk/code/trunk/apps/EApiValidateAPI/linux/makefile $
 #+=========================================================================
-#I   Copyright: Copyright (c) 2002-2010, Kontron Embedded Modules GmbH
+#I   Copyright: Copyright (c) 2002-2009, Kontron Embedded Modules GmbH
 #I      Author: John Kearney,                  John.Kearney@kontron.com
 #I
 #I     License: All rights reserved. This program and the accompanying 
@@ -23,11 +23,11 @@
 #+-------------------------------------------------------------------------
 #I
 #I  File Name            : makefile
-#I  File Location        : apps\EeePProg\linux
-#I  Last committed       : $Revision: 75 $
+#I  File Location        : apps\EApiValidateAPI\linux
+#I  Last committed       : $Revision: 58 $
 #I  Last changed by      : $Author: dethrophes $
-#I  Last changed date    : $Date: 2010-06-29 01:50:38 +0200 (Tue, 29 Jun 2010) $
-#I  ID                   : $Id: makefile 75 2010-06-28 23:50:38Z dethrophes $
+#I  Last changed date    : $Date: 2010-02-02 09:54:31 +0100 (Tue, 02 Feb 2010) $
+#I  ID                   : $Id: makefile 58 2010-02-02 08:54:31Z dethrophes $
 #I
 #+=========================================================================
 #</KHeader>
@@ -52,24 +52,22 @@ AR = ar
 RANLIB = ranlib
 ARFLAGS = -ruv
 
-BinFolder=../../bin/$(ARCH)/$(MACH)/rel
-DBinFolder=../../bin/$(ARCH)/$(MACH)/dbg
+BinFolder=./bin/$(ARCH)/$(MACH)/rel
+DBinFolder=./bin/$(ARCH)/$(MACH)/dbg
 BuildDir=./build/$(MACH)/rel
 DBuildDir=./build/$(MACH)/dbg
-PrgFldr=$(join $(shell pwd)/, ..)
-CmnFldr=$(join $(shell pwd)/, ../../common)
-EAPI_INC=$(join $(shell pwd)/, ../../../include/EApi.h)
-GET_VAR_FROM_CFILE=$(shell grep "$(2)" $(1) |sed -rn "s/^\#\s*define\s+$2\s+([0-9]+).*/\1/p")
-EAPI_VERSION=$(call GET_VAR_FROM_CFILE,$(EAPI_INC),EAPI_VER)
-EAPI_REVISION=$(call GET_VAR_FROM_CFILE,$(EAPI_INC),EAPI_REVISION)
+PrgFldr=$(join $(shell pwd)/,../EApiValidateAPI)
+CmnFldr=$(join $(shell pwd)/,../common)
 
+EAPI_VERSION:=1
+EAPI_REVISION:=0
 LibName:=EApi
 VPNPID:=PMG
 LibFName:=$(LibName).$(EAPI_VERSION).$(EAPI_REVISION).o
 SoName:=lib$(LibName).so.$(EAPI_VERSION)
 SoFName:=lib$(LibName)$(VPNPID).so.$(EAPI_VERSION).$(EAPI_REVISION)
 StaticLibFName:=$(LibName).a
-ExeName=EeePProg
+ExeName=EApiValidateAPI
 
 #DBGOPT:=-gxcoff3
 #DBGOPT:=-gxcoff+
@@ -78,24 +76,27 @@ ExeName=EeePProg
 #DBGOPT:=-g3
 #DBGOPT:=-gstabs
 #DBGOPT:=-gstabs+
-DBGOPT:=-g -O0 
+DBGOPT:=-g -O0
 RELOPT:=-O3
-INCLUDS=-I../../../include/linux -I../ -I../../include -I../../../include 
-CFLAGS:= -std=gnu99 -Wall -W -Werror -pedantic $(INCLUDS)
+INCLUDS=-I../include
+CFLAGS:= -Wall -W -pedantic $(INCLUDS)
+LDFLAGS:=/usr/local/lib/
+$(info Library Directory is $(LDFLAGS). For changing please set LDFLAGS variable)
+
 
 define FLD_BUILD_RULE
 @mkdir -p $(@)
 endef
 
 define PRG_BUILD_RULE
-gcc -v $(CFLAGS) $(1) -L. -ldl -o $(@) -Wl,-Map,$(basename $(@)).map $^
+gcc -v $(CFLAGS) $(1) -L -ldl -o $(@) -Wl,-Map,$(basename $(@)).map $^
 objcopy --only-keep-debug  "$(@)" "$(@).debug" 
 strip --strip-debug --strip-unneeded "$(@)"
 objcopy --add-gnu-debuglink="$(@).debug" "$(@)"
 endef
 
 define C_BUILD_RULE
-$(CC) $(CFLAGS) $(1) -x c -c -g -Wa,-a,-ad -o  $(@) $< > $(basename $(@)).lst
+$(CC) $(CFLAGS) $(1) -x c -c -Wa,-a,-ad -o  $(@) $< > $(basename $(@)).lst
 $(CC) $(CFLAGS) $(1) -x c -S -o  $(basename $(@)).s $<
 endef
 
@@ -113,22 +114,12 @@ endef
 define REMOVE_BIN_FILES
 @rm -f $(1)
 @rm -f $(basename $(1)).map
-@rm -f $(basename $(1)).debug
 endef
 
 OBJECTS=$(ExeName).o \
       EApiAHI2C.o \
       EApiAHStorage.o \
-      EApiAHStr.o  \
-	ArgParse.o \
-	BinFuncs.o \
-	CfgParser.o \
-	CfgPHelper.o \
-	EeePCfg.o \
-	EeePDB.o \
-	StrFuncs.o TokenFunc.o RangeFunc.o DbgChk.o Str2Value.o StrPrint.o
-      
-      
+      EApiAHStr.o DbgChk.o
 
 DefaultTgt: buildall
 
@@ -162,10 +153,12 @@ $(DBinFolder):
 $(DBuildDir):
 	$(FLD_BUILD_RULE)
 
-$(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(DBinFolder)/$(SoFName)
+#$(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(DBinFolder)/$(SoFName)
+$(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(LDFLAGS)/$(SoFName)
 	$(call PRG_BUILD_RULE,$(DBGOPT))
 
-$(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(BinFolder)/$(SoFName)
+#$(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(BinFolder)/$(SoFName)
+$(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(LDFLAGS)/$(SoFName)
 	$(call PRG_BUILD_RULE,$(RELOPT))
 
 $(DBuildDir)/%.o:$(CmnFldr)/%.c
