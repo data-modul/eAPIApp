@@ -412,7 +412,7 @@ void EApiValidateI2CApi (void)
         printf("\n");
     }
     else
-        printf("Reyyyy in ke error e \n");
+        printf("It is an error\n");
 
     //____________________________________________
 
@@ -435,7 +435,7 @@ void EApiValidateI2CApi (void)
             printf("\n");
         }
         else
-            printf("Reyyyy in ke error e \n");
+            printf("It is an error.\n");
     }
 
     //____________________________________________
@@ -454,9 +454,9 @@ void EApiValidateI2CApi (void)
                     1
                     );
         if(EAPI_TEST_SUCCESS(StatusCode))
-            printf("Reyyyy that is wunderbar\n");
+            printf("successfull\n");
         else
-            printf("Reyyyy that is an error\n");
+            printf("It is an error\n");
 
         sleep(5);
     }
@@ -513,9 +513,9 @@ void EApiValidateI2CApi (void)
                     1
                     );
         if(EAPI_TEST_SUCCESS(StatusCode))
-            printf("Reyyyy that is wunderbar\n");
+            printf("successfull\n");
         else
-            printf("Reyyyy that is an error\n");
+            printf("Error\n");
         sleep(1);
 
     }

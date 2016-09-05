@@ -80,8 +80,8 @@ DBGOPT:=-g -O0
 RELOPT:=-O3
 INCLUDS=-I../include
 CFLAGS:= -Wall -W -pedantic $(INCLUDS)
-LDFLAGS:=/usr/local/lib/
-$(info Library Directory is $(LDFLAGS). For changing please set LDFLAGS variable)
+PREFIX:=/usr/local/lib/
+$(info Library Directory is $(PREFIX). For changing please set PREFIX variable)
 
 
 define FLD_BUILD_RULE
@@ -154,11 +154,11 @@ $(DBuildDir):
 	$(FLD_BUILD_RULE)
 
 #$(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(DBinFolder)/$(SoFName)
-$(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(LDFLAGS)/$(SoFName)
+$(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(PREFIX)/$(SoFName)
 	$(call PRG_BUILD_RULE,$(DBGOPT))
 
 #$(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(BinFolder)/$(SoFName)
-$(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(LDFLAGS)/$(SoFName)
+$(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(PREFIX)/$(SoFName)
 	$(call PRG_BUILD_RULE,$(RELOPT))
 
 $(DBuildDir)/%.o:$(CmnFldr)/%.c
