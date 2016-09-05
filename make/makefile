@@ -62,10 +62,9 @@ CmnFldr=$(join $(shell pwd)/,../common)
 EAPI_VERSION:=1
 EAPI_REVISION:=0
 LibName:=EApi
-VPNPID:=PMG
 LibFName:=$(LibName).$(EAPI_VERSION).$(EAPI_REVISION).o
 SoName:=lib$(LibName).so.$(EAPI_VERSION)
-SoFName:=lib$(LibName)$(VPNPID).so.$(EAPI_VERSION).$(EAPI_REVISION)
+SoFName:=lib$(LibName).so.$(EAPI_VERSION).$(EAPI_REVISION)
 StaticLibFName:=$(LibName).a
 ExeName=EApiValidateAPI
 
@@ -79,7 +78,7 @@ ExeName=EApiValidateAPI
 DBGOPT:=-g -O0
 RELOPT:=-O3
 INCLUDS=-I../include
-CFLAGS:= -Wall -W -pedantic $(INCLUDS)
+CFLAGS:= -Wall -W -pedantic $(INCLUDS) -std=c99
 PREFIX:=/usr/local/lib/
 $(info Library Directory is $(PREFIX). For changing please set PREFIX variable)
 
@@ -153,11 +152,9 @@ $(DBinFolder):
 $(DBuildDir):
 	$(FLD_BUILD_RULE)
 
-#$(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(DBinFolder)/$(SoFName)
 $(DBinFolder)/$(ExeName): $(addprefix $(DBuildDir)/,$(OBJECTS)) $(PREFIX)/$(SoFName)
 	$(call PRG_BUILD_RULE,$(DBGOPT))
 
-#$(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(BinFolder)/$(SoFName)
 $(BinFolder)/$(ExeName):  $(addprefix $(BuildDir)/,$(OBJECTS))  $(PREFIX)/$(SoFName)
 	$(call PRG_BUILD_RULE,$(RELOPT))
 
