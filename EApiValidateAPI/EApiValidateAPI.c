@@ -41,7 +41,6 @@ typedef void EApiValidateTestFunction(void);
 #define DESTRUCTIVE_ALLOWED 1
 
 
-
 /*  */
 FILE *LogStream;
 
@@ -389,7 +388,7 @@ void EApiValidateI2CApi (void)
 
     uint8_t prBuffer1[64];
     StatusCode=EApiI2CReadTransfer(
-                11,
+                10,
                 0x50,
                 EAPI_I2C_ENC_EXT_CMD(0x00),
                 prBuffer1,
@@ -420,7 +419,7 @@ void EApiValidateI2CApi (void)
     uint8_t prBuffer2[1];
     for(int j =0 ; j < 8; j++){
         StatusCode=EApiI2CReadTransfer(
-                    11,
+                    10,
                     0x27,
                     EAPI_I2C_ENC_STD_CMD(j),
                     prBuffer2,
@@ -437,7 +436,7 @@ void EApiValidateI2CApi (void)
         else
             printf("It is an error.\n");
     }
-
+return;
     //____________________________________________
 
     uint8_t pBuffer3[10];
@@ -994,7 +993,7 @@ main(void)
     TestFunctions[1].TestHandler();
     TestFunctions[2].TestHandler();
 
-    if(!EAPI_TEST_SUCCESS(EApiLibInitialize()))
+    if(!EAPI_TEST_SUCCESS(EApiLibUnInitialize()))
     {
         exit(PRG_RETURN_LIB_UNINIT_ERROR);
     }
