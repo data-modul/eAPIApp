@@ -417,6 +417,8 @@ void EApiValidateI2CApi (void)
 
 
     uint8_t prBuffer2[1];
+        uint8_t prBuffer22[8];
+
     for(int j =0 ; j < 8; j++){
         StatusCode=EApiI2CReadTransfer(
                     10,
@@ -436,7 +438,26 @@ void EApiValidateI2CApi (void)
         else
             printf("It is an error.\n");
     }
-return;
+
+//    StatusCode=EApiI2CReadTransfer(
+//                10,
+//                0x27,
+//                EAPI_I2C_ENC_STD_CMD(0),
+//                prBuffer22,
+//                8,
+//                8
+//                );
+//    if(EAPI_TEST_SUCCESS(StatusCode))
+//    {
+//        for (int i =0 ; i < 8 ; i++)
+//            printf("%x  ",prBuffer22[i]);
+
+//        printf("\n");
+//    }
+//    else
+//        printf("It is an error.\n");
+
+
     //____________________________________________
 
     uint8_t pBuffer3[10];
@@ -457,9 +478,9 @@ return;
         else
             printf("It is an error\n");
 
-        sleep(5);
+        sleep(1);
     }
-
+return;
     //____________________________________________
 
     uint8_t pBuffer4[32];
@@ -991,7 +1012,8 @@ main(void)
 
     TestFunctions[0].TestHandler();
     TestFunctions[1].TestHandler();
-    TestFunctions[2].TestHandler();
+   TestFunctions[2].TestHandler();
+
 
     if(!EAPI_TEST_SUCCESS(EApiLibUnInitialize()))
     {
