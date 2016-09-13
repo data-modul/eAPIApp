@@ -79,7 +79,9 @@ DBGOPT:=-g -O0
 RELOPT:=-O3
 INCLUDS=-I../include
 CFLAGS:= -Wall -W -pedantic $(INCLUDS) -std=c99
-PREFIX:=/usr/local/lib/
+ifeq (,$(PREFIX))
+	PREFIX=/usr/local/lib
+endif
 $(info Library Directory is $(PREFIX). For changing please set PREFIX variable)
 
 
