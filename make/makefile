@@ -67,7 +67,9 @@ SoName:=lib$(LibName).so.$(EAPI_VERSION)
 SoFName:=lib$(LibName).so.$(EAPI_VERSION).$(EAPI_REVISION)
 StaticLibFName:=$(LibName).a
 ExeName=EApiValidateAPI
-
+ifneq (,$(EAPI_INC_PATH))
+	EAPIHEADER=-I$(EAPI_INC_PATH)
+endif
 #DBGOPT:=-gxcoff3
 #DBGOPT:=-gxcoff+
 #DBGOPT:=-gcoff3
@@ -77,7 +79,7 @@ ExeName=EApiValidateAPI
 #DBGOPT:=-gstabs+
 DBGOPT:=-g -O0
 RELOPT:=-O3
-INCLUDS=-I../include
+INCLUDS=-I../include $(EAPIHEADER)
 CFLAGS:= -Wall -W -pedantic $(INCLUDS) -std=c99
 ifeq (,$(PREFIX))
 	PREFIX=/usr/local/lib
