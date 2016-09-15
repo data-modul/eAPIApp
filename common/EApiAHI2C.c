@@ -278,7 +278,7 @@ EApiAHI2CWriteEeprom(
           Id, 
           (uint32_t)EncAddr, 
           (uint32_t)EncOffset, 
-          ((int8_t *)pBuffer)+(CurOffset-ByteOffset), 
+          ((uint8_t *)pBuffer)+(CurOffset-ByteOffset),
           (uint32_t)BlockLength
           );
       if(!EAPI_TEST_SUCCESS(StatusCode))
@@ -383,7 +383,7 @@ EApiAHI2CReadEeprom(
           Id, 
           (uint32_t)EncAddr, 
           (uint32_t)EncOffset, 
-          ((int8_t *)pBuffer)+(CurOffset-ByteOffset), 
+          ((uint8_t *)pBuffer)+(CurOffset-ByteOffset),
           (uint32_t)BlockLength, 
           (uint32_t)BlockLength
           );
