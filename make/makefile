@@ -93,6 +93,7 @@ endef
 
 define PRG_BUILD_RULE
 gcc -v $(CFLAGS) $(1) -L -ldl -o $(@) -Wl,-Map,$(basename $(@)).map $^
+cp "$(@)" "$(@)".nonstripped
 objcopy --only-keep-debug  "$(@)" "$(@).debug" 
 strip --strip-debug --strip-unneeded "$(@)"
 objcopy --add-gnu-debuglink="$(@).debug" "$(@)"
