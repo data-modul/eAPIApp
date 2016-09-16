@@ -394,7 +394,8 @@ void EApiValidateI2CApi (void)
     FILE *file;
     int j =0;
     file = fopen("eeprom.bak","r");
-
+if (file != NULL)
+{
     outvalue = fgetc(file);
     while ( !feof(file) && (j < 208))
     {
@@ -415,6 +416,7 @@ void EApiValidateI2CApi (void)
         outvalue = fgetc(file);
     }
     fclose(file);
+}
     //********************************
 
     uint8_t prBuffer1[208];
