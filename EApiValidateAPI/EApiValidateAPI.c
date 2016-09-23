@@ -260,7 +260,7 @@ void printHex(
 }
 void EApiValidateI2CApi (void)
 {
-    EApiStatus_t StatusCode;
+    EApiStatus_t StatusCode = EAPI_STATUS_SUCCESS;
 
     //_________ simulate ___________________________________
 
@@ -300,7 +300,7 @@ void EApiValidateI2CApi (void)
 
     //____________ i2c ________________________________
 
-    uint8_t prBuffer2[8];
+    uint8_t prBuffer2[8]= {0};
 
     StatusCode=EApiI2CReadTransfer(
                 I2CBUS,
@@ -407,7 +407,7 @@ if (file != NULL)
                     1
                     );
         if(EAPI_TEST_SUCCESS(StatusCode))
-            printf("successfull\n");
+            printf("successfull %d\n",j);
         else
             printf("Error\n");
         sleep(1);

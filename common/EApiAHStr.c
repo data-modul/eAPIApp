@@ -331,8 +331,9 @@ EApiAHCreateTimeString(
       StrLength+=EApiSprintf(&pString[StrLength], StrBufLen-StrLength, TEXT("%")TEXT(PRIu32)TEXT(" Years "), Value/365/24/60   );
     if(StrLength||((Value/24/60)%365))
       StrLength+=EApiSprintf(&pString[StrLength], StrBufLen-StrLength, TEXT("%")TEXT(PRIu32)TEXT(" Days " ), (Value/24/60)%365 );
-    if(StrLength||((Value/60)%24))
+    if(StrLength||((Value/60)%24)){
       StrLength+=EApiSprintf(&pString[StrLength], StrBufLen-StrLength, TEXT("%")TEXT(PRIu32)TEXT(" Hours "), (Value/60)%24     );
+    }
       StrLength+=EApiSprintf(&pString[StrLength], StrBufLen-StrLength, TEXT("%")TEXT(PRIu32)TEXT(" Mins"  ), (Value)%60        );
     StatusCode=StrLength;
 
