@@ -73,7 +73,11 @@ ifeq (,$(PREFIX))
 endif
 $(info Library Directory is $(PREFIX). For changing please set PREFIX variable)
 
-EAPIHEADER=$(PREFIX)/../include
+EAPIHEADER=-I$(PREFIX)/../include
+
+ifneq (,$(EAPI_INC_PATH))
+	EAPIHEADER=-I$(EAPI_INC_PATH)
+endif
 
 #DBGOPT:=-gxcoff3
 #DBGOPT:=-gxcoff+
