@@ -67,9 +67,14 @@ SoName:=lib$(LibName).so.$(EAPI_VERSION)
 SoFName:=lib$(LibName).so.$(EAPI_VERSION).$(EAPI_REVISION)
 StaticLibFName:=$(LibName).a
 ExeName=EApiValidateAPI
-ifneq (,$(EAPI_INC_PATH))
-	EAPIHEADER=-I$(EAPI_INC_PATH)
+
+ifeq (,$(PREFIX))
+	PREFIX=/usr/local/lib
 endif
+$(info Library Directory is $(PREFIX). For changing please set PREFIX variable)
+
+EAPIHEADER=$(PREFIX)/../include
+
 #DBGOPT:=-gxcoff3
 #DBGOPT:=-gxcoff+
 #DBGOPT:=-gcoff3
@@ -81,11 +86,6 @@ DBGOPT:=-g -O0
 RELOPT:=-O3
 INCLUDS=-I../include $(EAPIHEADER)
 CFLAGS:= -Wall -W -pedantic $(INCLUDS) -std=c99
-ifeq (,$(PREFIX))
-	PREFIX=/usr/local/lib
-endif
-$(info Library Directory is $(PREFIX). For changing please set PREFIX variable)
-
 
 define FLD_BUILD_RULE
 @mkdir -p $(@)
