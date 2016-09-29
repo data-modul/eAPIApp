@@ -939,10 +939,12 @@ main(int argc, char *argv[])
     int option = 0;
     int getstring = -1, getvalue = -1, i2c = -1, num =-1;
     int nostop = 0;
+    int noOption = 0;
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
     while ((option = getopt(argc, argv,"svi:n:")) != -1) {
+        noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
             break;
@@ -952,13 +954,24 @@ main(int argc, char *argv[])
             break;
         case 'n' : num = atoi(optarg);
             break;
+        case '?' :
         default: printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
             printf("[-s] to run EApiBoardGetStringA\n");
             printf("[-v] to run EApiBoardGetValue\n");
             printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
             printf("[-n] number of times running application. without set, App will run infinite\n");
-            exit(EXIT_FAILURE);
+            exit(PRG_RETURN_OK);
         }
+    }
+
+    if(noOption == 0)
+    {
+        printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
+                    printf("[-s] to run EApiBoardGetStringA\n");
+                    printf("[-v] to run EApiBoardGetValue\n");
+                    printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
+                    printf("[-n] number of times running application. without set, App will run infinite\n");
+                    exit(PRG_RETURN_OK);
     }
 
     LogStream=EAPI_fopen(TEXT("EApiValidateAPI.log"), TEXT("w"));
