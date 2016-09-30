@@ -40,6 +40,7 @@
 typedef void EApiValidateTestFunction(void);
 #define DESTRUCTIVE_ALLOWED 1
 unsigned int I2CBUS;
+unsigned int simulI2C = 0;
 
 /*  */
 FILE *LogStream;
@@ -421,8 +422,8 @@ void EApiValidateI2CApi (void)
                         1
                         );
             if(!EAPI_TEST_SUCCESS(StatusCode))
-               // printf("successfull %d\n",j);
-            //else
+                // printf("successfull %d\n",j);
+                //else
                 printf("Error %d\n",j);
             //   sleep(1);
             usleep(5000);
@@ -487,92 +488,97 @@ void EApiValidateI2CApi (void)
     }
     else
         printf("It is an error\n");
+
+
     /* ****** READWRITERAW simulate*********************************************** */
-    strcpy(testw," Hello from Data modul. This is a simulation test for eAPI library");
-    testw[0]=0x00;
-    printf("\n******** Simulate  EApiI2CWriteReadRaw ********\n");
-    for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CLLValidate);i2++) /* Iterated thought test cases */
+    if (simulI2C == 1)
     {
-        StatusCode=EApiI2CWriteReadRaw(
-                    I2CBUS                               ,
-                    EAPI_I2C_ENC_STD_CMD(EApiI2CLLValidate[i2].Address)   ,
-                    EApiI2CLLValidate[i2].WBufPtr   ,
-                    EApiI2CLLValidate[i2].WByteCnt  ,
-                    EApiI2CLLValidate[i2].RBufPtr   ,
-                    EApiI2CLLValidate[i2].RBufPtrLen,
-                    EApiI2CLLValidate[i2].RByteCnt
-                    );
-        if (StatusCode == EApiI2CLLValidate[i2].StatusCode)
+        strcpy(testw," Hello from Data modul. This is a simulation test for eAPI library");
+        testw[0]=0x00;
+        printf("\n******** Simulate 0x64  EApiI2CWriteReadRaw ********\n");
+        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CLLValidate);i2++) /* Iterated thought test cases */
         {
-            printf("successful test");
-            if(EApiI2CLLValidate[i2].RBufPtr != NULL && (StatusCode == EAPI_STATUS_SUCCESS || StatusCode == EAPI_STATUS_MORE_DATA ))
+            StatusCode=EApiI2CWriteReadRaw(
+                        I2CBUS                               ,
+                        EAPI_I2C_ENC_STD_CMD(EApiI2CLLValidate[i2].Address)   ,
+                        EApiI2CLLValidate[i2].WBufPtr   ,
+                        EApiI2CLLValidate[i2].WByteCnt  ,
+                        EApiI2CLLValidate[i2].RBufPtr   ,
+                        EApiI2CLLValidate[i2].RBufPtrLen,
+                        EApiI2CLLValidate[i2].RByteCnt
+                        );
+            if (StatusCode == EApiI2CLLValidate[i2].StatusCode)
             {
-                printf(": read result >  %s",(uint8_t*)EApiI2CLLValidate[i2].RBufPtr);
+                printf("successful test");
+                if(EApiI2CLLValidate[i2].RBufPtr != NULL && (StatusCode == EAPI_STATUS_SUCCESS || StatusCode == EAPI_STATUS_MORE_DATA ))
+                {
+                    printf(": read result >  %s",(uint8_t*)EApiI2CLLValidate[i2].RBufPtr);
+                }
+                printf("\n");
+
             }
-            printf("\n");
-
+            else
+                printf("fail test\n");
         }
-        else
-            printf("fail test\n");
-    }
-    /* ****** EApiI2CReadTransfer simulate*********************************************** */
-    printf("\n******** Simulate  EApiI2CReadTransfer ********\n");
+        /* ****** EApiI2CReadTransfer simulate*********************************************** */
+        printf("\n******** Simulate 0x64  EApiI2CReadTransfer ********\n");
 
-    for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CHLReadValidate);i2++) /* Iterated thought test cases */
-    {
+        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CHLReadValidate);i2++) /* Iterated thought test cases */
+        {
+            memset(Buffer, 0x00, ARRAY_SIZE(Buffer));
+            StatusCode=EApiI2CReadTransfer(
+                        I2CBUS                                   ,
+                        EAPI_I2C_ENC_STD_CMD(EApiI2CHLReadValidate[i2].Address)   ,
+                        EApiI2CHLReadValidate[i2].Offset    ,
+                        EApiI2CHLReadValidate[i2].BufPtr    ,
+                        EApiI2CHLReadValidate[i2].BufPtrLen ,
+                        EApiI2CHLReadValidate[i2].ByteCnt
+                        );
+            if (StatusCode == EApiI2CHLReadValidate[i2].StatusCode)
+            {
+                printf("successful test");
+                if(EApiI2CHLReadValidate[i2].BufPtr != NULL && (StatusCode == EAPI_STATUS_SUCCESS || StatusCode == EAPI_STATUS_MORE_DATA ))
+                {
+                    printf(": read result >  %s",(uint8_t*)EApiI2CHLReadValidate[i2].BufPtr);
+                }
+                printf("\n");
+
+            }
+            else
+                printf("fail test\n");
+        }
+        /* ****** EApiI2CWriteTransfer simulate*********************************************** */
+        printf("\n******** Simulate 0x64 EApiI2CWriteTransfer ********\n");
         memset(Buffer, 0x00, ARRAY_SIZE(Buffer));
-        StatusCode=EApiI2CReadTransfer(
-                    I2CBUS                                   ,
-                    EAPI_I2C_ENC_STD_CMD(EApiI2CHLReadValidate[i2].Address)   ,
-                    EApiI2CHLReadValidate[i2].Offset    ,
-                    EApiI2CHLReadValidate[i2].BufPtr    ,
-                    EApiI2CHLReadValidate[i2].BufPtrLen ,
-                    EApiI2CHLReadValidate[i2].ByteCnt
-                    );
-        if (StatusCode == EApiI2CHLReadValidate[i2].StatusCode)
+        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CHLWriteValidate);i2++) /* Iterated thought test cases */
         {
-            printf("successful test");
-            if(EApiI2CHLReadValidate[i2].BufPtr != NULL && (StatusCode == EAPI_STATUS_SUCCESS || StatusCode == EAPI_STATUS_MORE_DATA ))
+            StatusCode=EApiI2CWriteTransfer(
+                        I2CBUS                                   ,
+                        EApiI2CHLWriteValidate[i2].Address  ,
+                        EApiI2CHLWriteValidate[i2].Offset   ,
+                        EApiI2CHLWriteValidate[i2].BufPtr   ,
+                        EApiI2CHLWriteValidate[i2].ByteCnt
+                        );
+            if (StatusCode == EApiI2CHLWriteValidate[i2].StatusCode)
+                printf("successful test\n");
+            else
+                printf("fail test\n");
+        }
+        /* ****** EApiI2CGetBusCap simulate*********************************************** */
+        printf("\n******** Simulate 0x64 EApiI2CGetBusCap ********\n");
+        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CInterfaceValidate);i2++) /* Iterated thought test cases */
+        {
+            StatusCode=EApiI2CGetBusCap(I2CBUS, EApiI2CInterfaceValidate[i2].pValue);
+            if (StatusCode == EApiI2CInterfaceValidate[i2].StatusCode)
             {
-                printf(": read result >  %s",(uint8_t*)EApiI2CHLReadValidate[i2].BufPtr);
+                printf("successful test");
+                if (StatusCode == EAPI_STATUS_SUCCESS)
+                    printf(": %d",*(EApiI2CInterfaceValidate[i2].pValue));
+                printf("\n");
             }
-            printf("\n");
-
+            else
+                printf("fail test\n");
         }
-        else
-            printf("fail test\n");
-    }
-    /* ****** EApiI2CWriteTransfer simulate*********************************************** */
-    printf("\n******** Simulate  EApiI2CWriteTransfer ********\n");
-    memset(Buffer, 0x00, ARRAY_SIZE(Buffer));
-    for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CHLWriteValidate);i2++) /* Iterated thought test cases */
-    {
-        StatusCode=EApiI2CWriteTransfer(
-                    I2CBUS                                   ,
-                    EApiI2CHLWriteValidate[i2].Address  ,
-                    EApiI2CHLWriteValidate[i2].Offset   ,
-                    EApiI2CHLWriteValidate[i2].BufPtr   ,
-                    EApiI2CHLWriteValidate[i2].ByteCnt
-                    );
-        if (StatusCode == EApiI2CHLWriteValidate[i2].StatusCode)
-            printf("successful test\n");
-        else
-            printf("fail test\n");
-    }
-    /* ****** EApiI2CGetBusCap simulate*********************************************** */
-    printf("\n******** Simulate  EApiI2CGetBusCap ********\n");
-    for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CInterfaceValidate);i2++) /* Iterated thought test cases */
-    {
-        StatusCode=EApiI2CGetBusCap(I2CBUS, EApiI2CInterfaceValidate[i2].pValue);
-        if (StatusCode == EApiI2CInterfaceValidate[i2].StatusCode)
-        {
-            printf("successful test");
-            if (StatusCode == EAPI_STATUS_SUCCESS)
-                printf(": %d",*(EApiI2CInterfaceValidate[i2].pValue));
-            printf("\n");
-        }
-        else
-            printf("fail test\n");
     }
 
     return;
@@ -943,7 +949,7 @@ main(int argc, char *argv[])
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
-    while ((option = getopt(argc, argv,"svi:n:")) != -1) {
+    while ((option = getopt(argc, argv,"svi:n:m")) != -1) {
         noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
@@ -953,6 +959,8 @@ main(int argc, char *argv[])
         case 'i' : i2c = atoi(optarg);
             break;
         case 'n' : num = atoi(optarg);
+            break;
+        case 'm' : simulI2C = 1;
             break;
         case '?' :
         default: printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
@@ -967,11 +975,11 @@ main(int argc, char *argv[])
     if(noOption == 0)
     {
         printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
-                    printf("[-s] to run EApiBoardGetStringA\n");
-                    printf("[-v] to run EApiBoardGetValue\n");
-                    printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
-                    printf("[-n] number of times running application. without set, App will run infinite\n");
-                    exit(PRG_RETURN_OK);
+        printf("[-s] to run EApiBoardGetStringA\n");
+        printf("[-v] to run EApiBoardGetValue\n");
+        printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
+        printf("[-n] number of times running application. without set, App will run infinite\n");
+        exit(PRG_RETURN_OK);
     }
 
     LogStream=EAPI_fopen(TEXT("EApiValidateAPI.log"), TEXT("w"));
