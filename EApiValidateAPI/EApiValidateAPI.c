@@ -346,7 +346,7 @@ void EApiValidateI2CApi (void)
                 6
                 );
     if(EAPI_TEST_SUCCESS(StatusCode))
-        printf("successfull\n");
+        printf("successful\n");
     else
         printf("It is an error\n");
 
@@ -379,7 +379,7 @@ void EApiValidateI2CApi (void)
                     1
                     );
         if(EAPI_TEST_SUCCESS(StatusCode))
-            printf("successfull\n");
+            printf("successful\n");
         else
             printf("It is an error\n");
         sleep(1);
@@ -422,7 +422,7 @@ void EApiValidateI2CApi (void)
                         1
                         );
             if(!EAPI_TEST_SUCCESS(StatusCode))
-                // printf("successfull %d\n",j);
+                // printf("successful %d\n",j);
                 //else
                 printf("Error %d\n",j);
             //   sleep(1);
@@ -432,6 +432,8 @@ void EApiValidateI2CApi (void)
         }
         fclose(file);
     }
+    else
+        printf("No eeprom.bak file is founded to read from it.\n");
     //********************************
     printf("\n******** Eeprom 0x50   EApiI2CReadTransfer first 200 Bytes ********\n");
     uint8_t prBuffer1[200];
@@ -564,6 +566,7 @@ void EApiValidateI2CApi (void)
             else
                 printf("fail test\n");
         }
+    }
         /* ****** EApiI2CGetBusCap simulate*********************************************** */
         printf("\n******** Simulate 0x64 EApiI2CGetBusCap ********\n");
         for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CInterfaceValidate);i2++) /* Iterated thought test cases */
@@ -579,7 +582,6 @@ void EApiValidateI2CApi (void)
             else
                 printf("fail test\n");
         }
-    }
 
     return;
 }
