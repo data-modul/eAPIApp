@@ -333,8 +333,8 @@ void EApiValidateI2CApi (void)
     printf("\n");
 
     printf("\n******** I2C 0x27 EApiI2CWriteTransfer - one write for 6 bytes ********\n");
-    uint8_t pBuffer3[6];
-    for(int j=0; j< 6; j++)
+    uint8_t pBuffer3[16];
+    for(int j=0; j< 16; j++)
         pBuffer3[j]=j;
     pBuffer3[4]=0x00;
 
@@ -369,7 +369,8 @@ void EApiValidateI2CApi (void)
         printf("It is an error.\n");
 
     printf("\n******** I2C 0x27 EApiI2CWriteTransfer - one write for each byte ********\n");
-    for (int j=0; j <6 ; j++)
+        pBuffer3[4]=0x04;
+    for (int j=0; j <16 ; j++)
     {
         StatusCode=EApiI2CWriteTransfer(
                     I2CBUS,
@@ -948,6 +949,49 @@ main(int argc, char *argv[])
     int getstring = -1, getvalue = -1, i2c = -1, num =-1;
     int nostop = 0;
     int noOption = 0;
+
+    int count =0;
+    time_t rawtime;
+    struct tm *timeinfo;
+    uint32_t Level;
+    uint32_t Direction;
+
+    if(!EAPI_TEST_SUCCESS(EApiLibInitialize()))
+    {
+        exit(PRG_RETURN_LIB_INIT_ERROR);
+    }
+
+EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
+printf("Level after first Get: %02x\n",Level);
+Level = 0xac;
+EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xff, Level);
+EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
+printf("Level after second Get: %02x\n",Level);
+EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
+printf("direction is %02x\n",Direction);
+EApiGPIOSetDirection(EAPI_ID_GPIO_BANK00, 0xff, 0x0f0);
+EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
+printf("direction is %02x\n",Direction);
+
+//    EApiWDogStart(5000,5000,10000);
+//    while(count < 2)
+//    {
+//        EApiWDogTrigger();
+//        time(&rawtime);
+//        timeinfo = localtime(&rawtime);
+//        printf("%s\n",asctime(timeinfo));
+//        count++;
+//        sleep(16);
+//    }
+//    EApiWDogStop();
+
+
+
+
+    exit(PRG_RETURN_OK);
+
+
+
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
