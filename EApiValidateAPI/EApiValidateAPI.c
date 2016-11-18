@@ -956,22 +956,37 @@ main(int argc, char *argv[])
     uint32_t Level;
     uint32_t Direction;
 
-    if(!EAPI_TEST_SUCCESS(EApiLibInitialize()))
-    {
-        exit(PRG_RETURN_LIB_INIT_ERROR);
+   if(!EAPI_TEST_SUCCESS(EApiLibInitialize()))
+   {
+       exit(PRG_RETURN_LIB_INIT_ERROR);
     }
 
 EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
 printf("Level after first Get: %02x\n",Level);
-Level = 0xac;
-EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xff, Level);
-EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
-printf("Level after second Get: %02x\n",Level);
-EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
-printf("direction is %02x\n",Direction);
-EApiGPIOSetDirection(EAPI_ID_GPIO_BANK00, 0xff, 0x0f0);
-EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
-printf("direction is %02x\n",Direction);
+
+Level = 0x5c;
+EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xf0, Level);
+
+//EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
+//printf("Level after second Get: %02x\n",Level);
+
+//EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
+//printf("first direction is %02x\n",Direction);
+
+//EApiGPIOSetDirection(EAPI_ID_GPIO_BANK00, 0xff, 0x0f0);
+
+//EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
+//printf("second direction is %02x\n",Direction);
+
+//EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
+//printf("Level after third Get: %02x\n",Level);
+
+//Level = 0x5c;
+//EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0x0f, Level);
+
+//EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
+//printf("Level after forth Get: %02x\n",Level);
+
 
 //    EApiWDogStart(5000,5000,10000);
 //    while(count < 2)
@@ -989,8 +1004,6 @@ printf("direction is %02x\n",Direction);
 
 
     exit(PRG_RETURN_OK);
-
-
 
 
     //Specifying the expected options
