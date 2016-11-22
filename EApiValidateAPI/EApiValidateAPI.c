@@ -35,12 +35,14 @@
  */
 #include <EApiApp.h>
 #include <getopt.h>
+#include <signal.h>
 
 #define END_OF_LIST_MARK ((uint32_t)-1)
 typedef void EApiValidateTestFunction(void);
 #define DESTRUCTIVE_ALLOWED 1
 unsigned int I2CBUS;
 unsigned int simulI2C = 0;
+unsigned int watchdogLoop = 0;
 
 /*  */
 FILE *LogStream;
@@ -884,23 +886,23 @@ void EApiValidateGPIOApi(void)
             continue;
         }
 
-      StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
-      if(!EAPI_TEST_SUCCESS(StatusCode))
-      {
-          EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-          EAPI_MSG_OUT(
-                      TEXT("%-15s %-25s : %s\n"),
-                      EApiGpioDevices[i].Desc,
-                      TEXT("EApiGPIOGetLevel"),
-                      TmpStrBuf
-                      );
-          continue;
-      }
-      EAPI_MSG_OUT(
-                  TEXT("%-15s %-25s : Level    =%02")TEXT(PRIX32)TEXT("\n"),
-                  EApiGpioDevices[i].Desc,
-                  TEXT("EApiGPIOGetLevel"),
-                  Level);
+        StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
+        if(!EAPI_TEST_SUCCESS(StatusCode))
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(
+                        TEXT("%-15s %-25s : %s\n"),
+                        EApiGpioDevices[i].Desc,
+                        TEXT("EApiGPIOGetLevel"),
+                        TmpStrBuf
+                        );
+            continue;
+        }
+        EAPI_MSG_OUT(
+                    TEXT("%-15s %-25s : Level    =%02")TEXT(PRIX32)TEXT("\n"),
+                    EApiGpioDevices[i].Desc,
+                    TEXT("EApiGPIOGetLevel"),
+                    Level);
 
 
     }
@@ -926,6 +928,64 @@ void EApiValidateGPIOApi(void)
     //    }
     return ;
 }
+
+/*
+ * Test Watchdog Function
+ *
+ */
+void sig_handler(int signum) {
+    if (signum == SIGINT)
+    {
+        EApiWDogStop();
+        exit(0);
+    }
+}
+void EApiValidateWatchdogApi()
+{
+    time_t rawtime;
+    struct tm *timeinfo;
+    uint32_t maxDelay, maxeventTimeout, maxResetTimeout;
+    int count = 0;
+    int ping = 0;
+
+    EApiStatus_t StatusCode;
+
+    signal(SIGINT,&sig_handler);
+
+    EApiWDogGetCap(&maxDelay, &maxeventTimeout, &maxResetTimeout);
+    printf("max delay: %d msec, maxEventTimeout: %d msec, maxResetTimeout: %d msec\n",maxDelay, maxeventTimeout, maxResetTimeout);
+
+    StatusCode = EApiWDogStart(0,3000,5000);
+    ping = ((3000 + 5000)/1000) - 2;
+    if(StatusCode == EAPI_STATUS_SUCCESS )
+    {
+        if (watchdogLoop == 0) // forever
+        {
+            while(1)
+            {
+                time(&rawtime);
+                timeinfo = localtime(&rawtime);
+                printf("ping at %s",asctime(timeinfo));
+                EApiWDogTrigger();
+                sleep(ping);
+            }
+        }
+        else
+        {
+            while(count < watchdogLoop)
+            {
+                time(&rawtime);
+                timeinfo = localtime(&rawtime);
+                printf("ping at %s",asctime(timeinfo));
+                EApiWDogTrigger();
+                count++;
+                sleep(ping);
+            }
+            EApiWDogStop();
+        }
+    }
+}
+
 /*
  * Test Functions Table
  *
@@ -939,6 +999,7 @@ const TestFunctionsTbl_t TestFunctions[]={
     {EApiValidateStringApi  , TEXT("Strings Function"    )},
     {EApiValidateI2CApi     , TEXT("I2C Function"        )},
     {EApiValidateGPIOApi    , TEXT("Gpio Function"       )},
+    {EApiValidateWatchdogApi    , TEXT("Watchdog Function"       )},
     //{EApiValidateStorageApi , TEXT("Storage Function"    )},
 };
 /* void __cdecl main( __IN  char *const *const  argv, __IN const int argc) */
@@ -948,40 +1009,31 @@ typedef enum ProgramStatusCodes_e{
     PRG_RETURN_LIB_INIT_ERROR   ,
     PRG_RETURN_LIB_UNINIT_ERROR
 }ProgramStatusCodes_t;
+
+void usage(void)
+{
+    printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
+    printf("[-s] to run EApiBoardGetStringA\n");
+    printf("[-v] to run EApiBoardGetValue\n");
+    printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
+    printf("[-g] to run EApi GPIO GetLevel, SetLevel and SetDirection to output\n");
+    printf("[-n] number of times running application. without set, App will run infinite\n");
+    return;
+}
+
 int
 __cdecl
 main(int argc, char *argv[])
 {
 
     int option = 0;
-    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1;
+    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1, watchdog= -1;
     int nostop = 0;
     int noOption = 0;
 
-    int count =0;
-    time_t rawtime;
-    struct tm *timeinfo;
-
-
-    //    EApiWDogStart(5000,5000,10000);
-    //    while(count < 2)
-    //    {
-    //        EApiWDogTrigger();
-    //        time(&rawtime);
-    //        timeinfo = localtime(&rawtime);
-    //        printf("%s\n",asctime(timeinfo));
-    //        count++;
-    //        sleep(16);
-    //    }
-    //    EApiWDogStop();
-
-
-
-
-
     //Specifying the expected options
     //The two options l and b expect numbers as argument
-    while ((option = getopt(argc, argv,"svi:n:mg")) != -1) {
+    while ((option = getopt(argc, argv,"svi:n:mgw")) != -1) {
         noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
@@ -996,25 +1048,18 @@ main(int argc, char *argv[])
             break;
         case 'g' : gpio = 1;
             break;
+        case 'w' : watchdog = 1;
+            break;
         case '?' :
-        default: printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
-            printf("[-s] to run EApiBoardGetStringA\n");
-            printf("[-v] to run EApiBoardGetValue\n");
-            printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
-            printf("[-g] to run EApi GPIO GetLevel, SetLevel and SetDirection to output\n");
-            printf("[-n] number of times running application. without set, App will run infinite\n");
+        default:
+            usage();
             exit(PRG_RETURN_OK);
         }
     }
 
     if(noOption == 0)
     {
-        printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
-        printf("[-s] to run EApiBoardGetStringA\n");
-        printf("[-v] to run EApiBoardGetValue\n");
-        printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
-        printf("[-g] to run EApi GPIO GetLevel, SetLevel and SetDirection to output\n");
-        printf("[-n] number of times running application. without set, App will run infinite\n");
+        usage();
         exit(PRG_RETURN_OK);
     }
 
@@ -1022,9 +1067,8 @@ main(int argc, char *argv[])
     if(LogStream==NULL)
         LogStream=stdout;
     if(!EAPI_TEST_SUCCESS(EApiLibInitialize()))
-    {
         exit(PRG_RETURN_LIB_INIT_ERROR);
-    }
+
     EAPI_fprintf(
                 LogStream,
                 TEXT("L%04u %-30s | %-25s | %5s %5s    [%s]\n"),
@@ -1051,6 +1095,8 @@ main(int argc, char *argv[])
     if (num == -1)// run forever
         nostop = 1;
 
+
+
     while ((num > 0 && nostop ==0) || (nostop == 1))
     {
         if (getvalue == 1)
@@ -1061,6 +1107,17 @@ main(int argc, char *argv[])
             TestFunctions[2].TestHandler();
         if (gpio == 1)
             TestFunctions[3].TestHandler();
+        if (watchdog == 1 )
+        {
+            if (nostop == 1)
+                watchdogLoop = 0;
+            else
+            {
+                watchdogLoop = num;
+                num = 0;
+            }
+            TestFunctions[4].TestHandler();
+        }
 
         if (num > 0)
             num--;
