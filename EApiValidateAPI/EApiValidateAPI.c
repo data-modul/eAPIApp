@@ -113,7 +113,7 @@ EApiValidateTestFunction EApiValidateStringApi ;
 EApiValidateTestFunction EApiValidateValuesApi ;
 EApiValidateTestFunction EApiValidateI2CApi    ;
 //EApiValidateTestFunction EApiValidateStorageApi;
-//EApiValidateTestFunction EApiValidateGPIOApi   ;
+EApiValidateTestFunction EApiValidateGPIOApi   ;
 
 
 
@@ -369,7 +369,7 @@ void EApiValidateI2CApi (void)
         printf("It is an error.\n");
 
     printf("\n******** I2C 0x27 EApiI2CWriteTransfer - one write for each byte ********\n");
-        pBuffer3[4]=0x04;
+    pBuffer3[4]=0x04;
     for (int j=0; j <16 ; j++)
     {
         StatusCode=EApiI2CWriteTransfer(
@@ -568,21 +568,21 @@ void EApiValidateI2CApi (void)
                 printf("fail test\n");
         }
     }
-        /* ****** EApiI2CGetBusCap simulate*********************************************** */
-        printf("\n******** Simulate 0x64 EApiI2CGetBusCap ********\n");
-        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CInterfaceValidate);i2++) /* Iterated thought test cases */
+    /* ****** EApiI2CGetBusCap simulate*********************************************** */
+    printf("\n******** Simulate 0x64 EApiI2CGetBusCap ********\n");
+    for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CInterfaceValidate);i2++) /* Iterated thought test cases */
+    {
+        StatusCode=EApiI2CGetBusCap(I2CBUS, EApiI2CInterfaceValidate[i2].pValue);
+        if (StatusCode == EApiI2CInterfaceValidate[i2].StatusCode)
         {
-            StatusCode=EApiI2CGetBusCap(I2CBUS, EApiI2CInterfaceValidate[i2].pValue);
-            if (StatusCode == EApiI2CInterfaceValidate[i2].StatusCode)
-            {
-                printf("successful test");
-                if (StatusCode == EAPI_STATUS_SUCCESS)
-                    printf(": %d",*(EApiI2CInterfaceValidate[i2].pValue));
-                printf("\n");
-            }
-            else
-                printf("fail test\n");
+            printf("successful test");
+            if (StatusCode == EAPI_STATUS_SUCCESS)
+                printf(": %d",*(EApiI2CInterfaceValidate[i2].pValue));
+            printf("\n");
         }
+        else
+            printf("fail test\n");
+    }
 
     return;
 }
@@ -737,187 +737,195 @@ void EApiValidateI2CApi (void)
  *
  */
 
-//typedef struct EApiGpioValidate_s{
-//    uint32_t *pInputs     ; /* Value Pointer*/
-//    uint32_t *pOutputs    ; /* Value Pointer*/
-//    const EApiStatus_t  StatusCode1 ; /* Allowed Return Value 1 */
-//    const EApiStatus_t  StatusCode2 ; /* Allowed Return Value 2 */
-//    const EApiStatus_t  StatusCode3 ; /* Allowed Return Value 3 */
-//}EApiGpioValidate_t;
-//uint32_t GpioInputs;
-//uint32_t GpioOutputs;
-//const EApiGpioValidate_t EApiGpioterfaceValidate[]={
-//    {&GpioInputs, &GpioOutputs, EAPI_STATUS_SUCCESS          , EAPI_STATUS_UNSUPPORTED       , EAPI_STATUS_UNSUPPORTED       },
-//    {&GpioInputs, NULL        , EAPI_STATUS_SUCCESS          , EAPI_STATUS_UNSUPPORTED       , EAPI_STATUS_UNSUPPORTED       },
-//    {NULL       , &GpioOutputs, EAPI_STATUS_SUCCESS          , EAPI_STATUS_UNSUPPORTED       , EAPI_STATUS_UNSUPPORTED       },
-//    {NULL       , NULL        , EAPI_STATUS_INVALID_PARAMETER, EAPI_STATUS_INVALID_PARAMETER , EAPI_STATUS_INVALID_PARAMETER },
-//};
+typedef struct EApiGpioType_s{
+    const EApiId_t  Id     ;
+    const TCHAR *const   Desc   ;
+}EApiGpioType_t;
 
-//typedef struct EApiGpioType_s{
-//    const EApiId_t  Id     ;
-//    const TCHAR *const   Desc   ;
-//}EApiGpioType_t;
-
-//const EApiGpioType_t EApiGpioDevices[]={
-//    {EAPI_ID_GPIO_BANK00   , TEXT("GPIO Bank0"      )},
-//    {EAPI_GPIO_GPIO_ID(0)  , TEXT("GPIO GPIO0"      )},
-//    {EAPI_GPIO_GPIO_ID(1)  , TEXT("GPIO GPIO1"      )},
-//    {EAPI_GPIO_GPIO_ID(2)  , TEXT("GPIO GPIO2"      )},
-//    {EAPI_GPIO_GPIO_ID(3)  , TEXT("GPIO GPIO3"      )},
-//    {EAPI_GPIO_GPIO_ID(4)  , TEXT("GPIO GPIO4"      )},
-//    {EAPI_GPIO_GPIO_ID(5)  , TEXT("GPIO GPIO5"      )},
-//    {EAPI_GPIO_GPIO_ID(6)  , TEXT("GPIO GPIO6"      )},
-//    {EAPI_GPIO_GPIO_ID(7)  , TEXT("GPIO GPIO7"      )},
-//    {EAPI_GPIO_GPIO_ID(8)  , TEXT("GPIO GPIO8"      )},
-//    {EAPI_GPIO_GPIO_ID(9)  , TEXT("GPIO GPIO9"      )},
-//    {0x00000F00            , TEXT("Unsupported"     )},
-//};
+const EApiGpioType_t EApiGpioDevices[]={
+    {EAPI_ID_GPIO_BANK00   , TEXT("GPIO Bank0"      )},
+    {EAPI_GPIO_GPIO_ID(0)  , TEXT("GPIO GPIO0"      )},
+    {EAPI_GPIO_GPIO_ID(1)  , TEXT("GPIO GPIO1"      )},
+    {EAPI_GPIO_GPIO_ID(2)  , TEXT("GPIO GPIO2"      )},
+    {EAPI_GPIO_GPIO_ID(3)  , TEXT("GPIO GPIO3"      )},
+    {EAPI_GPIO_GPIO_ID(4)  , TEXT("GPIO GPIO4"      )},
+    {EAPI_GPIO_GPIO_ID(5)  , TEXT("GPIO GPIO5"      )},
+    {EAPI_GPIO_GPIO_ID(6)  , TEXT("GPIO GPIO6"      )},
+    {EAPI_GPIO_GPIO_ID(7)  , TEXT("GPIO GPIO7"      )},
+    {0x00000F00            , TEXT("Unsupported"     )},
+};
 
 
-//void EApiValidateGPIOApi(void)
-//{
-//    TCHAR TmpStrBuf[1024];
-//    unsigned i,i2;
-//    uint32_t Direction;
-//    uint32_t Level;
-//    uint32_t Inputs;
-//    uint32_t Outputs;
-//    EApiStatus_t StatusCode;
-//    for(i=0;i<ARRAY_SIZE(EApiGpioDevices);i++){
-//        /*       *((int*)NULL)=0; */
-//        StatusCode=EApiGPIOGetDirectionCaps(EApiGpioDevices[i].Id, &Inputs, &Outputs);
-//        if(!EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(
-//                        TEXT("%-15s %-25s : %s\n"),
-//                        EApiGpioDevices[i].Desc,
-//                        TEXT("EApiGPIOGetDirectionCaps"),
-//                        TmpStrBuf
-//                        );
-//            continue;
-//        }
-//        EAPI_MSG_OUT(
-//                    TEXT("%-15s %-25s : Inputs   =%08")TEXT(PRIX32)TEXT(" Outputs=%08")TEXT(PRIX32)TEXT("\n"),
-//                    EApiGpioDevices[i].Desc,
-//                    TEXT("EApiGPIOGetDirectionCaps"),
-//                    Inputs,
-//                    Outputs
-//                    );
-//        StatusCode=EApiGPIOGetDirection(EApiGpioDevices[i].Id, Inputs|Outputs, &Direction);
-//        if(!EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(
-//                        TEXT("%-15s %-25s : %s\n"),
-//                        EApiGpioDevices[i].Desc,
-//                        TEXT("EApiGPIOGetDirection"),
-//                        TmpStrBuf
-//                        );
-//            continue;
-//        }
-//        EAPI_MSG_OUT(
-//                    TEXT("%-15s %-25s : Direction=%08")TEXT(PRIX32)TEXT("\n"),
-//                    EApiGpioDevices[i].Desc,
-//                    TEXT("EApiGPIOGetDirection"),
-//                    Direction
-//                    );
-//        StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
-//        if(!EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(
-//                        TEXT("%-15s %-25s : %s\n"),
-//                        EApiGpioDevices[i].Desc,
-//                        TEXT("EApiGPIOGetLevel"),
-//                        TmpStrBuf
-//                        );
-//            continue;
-//        }
-//        EAPI_MSG_OUT(
-//                    TEXT("%-15s %-25s : Level    =%08")TEXT(PRIX32)TEXT("\n"),
-//                    EApiGpioDevices[i].Desc,
-//                    TEXT("EApiGPIOGetLevel"),
-//                    Level
-//                    );
-//        StatusCode=EApiGPIOSetDirection(
-//                    EApiGpioDevices[i].Id,
-//                    Inputs|Outputs,
-//                    ((Inputs&0xFFFF))|((Outputs&0x0000))
-//                    );
-//        if(!EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(
-//                        TEXT("%-15s %-25s : %s\n"),
-//                        EApiGpioDevices[i].Desc,
-//                        TEXT("EApiGPIOSetDirection"),
-//                        TmpStrBuf
-//                        );
-//            continue;
-//        }
-//        StatusCode=EApiGPIOGetDirection(EApiGpioDevices[i].Id, Inputs|Outputs, &Direction);
-//        if(!EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(
-//                        TEXT("%-15s %-25s : %s\n"),
-//                        EApiGpioDevices[i].Desc,
-//                        TEXT("EApiGPIOGetDirection"),
-//                        TmpStrBuf
-//                        );
-//            continue;
-//        }
-//        EAPI_MSG_OUT(
-//                    TEXT("%-15s %-25s : Direction=%08")TEXT(PRIX32)TEXT("\n"),
-//                    EApiGpioDevices[i].Desc,
-//                    TEXT("EApiGPIOGetDirection"),
-//                    Direction
-//                    );
-//        StatusCode=EApiGPIOSetLevel(EApiGpioDevices[i].Id, Outputs, Outputs);
-//        if(!EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(
-//                        TEXT("%-15s %-25s : %s\n"),
-//                        EApiGpioDevices[i].Desc,
-//                        TEXT("EApiGPIOSetLevel"),
-//                        TmpStrBuf
-//                        );
-//            continue;
-//        }
-//        StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
-//        if(!EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(
-//                        TEXT("%-15s %-25s : %s\n"),
-//                        EApiGpioDevices[i].Desc,
-//                        TEXT("EApiGPIOGetDirection"),
-//                        TmpStrBuf
-//                        );
-//            continue;
-//        }
-//        EAPI_MSG_OUT(
-//                    TEXT("%-15s %-25s : Level    =%08")TEXT(PRIX32)TEXT("\n"),
-//                    EApiGpioDevices[i].Desc,
-//                    TEXT("EApiGPIOSetLevel"),
-//                    Level);
-//    }
-//    for(i=0;i<10;i++) /* Iterated throught Ids */
-//    {
-//        for(i2=0;i2<ARRAY_SIZE(EApiGpioterfaceValidate);i2++) /* Iterated thought test cases */
-//        {
-//            StatusCode=EApiGPIOGetDirectionCaps(
-//                        i,
-//                        EApiGpioterfaceValidate[i2].pInputs,
-//                        EApiGpioterfaceValidate[i2].pOutputs
-//                        );
-//            EAPI_LOG_RETURN_VALUE(EApiGPIOGetDirectionCaps, EApiGpioterfaceValidate);
-//        }
-//    }
-//    return ;
-//}
+void EApiValidateGPIOApi(void)
+{
+    TCHAR TmpStrBuf[1024];
+    unsigned i;
+    uint32_t Direction;
+    uint32_t Level;
+    uint32_t Inputs;
+    uint32_t Outputs;
+    EApiStatus_t StatusCode;
+
+    for(i=0;i<ARRAY_SIZE(EApiGpioDevices);i++){
+
+        Direction = 0;
+        Level = 0;
+        Inputs = 0;
+        Outputs = 0;
+
+        /*       *((int*)NULL)=0; */
+        StatusCode=EApiGPIOGetDirectionCaps(EApiGpioDevices[i].Id, &Inputs, &Outputs);
+        if(!EAPI_TEST_SUCCESS(StatusCode))
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(
+                        TEXT("\n\n%-15s %-25s : %s\n"),
+                        EApiGpioDevices[i].Desc,
+                        TEXT("EApiGPIOGetDirectionCaps"),
+                        TmpStrBuf
+                        );
+            continue;
+        }
+        EAPI_MSG_OUT(
+                    TEXT("\n\n%-15s %-25s : Inputs   =%02")TEXT(PRIX32)TEXT(" Outputs=%02")TEXT(PRIX32)TEXT("\n"),
+                    EApiGpioDevices[i].Desc,
+                    TEXT("EApiGPIOGetDirectionCaps"),
+                    Inputs,
+                    Outputs
+                    );
+
+
+        StatusCode=EApiGPIOGetDirection(EApiGpioDevices[i].Id, Inputs|Outputs, &Direction);
+        if(!EAPI_TEST_SUCCESS(StatusCode))
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(
+                        TEXT("%-15s %-25s : %s\n"),
+                        EApiGpioDevices[i].Desc,
+                        TEXT("EApiGPIOGetDirection"),
+                        TmpStrBuf
+                        );
+            continue;
+        }
+        EAPI_MSG_OUT(
+                    TEXT("%-15s %-25s : Direction=%02")TEXT(PRIX32)TEXT("\n"),
+                    EApiGpioDevices[i].Desc,
+                    TEXT("EApiGPIOGetDirection"),
+                    Direction
+                    );
+
+
+        StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
+        if(!EAPI_TEST_SUCCESS(StatusCode))
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(
+                        TEXT("%-15s %-25s : %s\n"),
+                        EApiGpioDevices[i].Desc,
+                        TEXT("EApiGPIOGetLevel"),
+                        TmpStrBuf
+                        );
+            continue;
+        }
+        EAPI_MSG_OUT(
+                    TEXT("%-15s %-25s : Level    =%02")TEXT(PRIX32)TEXT("\n"),
+                    EApiGpioDevices[i].Desc,
+                    TEXT("EApiGPIOGetLevel"),
+                    Level
+                    );
+
+        StatusCode=EApiGPIOSetDirection(
+                    EApiGpioDevices[i].Id,
+                    Inputs|Outputs,
+                    ~(Direction)
+                    );
+        if(!EAPI_TEST_SUCCESS(StatusCode))
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(
+                        TEXT("%-15s %-25s : %s\n"),
+                        EApiGpioDevices[i].Desc,
+                        TEXT("EApiGPIOSetDirection"),
+                        TmpStrBuf
+                        );
+            continue;
+        }
+
+        StatusCode=EApiGPIOGetDirection(EApiGpioDevices[i].Id, Inputs|Outputs, &Direction);
+        if(!EAPI_TEST_SUCCESS(StatusCode))
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(
+                        TEXT("%-15s %-25s : %s\n"),
+                        EApiGpioDevices[i].Desc,
+                        TEXT("EApiGPIOGetDirection"),
+                        TmpStrBuf
+                        );
+            continue;
+        }
+        EAPI_MSG_OUT(
+                    TEXT("%-15s %-25s : Direction=%02")TEXT(PRIX32)TEXT("\n"),
+                    EApiGpioDevices[i].Desc,
+                    TEXT("EApiGPIOGetDirection"),
+                    Direction
+                    );
+
+
+        StatusCode=EApiGPIOSetLevel(EApiGpioDevices[i].Id, Outputs, ~(Level));
+        if(!EAPI_TEST_SUCCESS(StatusCode))
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(
+                        TEXT("%-15s %-25s : %s\n"),
+                        EApiGpioDevices[i].Desc,
+                        TEXT("EApiGPIOSetLevel"),
+                        TmpStrBuf
+                        );
+            continue;
+        }
+
+      StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
+      if(!EAPI_TEST_SUCCESS(StatusCode))
+      {
+          EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(
+                      TEXT("%-15s %-25s : %s\n"),
+                      EApiGpioDevices[i].Desc,
+                      TEXT("EApiGPIOGetLevel"),
+                      TmpStrBuf
+                      );
+          continue;
+      }
+      EAPI_MSG_OUT(
+                  TEXT("%-15s %-25s : Level    =%02")TEXT(PRIX32)TEXT("\n"),
+                  EApiGpioDevices[i].Desc,
+                  TEXT("EApiGPIOGetLevel"),
+                  Level);
+
+
+    }
+
+    //    StatusCode = EApiGPIOSetDirection(EAPI_ID_GPIO_BANK00, 0xff, 0x00);
+    //    if (StatusCode != EAPI_STATUS_SUCCESS)
+    //        printf("error in set direction\n");
+
+    //    while(1)
+    //    {
+    //        StatusCode = EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
+    //        if (StatusCode != EAPI_STATUS_SUCCESS)
+    //            printf("error in get level-1\n");
+
+    //       Level2 = 0;
+    //       Level2 = ~(Level);
+
+    //        StatusCode = EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xff, Level2);
+    //        if (StatusCode != EAPI_STATUS_SUCCESS)
+    //            printf("error in set level\n");
+
+    //        sleep(1);
+    //    }
+    return ;
+}
 /*
  * Test Functions Table
  *
@@ -930,8 +938,8 @@ const TestFunctionsTbl_t TestFunctions[]={
     {EApiValidateValuesApi  , TEXT("Values Function"     )},
     {EApiValidateStringApi  , TEXT("Strings Function"    )},
     {EApiValidateI2CApi     , TEXT("I2C Function"        )},
+    {EApiValidateGPIOApi    , TEXT("Gpio Function"       )},
     //{EApiValidateStorageApi , TEXT("Storage Function"    )},
-    // {EApiValidateGPIOApi    , TEXT("Gpio Function"       )},
 };
 /* void __cdecl main( __IN  char *const *const  argv, __IN const int argc) */
 typedef enum ProgramStatusCodes_e{
@@ -946,69 +954,34 @@ main(int argc, char *argv[])
 {
 
     int option = 0;
-    int getstring = -1, getvalue = -1, i2c = -1, num =-1;
+    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1;
     int nostop = 0;
     int noOption = 0;
 
     int count =0;
     time_t rawtime;
     struct tm *timeinfo;
-    uint32_t Level;
-    uint32_t Direction;
-
-   if(!EAPI_TEST_SUCCESS(EApiLibInitialize()))
-   {
-       exit(PRG_RETURN_LIB_INIT_ERROR);
-    }
-
-EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
-printf("Level after first Get: %02x\n",Level);
-
-Level = 0x5c;
-EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xf0, Level);
-
-//EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
-//printf("Level after second Get: %02x\n",Level);
-
-//EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
-//printf("first direction is %02x\n",Direction);
-
-//EApiGPIOSetDirection(EAPI_ID_GPIO_BANK00, 0xff, 0x0f0);
-
-//EApiGPIOGetDirection(EAPI_ID_GPIO_BANK00, 0xff, &Direction);
-//printf("second direction is %02x\n",Direction);
-
-//EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
-//printf("Level after third Get: %02x\n",Level);
-
-//Level = 0x5c;
-//EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0x0f, Level);
-
-//EApiGPIOGetLevel(EAPI_ID_GPIO_BANK00, 0xff, &Level);
-//printf("Level after forth Get: %02x\n",Level);
 
 
-//    EApiWDogStart(5000,5000,10000);
-//    while(count < 2)
-//    {
-//        EApiWDogTrigger();
-//        time(&rawtime);
-//        timeinfo = localtime(&rawtime);
-//        printf("%s\n",asctime(timeinfo));
-//        count++;
-//        sleep(16);
-//    }
-//    EApiWDogStop();
+    //    EApiWDogStart(5000,5000,10000);
+    //    while(count < 2)
+    //    {
+    //        EApiWDogTrigger();
+    //        time(&rawtime);
+    //        timeinfo = localtime(&rawtime);
+    //        printf("%s\n",asctime(timeinfo));
+    //        count++;
+    //        sleep(16);
+    //    }
+    //    EApiWDogStop();
 
 
 
-
-    exit(PRG_RETURN_OK);
 
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
-    while ((option = getopt(argc, argv,"svi:n:m")) != -1) {
+    while ((option = getopt(argc, argv,"svi:n:mg")) != -1) {
         noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
@@ -1021,11 +994,14 @@ EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xf0, Level);
             break;
         case 'm' : simulI2C = 1;
             break;
+        case 'g' : gpio = 1;
+            break;
         case '?' :
         default: printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
             printf("[-s] to run EApiBoardGetStringA\n");
             printf("[-v] to run EApiBoardGetValue\n");
             printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
+            printf("[-g] to run EApi GPIO GetLevel, SetLevel and SetDirection to output\n");
             printf("[-n] number of times running application. without set, App will run infinite\n");
             exit(PRG_RETURN_OK);
         }
@@ -1037,6 +1013,7 @@ EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xf0, Level);
         printf("[-s] to run EApiBoardGetStringA\n");
         printf("[-v] to run EApiBoardGetValue\n");
         printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
+        printf("[-g] to run EApi GPIO GetLevel, SetLevel and SetDirection to output\n");
         printf("[-n] number of times running application. without set, App will run infinite\n");
         exit(PRG_RETURN_OK);
     }
@@ -1082,12 +1059,12 @@ EApiGPIOSetLevel(EAPI_ID_GPIO_BANK00, 0xf0, Level);
             TestFunctions[1].TestHandler();
         if (i2c != -1) // i2c bus number
             TestFunctions[2].TestHandler();
+        if (gpio == 1)
+            TestFunctions[3].TestHandler();
 
         if (num > 0)
             num--;
     }
-
-
 
     if(!EAPI_TEST_SUCCESS(EApiLibUnInitialize()))
     {
