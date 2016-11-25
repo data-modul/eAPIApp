@@ -140,6 +140,7 @@ typedef struct EApiStringType_s{
 const EApiStringType_t EApiStrings[]={
     {EAPI_ID_BOARD_MANUFACTURER_STR  , TEXT("Manufacturer"        )},
     {EAPI_ID_BOARD_NAME_STR          , TEXT("Board Name"          )},
+    {EAPI_DMO_ID_BOARD_ID_STR ,        TEXT("Board ID"       )},
     {EAPI_ID_BOARD_SERIAL_STR        , TEXT("Board Serial Number" )},
     {EAPI_ID_BOARD_BIOS_REVISION_STR , TEXT("Bios Revision"       )},
     {EAPI_ID_BOARD_PLATFORM_TYPE_STR , TEXT("Platform Type"       )},
