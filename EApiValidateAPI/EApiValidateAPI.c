@@ -987,6 +987,76 @@ void EApiValidateWatchdogApi()
     }
 }
 
+typedef struct EApiBacklightType_s{
+    const EApiId_t  Id  ;
+    const uint32_t enable;
+    const uint32_t bright;
+    const TCHAR *const   Desc;
+}EApiBacklightType_t;
+
+const EApiBacklightType_t EApiBacklights[]={
+    {EAPI_ID_BACKLIGHT_1       , EAPI_BACKLIGHT_SET_ON, 0,     TEXT("EAPI_ID_BACKLIGHT_1"   )},
+    {EAPI_ID_BACKLIGHT_1       , EAPI_BACKLIGHT_SET_ON, 2000,  TEXT("EAPI_ID_BACKLIGHT_1"        )},
+    {EAPI_ID_BACKLIGHT_1       , EAPI_BACKLIGHT_SET_OFF, 8000, TEXT("EAPI_ID_BACKLIGHT_1"  )},
+    {EAPI_ID_BACKLIGHT_1       , EAPI_BACKLIGHT_SET_OFF, 1500, TEXT("EAPI_ID_BACKLIGHT_1" )},
+    {EAPI_ID_BACKLIGHT_2       , EAPI_BACKLIGHT_SET_ON, 2000,  TEXT("EAPI_ID_BACKLIGHT_2"  )},
+    {EAPI_ID_BACKLIGHT_3       , EAPI_BACKLIGHT_SET_OFF, 1500, TEXT("EAPI_ID_BACKLIGHT_3" )},
+};
+
+
+void EApiValidateBacklightApi (void)
+{
+    EApiStatus_t StatusCode;
+    uint32_t Value;
+    unsigned i;
+
+
+    TCHAR TmpStrBuf[1024];
+
+
+    for(i=0;i<ARRAY_SIZE(EApiBacklights);i++){
+ printf("\n");
+        if((StatusCode=EApiVgaGetBacklightEnable(EApiBacklights[i].Id, &Value))==EAPI_STATUS_SUCCESS)
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightEnable\tEnable:%d\t%s\n"), EApiBacklights[i].Desc, Value,TmpStrBuf);
+        }else{
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+        }
+        sleep(1);
+        if((StatusCode=EApiVgaSetBacklightEnable(EApiBacklights[i].Id, EApiBacklights[i].enable))==EAPI_STATUS_SUCCESS)
+        {
+             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+        }else{
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+        }
+sleep(1);
+        if((StatusCode=EApiVgaGetBacklightBrightness(EApiBacklights[i].Id, &Value))==EAPI_STATUS_SUCCESS)
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightBrightness\tBrightness:%d\t%s\n"), EApiBacklights[i].Desc, Value, TmpStrBuf);
+        }else{
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightBrightness\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+        }
+sleep(1);
+        if((StatusCode=EApiVgaSetBacklightBrightness(EApiBacklights[i].Id, EApiBacklights[i].bright))==EAPI_STATUS_SUCCESS)
+        {
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightBrightness\tBrightness:%d\t%s\n"), EApiBacklights[i].Desc, EApiBacklights[i].bright,TmpStrBuf);
+        }else{
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightBrightness\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+        }
+        sleep(1);
+
+    }
+    return ;
+}
+
 /*
  * Test Functions Table
  *
@@ -1001,6 +1071,7 @@ const TestFunctionsTbl_t TestFunctions[]={
     {EApiValidateI2CApi     , TEXT("I2C Function"        )},
     {EApiValidateGPIOApi    , TEXT("Gpio Function"       )},
     {EApiValidateWatchdogApi    , TEXT("Watchdog Function"       )},
+    {EApiValidateBacklightApi    , TEXT("Backlight Function"       )},
     //{EApiValidateStorageApi , TEXT("Storage Function"    )},
 };
 /* void __cdecl main( __IN  char *const *const  argv, __IN const int argc) */
@@ -1018,6 +1089,8 @@ void usage(void)
     printf("[-v] to run EApiBoardGetValue\n");
     printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
     printf("[-g] to run EApi GPIO GetLevel, SetLevel and SetDirection to output\n");
+    printf("[-w] to run EApi Watchog test\n");
+    printf("[-b] to run EApi Backlight test\n");
     printf("[-n] number of times running application. without set, App will run infinite\n");
     return;
 }
@@ -1028,13 +1101,13 @@ main(int argc, char *argv[])
 {
 
     int option = 0;
-    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1, watchdog= -1;
+    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1, watchdog= -1, backlight= -1;
     int nostop = 0;
     int noOption = 0;
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
-    while ((option = getopt(argc, argv,"svi:n:mgw")) != -1) {
+    while ((option = getopt(argc, argv,"svi:n:mgwb")) != -1) {
         noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
@@ -1050,6 +1123,8 @@ main(int argc, char *argv[])
         case 'g' : gpio = 1;
             break;
         case 'w' : watchdog = 1;
+            break;
+        case 'b' : backlight = 1;
             break;
         case '?' :
         default:
@@ -1119,6 +1194,8 @@ main(int argc, char *argv[])
             }
             TestFunctions[4].TestHandler();
         }
+        if (backlight == 1)
+            TestFunctions[5].TestHandler();
 
         if (num > 0)
             num--;
