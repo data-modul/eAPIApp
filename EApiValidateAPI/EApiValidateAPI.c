@@ -114,9 +114,10 @@ siFFormattedMessage_SC(
 EApiValidateTestFunction EApiValidateStringApi ;
 EApiValidateTestFunction EApiValidateValuesApi ;
 EApiValidateTestFunction EApiValidateI2CApi    ;
-//EApiValidateTestFunction EApiValidateStorageApi;
+EApiValidateTestFunction EApiValidateStorageApi;
 EApiValidateTestFunction EApiValidateGPIOApi   ;
-
+EApiValidateTestFunction EApiValidateWatchdogApi;
+EApiValidateTestFunction EApiValidateBacklightApi;
 
 
 TCHAR Buffer[1024]={0};
@@ -594,146 +595,124 @@ void EApiValidateI2CApi (void)
  *
  */
 
-//typedef struct EApiStorageType_s{
-//    const EApiId_t  Id     ;
-//    const TCHAR *const   Desc   ;
-//    const uint32_t  Length ;
-//}EApiStorageType_t;
+void EApiValidateStorageApi(void)
+{
+    TCHAR TmpStrBuf[1024];
+    EApiStatus_t StatusCode;
+    uint32_t pStorgeSize ;
+    uint32_t pBlockLen;
+    unsigned int size =0;
 
-//const EApiStorageType_t EApiStorageDevices[]={
-//    {EAPI_ID_STORAGE_STD        , TEXT("Standard Storage"   ), 0x20},
-//    {EAPI_PMG_ID_STORAGE_SAMPLE , TEXT("Dummy PICMG Storage"), 0x80},
-//    {0x00000F00                 , TEXT("Unsupported"        ), 0x20},
-//};
 
-//typedef struct EApiStorageValidate_s{
-//    const uint32_t  Offset      ; /* Read Offset */
-//    void *    BufPtr      ; /* Buffer Pointer */
-//    const uint32_t  BufPtrLen   ; /* Buffer Length */
-//    const uint32_t  ByteCnt     ; /* Byte Count  */
-//    const EApiStatus_t  StatusCode1 ; /* Allowed Return Value 1 */
-//    const EApiStatus_t  StatusCode2 ; /* Allowed Return Value 2 */
-//    const EApiStatus_t  StatusCode3 ; /* Allowed Return Value 3 */
-//}EApiStorageValidate_t;
-//const EApiStorageValidate_t StorageValidate[]={
-//    {0x0000, Buffer, ARRAY_SIZE(Buffer),  10, EAPI_STATUS_SUCCESS             , EAPI_STATUS_UNSUPPORTED         , EAPI_STATUS_UNSUPPORTED       },
-//    {0x0000, NULL  , ARRAY_SIZE(Buffer), 100, EAPI_STATUS_INVALID_PARAMETER   , EAPI_STATUS_INVALID_PARAMETER   , EAPI_STATUS_INVALID_PARAMETER },
-//    {0x0021, Buffer,            0x0000 ,  20, EAPI_STATUS_INVALID_PARAMETER   , EAPI_STATUS_INVALID_BLOCK_LENGTH, EAPI_STATUS_UNSUPPORTED       },
-//    {0x0021, Buffer,            0x0010 ,  20, EAPI_STATUS_INVALID_BLOCK_LENGTH, EAPI_STATUS_SUCCESS             , EAPI_STATUS_UNSUPPORTED       },
-//    {0x0021, Buffer, ARRAY_SIZE(Buffer),   0, EAPI_STATUS_INVALID_PARAMETER   , EAPI_STATUS_INVALID_PARAMETER   , EAPI_STATUS_UNSUPPORTED       },
-//    {0x0001, Buffer, ARRAY_SIZE(Buffer),  10, EAPI_STATUS_SUCCESS             , EAPI_STATUS_UNSUPPORTED         , EAPI_STATUS_UNSUPPORTED       },
-//};
-//typedef struct EApiStorageCapValidate_s{
-//    uint32_t *pStorgeSize ; /* Read Offset */
-//    uint32_t *pBlockLen   ; /* Buffer Pointer */
-//    const EApiStatus_t  StatusCode1 ; /* Allowed Return Value 1 */
-//    const EApiStatus_t  StatusCode2 ; /* Allowed Return Value 2 */
-//    const EApiStatus_t  StatusCode3 ; /* Allowed Return Value 3 */
-//}EApiStorageCapValidate_t;
-//uint32_t StorageSize;
-//uint32_t BlockLength;
-//const EApiStorageCapValidate_t StorageCapValidate[]={
-//    {&StorageSize, &BlockLength, EAPI_STATUS_SUCCESS          , EAPI_STATUS_UNSUPPORTED       , EAPI_STATUS_UNSUPPORTED       },
-//    {&StorageSize, NULL        , EAPI_STATUS_SUCCESS          , EAPI_STATUS_UNSUPPORTED       , EAPI_STATUS_UNSUPPORTED       },
-//    {NULL        , &BlockLength, EAPI_STATUS_SUCCESS          , EAPI_STATUS_UNSUPPORTED       , EAPI_STATUS_UNSUPPORTED       },
-//    {NULL        , NULL        , EAPI_STATUS_INVALID_PARAMETER, EAPI_STATUS_INVALID_PARAMETER , EAPI_STATUS_INVALID_PARAMETER },
-//};
-//void EApiValidateStorageApi(void)
-//{
-//    TCHAR TmpStrBuf[1024];
-//    unsigned i,i2;
-//    EApiStatus_t StatusCode;
+    StatusCode=EApiStorageCap(EAPI_ID_STORAGE_STD,&pStorgeSize,&pBlockLen);
+    if(EAPI_TEST_SUCCESS(StatusCode))
+        printf("The User space storage is %d, Write Block alignment is %d\n", pStorgeSize, pBlockLen);
+    else
+        printf("Unsuccessful Storage Cap\n");
 
-//    for(i=0;i<ARRAY_SIZE(EApiStorageDevices);i++){
-//        StatusCode=EApiStorageAreaRead(
-//                    EApiStorageDevices[i].Id,
-//                    0,
-//                    TmpStrBuf,
-//                    ARRAY_SIZE(TmpStrBuf) , /* For Debug Purposes */
-//                    EApiStorageDevices[i].Length
-//                    );
-//        if(EAPI_TEST_SUCCESS(StatusCode))
-//        {
-//            EAPI_MSG_OUT(
-//                        TEXT("%-30s : "),
-//                        EApiStorageDevices[i].Desc
-//                        );
-//            printHex(stdout, TmpStrBuf, 16);
-//            EAPI_MSG_OUT(TEXT("\n"));
-//#if DESTRUCTIVE_ALLOWED
-//            StatusCode=EApiAHWriteStorage(
-//                        EApiStorageDevices[i].Id      ,
-//                        13                            ,
-//                        TmpStrBuf                     ,
-//                        EApiStorageDevices[i].Length/5
-//                        );
-//            if(EAPI_TEST_SUCCESS(StatusCode))
-//            {
-//                EAPI_MSG_OUT(
-//                            TEXT("%-30s : "),
-//                            EApiStorageDevices[i].Desc
-//                            );
-//                printHex(stdout, TmpStrBuf, 16);
-//                EAPI_MSG_OUT(TEXT("\n"));
-//            }
-//            else
-//            {
-//                EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//                EAPI_MSG_OUT(
-//                            TEXT("%-30s : %02")TEXT(PRIX8)TEXT(" %s\n")      ,
-//                            EApiStorageDevices[i].Desc,
-//                            I2CDevices[i].DeviceAddr  ,
-//                            TmpStrBuf
-//                            );
-//            }
-//#endif
-//        }
-//        else
-//        {
-//            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-//            EAPI_MSG_OUT(TEXT("%-30s : %s\n"), EApiStorageDevices[i].Desc, TmpStrBuf);
-//        }
-//    }
-//    /*
-//   * More Rigorous Interfaces Verification
-//   */
-//    for(i=0;i<10;i++) /* Iterate thought Ids */
-//    {
-//        for(i2=0;i2<ARRAY_SIZE(StorageValidate);i2++) /* Iterated thought test cases */
-//        {
-//            StatusCode=EApiStorageAreaRead(
-//                        i                             ,
-//                        StorageValidate[i2].Offset    ,
-//                        StorageValidate[i2].BufPtr    ,
-//                        StorageValidate[i2].BufPtrLen ,
-//                        StorageValidate[i2].ByteCnt
-//                        );
-//            EAPI_LOG_RETURN_VALUE(EApiStorageAreaRead, StorageValidate);
-//#if DESTRUCTIVE_ALLOWED
-//            StatusCode=EApiStorageAreaWrite(
-//                        i                           ,
-//                        StorageValidate[i2].Offset  ,
-//                        StorageValidate[i2].BufPtr  ,
-//                        StorageValidate[i2].ByteCnt
-//                        );
-//            EAPI_LOG_RETURN_VALUE(EApiStorageAreaWrite, StorageValidate);
-//#endif
-//        }
-//    }
-//    for(i=0;i<10;i++) /* Iterated thought Ids */
-//    {
-//        for(i2=0;i2<ARRAY_SIZE(StorageCapValidate);i2++) /* Iterated thought test cases */
-//        {
-//            StatusCode=EApiStorageCap(
-//                        i                                 ,
-//                        StorageCapValidate[i2].pStorgeSize,
-//                        StorageCapValidate[i2].pBlockLen
-//                        );
-//            EAPI_LOG_RETURN_VALUE(EApiStorageCap, StorageCapValidate);
-//        }
-//    }
-//    return ;
-//}
+
+    StatusCode=EApiStorageAreaRead(
+                EAPI_ID_STORAGE_STD,
+                0,
+                TmpStrBuf,
+                ARRAY_SIZE(TmpStrBuf) , /* For Debug Purposes */
+                pStorgeSize
+                );
+    if(EAPI_TEST_SUCCESS(StatusCode))
+    {
+        EAPI_MSG_OUT(
+                    TEXT("%-30s : "),"Read Standard Storage"
+                    );
+        printHex(stdout, TmpStrBuf, pStorgeSize);
+        EAPI_MSG_OUT(TEXT("\n"));
+
+    }
+    else
+    {
+        EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+        EAPI_MSG_OUT(TEXT("%-30s : %s\n"), "Read Standard Storage", TmpStrBuf);
+    }
+
+
+    strncpy(TmpStrBuf, "Write-Test1 more than capacity.", sizeof("Write-Test1 more than capacity."));
+    size = sizeof("Write-Test1 more than capacity.");
+    StatusCode=EApiStorageAreaWrite(
+                EAPI_ID_STORAGE_STD,
+                0                            ,
+                TmpStrBuf                     ,
+                size
+                );
+    if(EAPI_TEST_SUCCESS(StatusCode))
+    {
+        EAPI_MSG_OUT(
+                    TEXT("%-30s : "),
+                    "Write1 Standard Storage"
+                    );
+        printHex(stdout, TmpStrBuf,size);
+        EAPI_MSG_OUT(TEXT("\n"));
+    }
+    else
+    {
+        EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+        EAPI_MSG_OUT(
+                    TEXT("%-30s :")TEXT(" %s\n")      ,
+                    "Write1 Standard Storage",
+                    TmpStrBuf
+                    );
+    }
+
+
+    strncpy(TmpStrBuf, "Write-Test2 ok.", sizeof("Write-Test2 ok."));
+    size = sizeof("Write-Test2 ok.");
+    StatusCode=EApiStorageAreaWrite(
+                EAPI_ID_STORAGE_STD,
+                0                            ,
+                TmpStrBuf                     ,
+                size
+                );
+    if(EAPI_TEST_SUCCESS(StatusCode))
+    {
+        EAPI_MSG_OUT(
+                    TEXT("%-30s : "),
+                    "Write2 Standard Storage"
+                    );
+        printHex(stdout, TmpStrBuf,size);
+        EAPI_MSG_OUT(TEXT("\n"));
+    }
+    else
+    {
+        EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+        EAPI_MSG_OUT(
+                    TEXT("%-30s :")TEXT(" %s\n")      ,
+                    "Write2 Standard Storage",
+                    TmpStrBuf
+                    );
+    }
+
+    StatusCode=EApiStorageAreaRead(
+                EAPI_ID_STORAGE_STD,
+                0,
+                TmpStrBuf,
+                ARRAY_SIZE(TmpStrBuf) , /* For Debug Purposes */
+                pStorgeSize
+                );
+    if(EAPI_TEST_SUCCESS(StatusCode))
+    {
+        EAPI_MSG_OUT(
+                    TEXT("%-30s : "),"Read2 Standard Storage"
+                    );
+        printHex(stdout, TmpStrBuf, pStorgeSize);
+        EAPI_MSG_OUT(TEXT("\n"));
+
+    }
+    else
+    {
+        EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+        EAPI_MSG_OUT(TEXT("%-30s : %s\n"), "Read2 Standard Storage", TmpStrBuf);
+    }
+
+    return ;
+}
 
 /*
  * Test GPIO Function
@@ -946,7 +925,7 @@ void EApiValidateWatchdogApi()
     time_t rawtime;
     struct tm *timeinfo;
     uint32_t maxDelay, maxeventTimeout, maxResetTimeout;
-    int count = 0;
+    unsigned int count = 0;
     int ping = 0;
 
     EApiStatus_t StatusCode;
@@ -1015,7 +994,7 @@ void EApiValidateBacklightApi (void)
 
 
     for(i=0;i<ARRAY_SIZE(EApiBacklights);i++){
- printf("\n");
+        printf("\n");
         if((StatusCode=EApiVgaGetBacklightEnable(EApiBacklights[i].Id, &Value))==EAPI_STATUS_SUCCESS)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
@@ -1027,13 +1006,13 @@ void EApiValidateBacklightApi (void)
         sleep(1);
         if((StatusCode=EApiVgaSetBacklightEnable(EApiBacklights[i].Id, EApiBacklights[i].enable))==EAPI_STATUS_SUCCESS)
         {
-             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+            EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
             EAPI_MSG_OUT(TEXT("%-30s-SetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }else{
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
             EAPI_MSG_OUT(TEXT("%-30s-SetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }
-sleep(1);
+        sleep(1);
         if((StatusCode=EApiVgaGetBacklightBrightness(EApiBacklights[i].Id, &Value))==EAPI_STATUS_SUCCESS)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
@@ -1042,7 +1021,7 @@ sleep(1);
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
             EAPI_MSG_OUT(TEXT("%-30s-GetBacklightBrightness\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }
-sleep(1);
+        sleep(1);
         if((StatusCode=EApiVgaSetBacklightBrightness(EApiBacklights[i].Id, EApiBacklights[i].bright))==EAPI_STATUS_SUCCESS)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
@@ -1072,7 +1051,7 @@ const TestFunctionsTbl_t TestFunctions[]={
     {EApiValidateGPIOApi    , TEXT("Gpio Function"       )},
     {EApiValidateWatchdogApi    , TEXT("Watchdog Function"       )},
     {EApiValidateBacklightApi    , TEXT("Backlight Function"       )},
-    //{EApiValidateStorageApi , TEXT("Storage Function"    )},
+    {EApiValidateStorageApi , TEXT("Storage Function"    )},
 };
 /* void __cdecl main( __IN  char *const *const  argv, __IN const int argc) */
 typedef enum ProgramStatusCodes_e{
@@ -1101,13 +1080,13 @@ main(int argc, char *argv[])
 {
 
     int option = 0;
-    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1, watchdog= -1, backlight= -1;
+    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1, watchdog= -1, backlight= -1, storage= -1;
     int nostop = 0;
     int noOption = 0;
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
-    while ((option = getopt(argc, argv,"svi:n:mgwb")) != -1) {
+    while ((option = getopt(argc, argv,"svi:n:mgwbu")) != -1) {
         noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
@@ -1125,6 +1104,8 @@ main(int argc, char *argv[])
         case 'w' : watchdog = 1;
             break;
         case 'b' : backlight = 1;
+            break;
+        case 'u' : storage = 1;
             break;
         case '?' :
         default:
@@ -1196,6 +1177,8 @@ main(int argc, char *argv[])
         }
         if (backlight == 1)
             TestFunctions[5].TestHandler();
+        if (storage == 1)
+            TestFunctions[6].TestHandler();
 
         if (num > 0)
             num--;
