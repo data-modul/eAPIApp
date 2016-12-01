@@ -41,7 +41,6 @@
 typedef void EApiValidateTestFunction(void);
 #define DESTRUCTIVE_ALLOWED 1
 unsigned int I2CBUS;
-unsigned int simulI2C = 0;
 unsigned int watchdogLoop = 0;
 
 /*  */
@@ -158,7 +157,7 @@ void EApiValidateStringApi (void)
     pBufferLen = 100;
     pBuffer=(char *)malloc((pBufferLen) * sizeof(char));
 
-    printf("\n");
+     printf("\n********  EApiValidateStringApi ********\n");
     for(unsigned i=0;i<ARRAY_SIZE(EApiStrings);i++){
         pBufferLen = 100;
         StatusCode = EApiBoardGetStringA(EApiStrings[i].Id, pBuffer,&pBufferLen);
@@ -229,7 +228,7 @@ void EApiValidateValuesApi (void)
 
 
     TCHAR TmpStrBuf[1024];
-    printf("\n");
+     printf("\n********  EApiValidateValuesApi ********\n");
 
     for(i=0;i<ARRAY_SIZE(EApiValues);i++){
         if((StatusCode=EApiBoardGetValue(EApiValues[i].Id, &Value))==EAPI_STATUS_SUCCESS)
@@ -497,83 +496,8 @@ void EApiValidateI2CApi (void)
         printf("It is an error\n");
 
 
-    /* ****** READWRITERAW simulate*********************************************** */
-    if (simulI2C == 1)
-    {
-        strcpy(testw," Hello from Data modul. This is a simulation test for eAPI library");
-        testw[0]=0x00;
-        printf("\n******** Simulate 0x64  EApiI2CWriteReadRaw ********\n");
-        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CLLValidate);i2++) /* Iterated thought test cases */
-        {
-            StatusCode=EApiI2CWriteReadRaw(
-                        I2CBUS                               ,
-                        EAPI_I2C_ENC_STD_CMD(EApiI2CLLValidate[i2].Address)   ,
-                        EApiI2CLLValidate[i2].WBufPtr   ,
-                        EApiI2CLLValidate[i2].WByteCnt  ,
-                        EApiI2CLLValidate[i2].RBufPtr   ,
-                        EApiI2CLLValidate[i2].RBufPtrLen,
-                        EApiI2CLLValidate[i2].RByteCnt
-                        );
-            if (StatusCode == EApiI2CLLValidate[i2].StatusCode)
-            {
-                printf("successful test");
-                if(EApiI2CLLValidate[i2].RBufPtr != NULL && (StatusCode == EAPI_STATUS_SUCCESS || StatusCode == EAPI_STATUS_MORE_DATA ))
-                {
-                    printf(": read result >  %s",(uint8_t*)EApiI2CLLValidate[i2].RBufPtr);
-                }
-                printf("\n");
-
-            }
-            else
-                printf("fail test\n");
-        }
-        /* ****** EApiI2CReadTransfer simulate*********************************************** */
-        printf("\n******** Simulate 0x64  EApiI2CReadTransfer ********\n");
-
-        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CHLReadValidate);i2++) /* Iterated thought test cases */
-        {
-            memset(Buffer, 0x00, ARRAY_SIZE(Buffer));
-            StatusCode=EApiI2CReadTransfer(
-                        I2CBUS                                   ,
-                        EAPI_I2C_ENC_STD_CMD(EApiI2CHLReadValidate[i2].Address)   ,
-                        EApiI2CHLReadValidate[i2].Offset    ,
-                        EApiI2CHLReadValidate[i2].BufPtr    ,
-                        EApiI2CHLReadValidate[i2].BufPtrLen ,
-                        EApiI2CHLReadValidate[i2].ByteCnt
-                        );
-            if (StatusCode == EApiI2CHLReadValidate[i2].StatusCode)
-            {
-                printf("successful test");
-                if(EApiI2CHLReadValidate[i2].BufPtr != NULL && (StatusCode == EAPI_STATUS_SUCCESS || StatusCode == EAPI_STATUS_MORE_DATA ))
-                {
-                    printf(": read result >  %s",(uint8_t*)EApiI2CHLReadValidate[i2].BufPtr);
-                }
-                printf("\n");
-
-            }
-            else
-                printf("fail test\n");
-        }
-        /* ****** EApiI2CWriteTransfer simulate*********************************************** */
-        printf("\n******** Simulate 0x64 EApiI2CWriteTransfer ********\n");
-        memset(Buffer, 0x00, ARRAY_SIZE(Buffer));
-        for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CHLWriteValidate);i2++) /* Iterated thought test cases */
-        {
-            StatusCode=EApiI2CWriteTransfer(
-                        I2CBUS                                   ,
-                        EApiI2CHLWriteValidate[i2].Address  ,
-                        EApiI2CHLWriteValidate[i2].Offset   ,
-                        EApiI2CHLWriteValidate[i2].BufPtr   ,
-                        EApiI2CHLWriteValidate[i2].ByteCnt
-                        );
-            if (StatusCode == EApiI2CHLWriteValidate[i2].StatusCode)
-                printf("successful test\n");
-            else
-                printf("fail test\n");
-        }
-    }
     /* ****** EApiI2CGetBusCap simulate*********************************************** */
-    printf("\n******** Simulate 0x64 EApiI2CGetBusCap ********\n");
+    printf("\n******** EApiI2CGetBusCap ********\n");
     for(unsigned i2=0;i2<ARRAY_SIZE(EApiI2CInterfaceValidate);i2++) /* Iterated thought test cases */
     {
         StatusCode=EApiI2CGetBusCap(I2CBUS, EApiI2CInterfaceValidate[i2].pValue);
@@ -598,12 +522,13 @@ void EApiValidateI2CApi (void)
 void EApiValidateStorageApi(void)
 {
     TCHAR TmpStrBuf[1024];
-    EApiStatus_t StatusCode;
-    uint32_t pStorgeSize ;
-    uint32_t pBlockLen;
+    EApiStatus_t StatusCode = EAPI_STATUS_SUCCESS;
+    uint32_t pStorgeSize = 0 ;
+    uint32_t pBlockLen = 0;
     unsigned int size =0;
 
-
+ printf("\n********  EApiValidateStorageApi ********\n");
+  printf("\n");
     StatusCode=EApiStorageCap(EAPI_ID_STORAGE_STD,&pStorgeSize,&pBlockLen);
     if(EAPI_TEST_SUCCESS(StatusCode))
         printf("The User space storage is %d, Write Block alignment is %d\n", pStorgeSize, pBlockLen);
@@ -748,6 +673,8 @@ void EApiValidateGPIOApi(void)
     uint32_t Outputs;
     EApiStatus_t StatusCode;
 
+    printf("\n********  EApiValidateGPIOApi ********\n");
+
     for(i=0;i<ARRAY_SIZE(EApiGpioDevices);i++){
 
         Direction = 0;
@@ -761,7 +688,7 @@ void EApiValidateGPIOApi(void)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
             EAPI_MSG_OUT(
-                        TEXT("\n\n%-15s %-25s : %s\n"),
+                        TEXT("\n%-15s %-25s : %s\n"),
                         EApiGpioDevices[i].Desc,
                         TEXT("EApiGPIOGetDirectionCaps"),
                         TmpStrBuf
@@ -769,7 +696,7 @@ void EApiValidateGPIOApi(void)
             continue;
         }
         EAPI_MSG_OUT(
-                    TEXT("\n\n%-15s %-25s : Inputs   =%02")TEXT(PRIX32)TEXT(" Outputs=%02")TEXT(PRIX32)TEXT("\n"),
+                    TEXT("\n%-15s %-25s : Inputs   =%02")TEXT(PRIX32)TEXT(" Outputs=%02")TEXT(PRIX32)TEXT("\n"),
                     EApiGpioDevices[i].Desc,
                     TEXT("EApiGPIOGetDirectionCaps"),
                     Inputs,
@@ -932,6 +859,8 @@ void EApiValidateWatchdogApi()
 
     signal(SIGINT,&sig_handler);
 
+    printf("\n********  EApiValidateWatchdogApi ********\n\n");
+
     EApiWDogGetCap(&maxDelay, &maxeventTimeout, &maxResetTimeout);
     printf("max delay: %d msec, maxEventTimeout: %d msec, maxResetTimeout: %d msec\n",maxDelay, maxeventTimeout, maxResetTimeout);
 
@@ -992,46 +921,45 @@ void EApiValidateBacklightApi (void)
 
     TCHAR TmpStrBuf[1024];
 
+  printf("\n********  EApiValidateBacklightApi ********\n");
 
     for(i=0;i<ARRAY_SIZE(EApiBacklights);i++){
         printf("\n");
         if((StatusCode=EApiVgaGetBacklightEnable(EApiBacklights[i].Id, &Value))==EAPI_STATUS_SUCCESS)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightEnable\tEnable:%d\t%s\n"), EApiBacklights[i].Desc, Value,TmpStrBuf);
+            if (Value == EAPI_BACKLIGHT_SET_ON)
+                EAPI_MSG_OUT(TEXT("%-30sGetBacklightEnable\tEnable:EAPI_BACKLIGHT_SET_ON \t%s\n"), EApiBacklights[i].Desc,TmpStrBuf);
+            else
+                EAPI_MSG_OUT(TEXT("%-30sGetBacklightEnable\tEnable:EAPI_BACKLIGHT_SET_OFF\t%s\n"), EApiBacklights[i].Desc,TmpStrBuf);
         }else{
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+            EAPI_MSG_OUT(TEXT("%-30sGetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }
-        sleep(1);
         if((StatusCode=EApiVgaSetBacklightEnable(EApiBacklights[i].Id, EApiBacklights[i].enable))==EAPI_STATUS_SUCCESS)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+            EAPI_MSG_OUT(TEXT("%-30sSetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }else{
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+            EAPI_MSG_OUT(TEXT("%-30sSetBacklightEnable\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }
-        sleep(1);
         if((StatusCode=EApiVgaGetBacklightBrightness(EApiBacklights[i].Id, &Value))==EAPI_STATUS_SUCCESS)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightBrightness\tBrightness:%d\t%s\n"), EApiBacklights[i].Desc, Value, TmpStrBuf);
+            EAPI_MSG_OUT(TEXT("%-30sGetBacklightBrightness\tBrightness:%d\t%s\n"), EApiBacklights[i].Desc, Value, TmpStrBuf);
         }else{
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-GetBacklightBrightness\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+            EAPI_MSG_OUT(TEXT("%-30sGetBacklightBrightness\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }
-        sleep(1);
         if((StatusCode=EApiVgaSetBacklightBrightness(EApiBacklights[i].Id, EApiBacklights[i].bright))==EAPI_STATUS_SUCCESS)
         {
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightBrightness\tBrightness:%d\t%s\n"), EApiBacklights[i].Desc, EApiBacklights[i].bright,TmpStrBuf);
+            EAPI_MSG_OUT(TEXT("%-30sSetBacklightBrightness\tBrightness:%d\t%s\n"), EApiBacklights[i].Desc, EApiBacklights[i].bright,TmpStrBuf);
         }else{
             EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
-            EAPI_MSG_OUT(TEXT("%-30s-SetBacklightBrightness\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
+            EAPI_MSG_OUT(TEXT("%-30sSetBacklightBrightness\t%s\n"), EApiBacklights[i].Desc, TmpStrBuf);
         }
-        sleep(1);
-
     }
     return ;
 }
@@ -1063,13 +991,15 @@ typedef enum ProgramStatusCodes_e{
 
 void usage(void)
 {
-    printf("Usage: EApiValidateAPI [-s] [-v] [-i I2C-BUS] [-n run-times]\n");
+    printf("Usage: EApiValidateAPI [-s][-v][-g][-w][-b][-u][-i I2C-BUS][-a I2C-BUS][-n run-times]\n");
     printf("[-s] to run EApiBoardGetStringA\n");
     printf("[-v] to run EApiBoardGetValue\n");
     printf("[-i I2C-BUS] to run i2c R/W of an I2C bus name(I2C-BUS)\n");
     printf("[-g] to run EApi GPIO GetLevel, SetLevel and SetDirection to output\n");
     printf("[-w] to run EApi Watchog test\n");
     printf("[-b] to run EApi Backlight test\n");
+    printf("[-u] to run EApi User Storage test\n");
+    printf("[-a] to run all EAPi tests\n");
     printf("[-n] number of times running application. without set, App will run infinite\n");
     return;
 }
@@ -1086,7 +1016,7 @@ main(int argc, char *argv[])
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
-    while ((option = getopt(argc, argv,"svi:n:mgwbu")) != -1) {
+    while ((option = getopt(argc, argv,"svi:n:gwbua:")) != -1) {
         noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
@@ -1097,8 +1027,6 @@ main(int argc, char *argv[])
             break;
         case 'n' : num = atoi(optarg);
             break;
-        case 'm' : simulI2C = 1;
-            break;
         case 'g' : gpio = 1;
             break;
         case 'w' : watchdog = 1;
@@ -1106,6 +1034,16 @@ main(int argc, char *argv[])
         case 'b' : backlight = 1;
             break;
         case 'u' : storage = 1;
+            break;
+        case 'a' :
+            getstring = 1;
+            storage = 1;
+            getvalue = 1;
+            i2c = atoi(optarg);
+            gpio = 1;
+            watchdog = 1;
+            backlight = 1;
+            storage = 1;
             break;
         case '?' :
         default:
@@ -1169,10 +1107,8 @@ main(int argc, char *argv[])
             if (nostop == 1)
                 watchdogLoop = 0;
             else
-            {
                 watchdogLoop = num;
-                num = 0;
-            }
+
             TestFunctions[4].TestHandler();
         }
         if (backlight == 1)
