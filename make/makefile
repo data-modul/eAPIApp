@@ -89,7 +89,7 @@ endif
 DBGOPT:=-g -O0
 RELOPT:=-O3
 INCLUDS=-I../include $(EAPIHEADER)
-CFLAGS:= -Wall -W  $(INCLUDS) -std=c99 -D _DEFAULT_SOURCE
+CFLAGS:= -Wall -W  $(INCLUDS) -std=c99 -D _DEFAULT_SOURCE $(LDFLAGS)
 
 define FLD_BUILD_RULE
 @mkdir -p $(@)
