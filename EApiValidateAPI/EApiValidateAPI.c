@@ -703,7 +703,7 @@ void EApiValidateGPIOApi(void)
                     Outputs
                     );
 
-
+sleep(1);
         StatusCode=EApiGPIOGetDirection(EApiGpioDevices[i].Id, Inputs|Outputs, &Direction);
         if(!EAPI_TEST_SUCCESS(StatusCode))
         {
@@ -723,7 +723,7 @@ void EApiValidateGPIOApi(void)
                     Direction
                     );
 
-
+sleep(1);
         StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
         if(!EAPI_TEST_SUCCESS(StatusCode))
         {
@@ -742,7 +742,7 @@ void EApiValidateGPIOApi(void)
                     TEXT("EApiGPIOGetLevel"),
                     Level
                     );
-
+sleep(1);
         StatusCode=EApiGPIOSetDirection(
                     EApiGpioDevices[i].Id,
                     Inputs|Outputs,
@@ -759,7 +759,7 @@ void EApiValidateGPIOApi(void)
                         );
             continue;
         }
-
+sleep(1);
         StatusCode=EApiGPIOGetDirection(EApiGpioDevices[i].Id, Inputs|Outputs, &Direction);
         if(!EAPI_TEST_SUCCESS(StatusCode))
         {
@@ -779,7 +779,7 @@ void EApiValidateGPIOApi(void)
                     Direction
                     );
 
-
+sleep(1);
         StatusCode=EApiGPIOSetLevel(EApiGpioDevices[i].Id, Outputs, ~(Level));
         if(!EAPI_TEST_SUCCESS(StatusCode))
         {
@@ -792,7 +792,7 @@ void EApiValidateGPIOApi(void)
                         );
             continue;
         }
-
+sleep(1);
         StatusCode=EApiGPIOGetLevel(EApiGpioDevices[i].Id, Inputs|Outputs, &Level);
         if(!EAPI_TEST_SUCCESS(StatusCode))
         {
@@ -831,7 +831,7 @@ void EApiValidateGPIOApi(void)
     //        if (StatusCode != EAPI_STATUS_SUCCESS)
     //            printf("error in set level\n");
 
-    //        sleep(1);
+            sleep(1);
     //    }
     return ;
 }
