@@ -117,6 +117,7 @@ EApiValidateTestFunction EApiValidateStorageApi;
 EApiValidateTestFunction EApiValidateGPIOApi   ;
 EApiValidateTestFunction EApiValidateWatchdogApi;
 EApiValidateTestFunction EApiValidateBacklightApi;
+EApiValidateTestFunction EApiValidatePwmEApi;
 
 
 TCHAR Buffer[1024]={0};
@@ -964,6 +965,251 @@ void EApiValidateBacklightApi (void)
     return ;
 }
 
+void EApiValidatePwmEApi (void)
+{
+    EApiStatus_t StatusCode;
+uint32_t minperiod =0,maxperiod= 0,mingran=0,maxgran=0,feature=0;
+uint32_t pPwmPeriod, pPwmDutyCycle, pPwmPolarity, pPwmFeatureFlags, pPwmEnable, pPwmGranularity;
+EApiId_t compan;
+
+    TCHAR TmpStrBuf[1024];
+
+  printf("\n********  EApiValidatePwmEApi ********\n");
+
+  feature = EAPIEX_PWM_QUERY_FLAG;
+   StatusCode = EApiExPwmGetCaps(EAPIEX_ID_PWM_CHANNEL_0,&minperiod,&maxperiod,&mingran,&maxgran,&compan,&feature);
+  if(!EAPI_TEST_SUCCESS(StatusCode))
+  {
+	  EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmGetCaps\t%s\n"), TmpStrBuf);
+  }
+  else
+ EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetCaps\tminPeriod:%d\tmaxPeriod:%d\tminGranularity:%d\tmaxGranularity:%d\tCompanionChannel:%d\tFeatures:%d\n"),minperiod,maxperiod,mingran,maxgran,compan,feature );
+
+   feature = EAPIEX_PWM_QUERY_FLAG;
+  StatusCode = EApiExPwmGetCaps(EAPIEX_ID_PWM_CHANNEL_1,&minperiod,&maxperiod,&mingran,&maxgran,&compan,&feature);
+  if(!EAPI_TEST_SUCCESS(StatusCode))
+  {
+	  EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmGetCaps\t%s\n"), TmpStrBuf);
+  }
+  else
+ EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetCaps\tminPeriod:%d\tmaxPeriod:%d\tminGranularity:%d\tmaxGranularity:%d\tCompanionChannel:%d\tFeatures:%d\n"),minperiod,maxperiod,mingran,maxgran,compan,feature );
+
+  
+  StatusCode = EApiExPwmGetConfig(EAPIEX_ID_PWM_CHANNEL_0, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmGetConfig\t%s\n"), TmpStrBuf);
+
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetConfig\tPeriod:%d\tDuty-cycle:%d\tPolarity:%d\tFeature:%d\tEnable:%d\tGranularity:%d\n"),pPwmPeriod,pPwmDutyCycle,pPwmPolarity,pPwmFeatureFlags,pPwmEnable,pPwmGranularity );
+
+
+ StatusCode = EApiExPwmGetConfig(EAPIEX_ID_PWM_CHANNEL_1, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmGetConfig\t%s\n"), TmpStrBuf);
+
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetConfig\tPeriod:%d\tDuty-cycle:%d\tPolarity:%d\tFeature:%d\tEnable:%d\tGranularity:%d\n"),pPwmPeriod,pPwmDutyCycle,pPwmPolarity,pPwmFeatureFlags,pPwmEnable,pPwmGranularity );
+
+ StatusCode = EApiExPwmGetConfig(2, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("No ch2 in EApiExPwmGetConfig\t%s\n"), TmpStrBuf);
+
+}
+else
+ EAPI_MSG_OUT(TEXT("EApiExPwmGetConfig\tPeriod:%d\tDuty-cycle:%d\tPolarity:%d\tFeature:%d\tEnable:%d\tGranularity:%d\n"),pPwmPeriod,pPwmDutyCycle,pPwmPolarity,pPwmFeatureFlags,pPwmEnable,pPwmGranularity );
+
+pPwmPeriod = 160;
+pPwmDutyCycle = 20;
+pPwmPolarity = EAPIEX_PWM_POLARITY_INVERSED;
+pPwmFeatureFlags = 0;//EAPIEX_PWM_FEATURE_CENTER_MODE;
+pPwmEnable = 1;
+uint32_t minstep = 4;
+uint32_t maxstep = 10;
+StatusCode = EApiExPwmSetConfig(EAPIEX_ID_PWM_CHANNEL_0, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&minstep,&maxstep,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmSetConfig 160,20:\t%s\n"), TmpStrBuf);
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmSetConfig 160,20: \tGranularity:%d\n"),pPwmGranularity );
+
+
+pPwmPeriod = 1000;
+pPwmDutyCycle = 250;
+pPwmPolarity = EAPIEX_PWM_POLARITY_NORMAL;
+pPwmFeatureFlags = 0 ;
+pPwmEnable = 1;
+StatusCode = EApiExPwmSetConfig(EAPIEX_ID_PWM_CHANNEL_1, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,0,0,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmSetConfig 1000,250:\t%s\n"), TmpStrBuf);
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmSetConfig 1000,250: \tGranularity:%d\n"),pPwmGranularity );
+
+StatusCode = EApiExPwmGetConfig(EAPIEX_ID_PWM_CHANNEL_0, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmGetConfig\t%s\n"), TmpStrBuf);
+
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetConfig\tPeriod:%d\tDuty-cycle:%d\tPolarity:%d\tFeature:%d\tEnable:%d\tGranularity:%d\n"),pPwmPeriod,pPwmDutyCycle,pPwmPolarity,pPwmFeatureFlags,pPwmEnable,pPwmGranularity );
+
+
+ StatusCode = EApiExPwmGetConfig(EAPIEX_ID_PWM_CHANNEL_1, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmGetConfig\t%s\n"), TmpStrBuf);
+
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetConfig\tPeriod:%d\tDuty-cycle:%d\tPolarity:%d\tFeature:%d\tEnable:%d\tGranularity:%d\n"),pPwmPeriod,pPwmDutyCycle,pPwmPolarity,pPwmFeatureFlags,pPwmEnable,pPwmGranularity );
+
+
+StatusCode = EApiExPwmGetDuty(EAPIEX_ID_PWM_CHANNEL_0,&pPwmDutyCycle);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmGetDuty\t%s\n"), TmpStrBuf);
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetDuty\tDuty-Cycle:%d\n"),pPwmDutyCycle);
+
+StatusCode = EApiExPwmGetDuty(EAPIEX_ID_PWM_CHANNEL_1,&pPwmDutyCycle);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmGetDuty\t%s\n"), TmpStrBuf);
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetDuty\tDuty-Cycle:%d\n"),pPwmDutyCycle);
+
+StatusCode = EApiExPwmGetDuty(2,&pPwmDutyCycle);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("No ch2 in EApiExPwmGetDuty\t%s\n"), TmpStrBuf);
+}
+else
+ EAPI_MSG_OUT(TEXT("EApiExPwmGetDuty\tDuty-Cycle:%d\n"),pPwmDutyCycle);
+
+
+pPwmDutyCycle = 40;
+StatusCode = EApiExPwmSetDuty(EAPIEX_ID_PWM_CHANNEL_0, pPwmDutyCycle);
+EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+if(!EAPI_TEST_SUCCESS(StatusCode))
+	EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmSetDuty 40:\t%s\n"), TmpStrBuf);
+else
+EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmSetDuty 40: \t%s\n"), TmpStrBuf);
+
+StatusCode = EApiExPwmGetConfig(EAPIEX_ID_PWM_CHANNEL_0, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmGetConfig\t%s\n"), TmpStrBuf);
+
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetConfig\tPeriod:%d\tDuty-cycle:%d\tPolarity:%d\tFeature:%d\tEnable:%d\tGranularity:%d\n"),pPwmPeriod,pPwmDutyCycle,pPwmPolarity,pPwmFeatureFlags,pPwmEnable,pPwmGranularity );
+
+pPwmDutyCycle = 230;
+StatusCode = EApiExPwmSetDuty(EAPIEX_ID_PWM_CHANNEL_1, pPwmDutyCycle);
+EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+if(!EAPI_TEST_SUCCESS(StatusCode))
+	EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmSetDuty 230:\t%s\n"), TmpStrBuf);
+else
+EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmSetDuty 230: \t%s\n"), TmpStrBuf);
+
+StatusCode = EApiExPwmGetConfig(EAPIEX_ID_PWM_CHANNEL_1, &pPwmPeriod,&pPwmDutyCycle,&pPwmPolarity,&pPwmFeatureFlags,&pPwmEnable,&pPwmGranularity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmGetConfig\t%s\n"), TmpStrBuf);
+
+}
+else
+ EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetConfig\tPeriod:%d\tDuty-cycle:%d\tPolarity:%d\tFeature:%d\tEnable:%d\tGranularity:%d\n"),pPwmPeriod,pPwmDutyCycle,pPwmPolarity,pPwmFeatureFlags,pPwmEnable,pPwmGranularity );
+
+
+pPwmPolarity = EAPIEX_PWM_POLARITY_NORMAL;
+StatusCode = EApiExPwmSetPolarity(EAPIEX_ID_PWM_CHANNEL_0, pPwmPolarity);
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmSetPolarity normal:\t%s\n"), TmpStrBuf);
+
+StatusCode = EApiExPwmGetPolarity(EAPIEX_ID_PWM_CHANNEL_0, &pPwmPolarity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch0:EApiExPwmGetPolarity\t%s\n"), TmpStrBuf);
+}
+else
+EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetPolarity\t%d\n"), pPwmPolarity);
+
+
+pPwmPolarity = EAPIEX_PWM_POLARITY_INVERSED; 
+StatusCode = EApiExPwmSetPolarity(EAPIEX_ID_PWM_CHANNEL_1, pPwmPolarity);
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmSetPolarity inversed:\t%s\n"), TmpStrBuf);
+
+StatusCode = EApiExPwmGetPolarity(EAPIEX_ID_PWM_CHANNEL_1, &pPwmPolarity);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+          EAPI_MSG_OUT(TEXT("Error in Ch1:EApiExPwmGetPolarity\t%s\n"), TmpStrBuf);
+}
+else
+EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetPolarity\t%d\n"), pPwmPolarity);
+
+
+pPwmEnable = 1;
+StatusCode = EApiExPwmSetEnable(EAPIEX_ID_PWM_CHANNEL_0,pPwmEnable);
+EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmSetEnable 1:\t%s\n"), TmpStrBuf);
+
+
+StatusCode = EApiExPwmGetEnable(EAPIEX_ID_PWM_CHANNEL_0, &pPwmEnable);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetEnable\t%s\n"), TmpStrBuf);
+}
+else
+EAPI_MSG_OUT(TEXT("Ch0:EApiExPwmGetEnable\t%d\n"),pPwmEnable );
+
+pPwmEnable = 0;
+StatusCode = EApiExPwmSetEnable(EAPIEX_ID_PWM_CHANNEL_1,pPwmEnable);
+EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmSetEnable 0:\t%s\n"), TmpStrBuf);
+
+
+StatusCode = EApiExPwmGetEnable(EAPIEX_ID_PWM_CHANNEL_1, &pPwmEnable);
+if(!EAPI_TEST_SUCCESS(StatusCode))
+{
+ EApiAHCreateErrorString(StatusCode, TmpStrBuf, ARRAY_SIZE(TmpStrBuf));
+EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetEnable\t%s\n"), TmpStrBuf);
+}
+else
+EAPI_MSG_OUT(TEXT("Ch1:EApiExPwmGetEnable\t%d\n"),pPwmEnable );
+
+    return ;
+}
+
+
 /*
  * Test Functions Table
  *
@@ -980,6 +1226,7 @@ const TestFunctionsTbl_t TestFunctions[]={
     {EApiValidateWatchdogApi    , TEXT("Watchdog Function"       )},
     {EApiValidateBacklightApi    , TEXT("Backlight Function"       )},
     {EApiValidateStorageApi , TEXT("Storage Function"    )},
+    {EApiValidatePwmEApi , TEXT("PWM Function"    )},
 };
 /* void __cdecl main( __IN  char *const *const  argv, __IN const int argc) */
 typedef enum ProgramStatusCodes_e{
@@ -999,6 +1246,7 @@ void usage(void)
     printf("[-w] to run EApi Watchog test\n");
     printf("[-b] to run EApi Backlight test\n");
     printf("[-u] to run EApi User Storage test\n");
+    printf("[-p] to run EApi PWM test\n");
     printf("[-a] to run all EAPi tests\n");
     printf("[-n] number of times running application. without set, App will run infinite\n");
     return;
@@ -1010,13 +1258,13 @@ main(int argc, char *argv[])
 {
 
     int option = 0;
-    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1, watchdog= -1, backlight= -1, storage= -1;
+    int getstring = -1, getvalue = -1, i2c = -1, num =-1 , gpio = -1, watchdog= -1, backlight= -1, storage= -1, pwm= -1;
     int nostop = 0;
     int noOption = 0;
 
     //Specifying the expected options
     //The two options l and b expect numbers as argument
-    while ((option = getopt(argc, argv,"svi:n:gwbua:")) != -1) {
+    while ((option = getopt(argc, argv,"svi:n:gwbua:p")) != -1) {
         noOption = 1;
         switch (option) {
         case 's' : getstring = 1;
@@ -1035,7 +1283,9 @@ main(int argc, char *argv[])
             break;
         case 'u' : storage = 1;
             break;
-        case 'a' :
+        case 'p' : pwm = 1;
+            break;
+	case 'a' :
             getstring = 1;
             storage = 1;
             getvalue = 1;
@@ -1044,6 +1294,7 @@ main(int argc, char *argv[])
             watchdog = 1;
             backlight = 1;
             storage = 1;
+	    pwm =1;
             break;
         case '?' :
         default:
@@ -1061,10 +1312,11 @@ main(int argc, char *argv[])
     LogStream=EAPI_fopen(TEXT("EApiValidateAPI.log"), TEXT("w"));
     if(LogStream==NULL)
         LogStream=stdout;
+
     if(!EAPI_TEST_SUCCESS(EApiLibInitialize()))
         exit(PRG_RETURN_LIB_INIT_ERROR);
 
-    EAPI_fprintf(
+     EAPI_fprintf(
                 LogStream,
                 TEXT("L%04u %-30s | %-25s | %5s %5s    [%s]\n"),
                 __LINE__              ,
@@ -1115,7 +1367,8 @@ main(int argc, char *argv[])
             TestFunctions[5].TestHandler();
         if (storage == 1)
             TestFunctions[6].TestHandler();
-
+	if (pwm == 1)
+            TestFunctions[7].TestHandler();
         if (num > 0)
             num--;
     }
