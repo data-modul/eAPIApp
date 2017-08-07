@@ -11,6 +11,7 @@ Parameters are matched to the following features:
 * Watchdog
 * Get/Set backlight
 * Read/Write defined user space at Eeprom
+* Get/Set PWM Channels
 
 The EApiValidate will be built by make command. 
 The EApi library should be installed in **/usr/local**. In case of another installation

@@ -46,6 +46,7 @@
 #include <stdio.h>
 #include <EApiOs.h>	/* Os Specific Include File */
 #include <EApi.h>
+#include <EApiExt.h>
 #include <EApiCommon.h>
 #include <EApiAHStr.h>
 #include <EApiAHI2C.h>
